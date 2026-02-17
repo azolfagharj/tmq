@@ -1,6 +1,6 @@
 # tmq — TOML Query Tool
 
-**Complete standalone TOML CLI tool.** Like jq for JSON, yq for YAML — but for TOML.
+**Complete standalone TOML CLI processor .** supporting query, modification, and format conversion
 
 ```
 tmq = ToMl + Query
@@ -251,6 +251,3 @@ tmq uses clear exit codes for automation:
 
 MIT License
 
-## Contributing
-
-Contributions welcome! Please check the issues for current development focus areas.
