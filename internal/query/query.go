@@ -17,9 +17,7 @@ func New(path string) (*Query, error) {
 	}
 
 	// Remove leading dot if present
-	if strings.HasPrefix(path, ".") {
-		path = path[1:]
-	}
+	path = strings.TrimPrefix(path, ".")
 
 	if path == "" {
 		// Root query (just ".")

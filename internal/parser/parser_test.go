@@ -329,7 +329,9 @@ port = 5432`
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		reader.Seek(0, 0) // Reset reader
+		if _, err := reader.Seek(0, 0); err != nil {
+			b.Fatalf("seek error: %v", err)
+		}
 		p := New()
 		err := p.ParseReader(reader)
 		if err != nil {

@@ -97,4 +97,3 @@ MIT (or to be decided)
 ## Contributing
 
 See `protectedocs/docs/` for project vision and roadmap. Contributions welcome once the foundation is in place.
-#

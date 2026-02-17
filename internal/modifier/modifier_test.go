@@ -71,6 +71,13 @@ func TestSetValue(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name:     "overwrite existing key",
+			initial:  createSimpleTestData(),
+			expr:     `.key = "updated"`,
+			expected: map[string]interface{}{testKey: "updated"},
+			wantErr:  false,
+		},
+		{
 			name:    "set number",
 			initial: map[string]interface{}{},
 			expr:    `.age = 30`,
