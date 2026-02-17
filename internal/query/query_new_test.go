@@ -7,11 +7,11 @@ import (
 
 // Test constants for query paths
 const (
-	rootPath        = "."
-	singleKeyPath   = ".key"
-	nestedPath      = ".project.version"
-	deepNestedPath  = ".a.b.c.d.e"
-	noDotPath       = "key.subkey"
+	rootPath       = "."
+	singleKeyPath  = ".key"
+	nestedPath     = ".project.version"
+	deepNestedPath = ".a.b.c.d.e"
+	noDotPath      = "key.subkey"
 )
 
 // Helper functions for query testing

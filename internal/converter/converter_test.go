@@ -27,8 +27,8 @@ func createComplexTestData() map[string]interface{} {
 		"title": testTitle,
 		"config": map[string]interface{}{
 			"database": map[string]interface{}{
-				"host": testHost,
-				"port": testPort,
+				"host":    testHost,
+				"port":    testPort,
 				"enabled": true,
 			},
 		},

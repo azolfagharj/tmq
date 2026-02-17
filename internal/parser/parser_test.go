@@ -11,17 +11,17 @@ import (
 
 // Test constants for TOML content
 const (
-	validTOMLContent     = `key = "value"`
-	invalidTOMLContent   = `invalid toml syntax [[[`
-	complexTOMLContent   = `[section]
+	validTOMLContent   = `key = "value"`
+	invalidTOMLContent = `invalid toml syntax [[[`
+	complexTOMLContent = `[section]
 key = "value"
 number = 42`
 	commentedTOMLContent = `# This is a comment
 key = "value"
 # Another comment`
-	booleanTOMLContent   = `enabled = true
+	booleanTOMLContent = `enabled = true
 disabled = false`
-	emptyTOMLContent     = ""
+	emptyTOMLContent = ""
 )
 
 // Helper functions for test setup
@@ -70,10 +70,10 @@ func TestNew(t *testing.T) {
 
 func TestParseFile(t *testing.T) {
 	tests := []struct {
-		name     string
-		setup    func(t *testing.T) (string, error) // Returns file path or error for special cases
-		wantErr  bool
-		errMsg   string
+		name    string
+		setup   func(t *testing.T) (string, error) // Returns file path or error for special cases
+		wantErr bool
+		errMsg  string
 	}{
 		{
 			name: "empty path",
@@ -178,8 +178,8 @@ func TestParseReader(t *testing.T) {
 		},
 		{
 			name:    "complex TOML",
-			input:    complexTOMLContent,
-			wantErr:  false,
+			input:   complexTOMLContent,
+			wantErr: false,
 		},
 		{
 			name:    "TOML with comments",

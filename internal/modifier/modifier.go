@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/username/toml_query/internal/query"
+	"github.com/azolfagharj/tmq/internal/query"
 )
 
 // Modifier handles TOML modification operations
