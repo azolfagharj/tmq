@@ -11,12 +11,12 @@ tmq = ToMl + Query
 ## Quick Links
 
 - [Installation](Installation) - Download and setup instructions
-- [Getting Started](Getting.Started) - Basic usage and examples
-- [Query Operations](Query.Operations) - Reading and accessing TOML data
-- [Modification Operations](Modification.Operations) - Setting and deleting values
-- [Validation & Comparison](Validation.and.Comparison) - Checking and comparing TOML files
-- [Bulk Operations](Bulk.Operations) - Processing multiple files
-- [Command Reference](Command.Reference) - Complete CLI reference
+- [Getting Started](Getting-Started) - Basic usage and examples
+- [Query Operations](Query-Operations) - Reading and accessing TOML data
+- [Modification Operations](Modification-Operations) - Setting and deleting values
+- [Validation & Comparison](Validation-and-Comparison) - Checking and comparing TOML files
+- [Bulk Operations](Bulk-Operations) - Processing multiple files
+- [Command Reference](Command-Reference) - Complete CLI reference
 - [Examples](Examples) - Comprehensive usage examples
 - [Troubleshooting](Troubleshooting) - Common issues and solutions
 
