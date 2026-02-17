@@ -1,5 +1,6 @@
 # Binaries
-tmq
+/tmq
+bin/
 *.exe
 
 # Build
