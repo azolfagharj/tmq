@@ -59,7 +59,7 @@ jobs:
           go clean -cache
 
       - name: Run lint
-        run: golangci-lint run --timeout=5m
+        run: make lint
 
   build:
     name: Build
@@ -91,32 +91,17 @@ jobs:
           go-version: '1.23'
           cache-dependency-path: go.sum
 
-      - name: Find project root and clear build cache
-        id: project
-        run: |
-          # Support both root layout (cmd/tmq) and nested layout (toml_query/cmd/tmq)
-          if [ -d "cmd/tmq" ] && [ -f "go.mod" ]; then
-            echo "PROJECT_ROOT=." >> $GITHUB_OUTPUT
-            echo "Using project root: ."
-          elif [ -d "toml_query/cmd/tmq" ] && [ -f "toml_query/go.mod" ]; then
-            echo "PROJECT_ROOT=toml_query" >> $GITHUB_OUTPUT
-            echo "Using project root: toml_query"
-          else
-            echo "Error: cmd/tmq not found. Structure:"
-            find . -name "go.mod" 2>/dev/null
-            find . -type d -name "tmq" 2>/dev/null
-            exit 1
-          fi
-          # Clear stale Go build cache (fixes export data / module path mismatch)
-          go clean -cache
-
       - name: Verify project structure
         run: |
-          cd ${{ steps.project.outputs.PROJECT_ROOT }}
-          echo "Working in: $(pwd)"
+          echo "Current directory: $(pwd)"
+          echo "Listing files:"
           ls -la
-          ls -la cmd/tmq/ || true
-          go list ./cmd/tmq || true
+          echo "Checking cmd/tmq:"
+          ls -la cmd/tmq/ || echo "cmd/tmq not found"
+          echo "Checking go.mod:"
+          cat go.mod | head -5
+          echo "Verifying package can be found:"
+          go list ./cmd/tmq || echo "Package not found"
 
       - name: Build binary
         env:
@@ -124,10 +109,9 @@ jobs:
           GOARCH: ${{ matrix.goarch }}
           CGO_ENABLED: 0
         run: |
-          cd ${{ steps.project.outputs.PROJECT_ROOT }}
-          mkdir -p "$GITHUB_WORKSPACE/release-binaries"
-          go build -ldflags="-s -w -X 'main.AZ_VERSION=${{ env.VERSION }}' -X 'main.AZ_UPDATE=${{ env.UPDATE }}'" -o "$GITHUB_WORKSPACE/release-binaries/tmq${{ matrix.suffix }}" ./cmd/tmq
-          mv "$GITHUB_WORKSPACE/release-binaries/tmq${{ matrix.suffix }}" "$GITHUB_WORKSPACE/release-binaries/tmq-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.suffix }}"
+          mkdir -p release-binaries
+          go build -ldflags="-s -w -X 'main.AZ_VERSION=${{ env.VERSION }}' -X 'main.AZ_UPDATE=${{ env.UPDATE }}'" -o release-binaries/tmq${{ matrix.suffix }} ./cmd/tmq
+          mv release-binaries/tmq${{ matrix.suffix }} release-binaries/tmq-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.suffix }}
 
       - name: Test binary
         shell: bash
