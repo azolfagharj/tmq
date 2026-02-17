@@ -1,6 +1,6 @@
 # tmq — TOML Query Tool
 
-[![CI](https://github.com/azolfagharj/tmq/actions/workflows/ci.yml/badge.svg)](https://github.com/azolfagharj/tmq/actions) [![Documentation](https://img.shields.io/badge/Documentation-Wiki-blue?logo=github)](https://github.com/azolfagharj/tmq/wiki) [![Donate](https://img.shields.io/badge/Donate-to%20Keep%20This%20Project%20Alive-orange)](https://donate.azolfagharj.ir/)
+[![CI](https://github.com/azolfagharj/tmq/actions/workflows/ci.yml/badge.svg)](https://github.com/azolfagharj/tmq/actions) [![Documentation](https://img.shields.io/badge/Documentation-Wiki-blue?logo=github)](https://github.com/azolfagharj/tmq/wiki) [![Donate](https://img.shields.io/badge/Donate-to%20Keep%20This%20Project%20Alive-orange)](https://azolfagharj.github.io/donate/)
 
 **Complete standalone TOML CLI processor .** supporting query, modification, and format conversion
 
@@ -262,8 +262,8 @@ MIT License
 
 
 
- 🤝 **Enjoying this free project?** <a href="https://donate.azolfagharj.ir/">Consider supporting</a> its development
+ 🤝 **Enjoying this free project?** <a href="https://azolfagharj.github.io/donate/">Consider supporting</a> its development
 
-<a href="https://donate.azolfagharj.ir/"><img src="https://img.shields.io/badge/Donate-Support%20Development-orange?style=for-the-badge" alt="Donate"></a>
+<a href="https://azolfagharj.github.io/donate/"><img src="https://img.shields.io/badge/Donate-Support%20Development-orange?style=for-the-badge" alt="Donate"></a>
 
 ---
