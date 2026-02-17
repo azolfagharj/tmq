@@ -257,3 +257,13 @@ tmq uses clear exit codes for automation:
 
 MIT License
 
+---
+## Support this Project
+
+
+
+ 🤝 **Enjoying this free project?** <a href="https://donate.azolfagharj.ir/">Consider supporting</a> its development
+
+<a href="https://donate.azolfagharj.ir/"><img src="https://img.shields.io/badge/Donate-Support%20Development-orange?style=for-the-badge" alt="Donate"></a>
+
+---
