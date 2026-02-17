@@ -19,3 +19,6 @@ Thumbs.db
 
 # Protected documentation
 protectedocs/
+
+# Development rules
+.cursorrules
