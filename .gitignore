@@ -1,0 +1,20 @@
+# Binaries
+tmq
+*.exe
+
+# Build
+dist/
+*.o
+*.a
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Protected documentation
+protectedocs/

@@ -1,0 +1,121 @@
+# Release configuration file
+# All release settings are defined here
+
+# Release notes file
+release_notes_file: release_notes.md
+
+# Extract variables from files
+# This section defines variables to extract from source files.
+# Each variable can be extracted from any file using configurable extraction patterns.
+#
+# Structure:
+#   extract_variables:
+#     <VARIABLE_KEY>:          # Unique key for this variable (used internally)
+#       name: <string>         # Display name for release notes (optional, defaults to variable_name)
+#       file_path: <string>    # Path to source file (relative to repo root) - REQUIRED
+#       extraction:            # Extraction configuration - REQUIRED
+#         type: <string>       # Extraction type - REQUIRED (currently only "grep_awk" supported)
+#         # For type: grep_awk
+#         grep_pattern: <string>    # Pattern to search for with grep - REQUIRED
+#         awk_separator: <string>  # Field separator for awk -F - REQUIRED
+#         awk_field: <number>      # Field number to extract (1-indexed) - REQUIRED
+#         head_lines: <number>     # Number of matching lines to consider (default: 1) - OPTIONAL
+#       variable_name: <string>    # Name for environment variable - REQUIRED
+#       add_to_releasenote: <bool> # Include in release notes file (default: false) - OPTIONAL
+#       add_to_env: <bool>        # Add to GITHUB_ENV (default: false) - OPTIONAL
+#
+# Example extraction patterns:
+#   1. Extract version from: VERSION="1.2.3"
+#      grep_pattern: "VERSION"
+#      awk_separator: '"'
+#      awk_field: 2
+#      Result: "1.2.3"
+#
+#   2. Extract date from: UPDATED="2025-12-09"
+#      grep_pattern: "UPDATED"
+#      awk_separator: '"'
+#      awk_field: 2
+#      Result: "2025-12-09"
+#
+#   3. Extract value from: KEY=value
+#      grep_pattern: "^KEY="
+#      awk_separator: "="
+#      awk_field: 2
+#      Result: "value"
+#
+#   4. Extract from space-separated: NAME John Doe
+#      grep_pattern: "^NAME"
+#      awk_separator: " "
+#      awk_field: 2
+#      Result: "John"
+#
+# Notes:
+#   - variable_name must be unique and valid environment variable name (uppercase, alphanumeric, underscores)
+#   - file_path must exist and be readable
+#   - extraction.type must be "grep_awk" (other types may be added in future)
+#   - grep_pattern uses basic grep syntax (not regex by default)
+#   - awk_separator can be any character or string
+#   - awk_field is 1-indexed (first field is 1, second is 2, etc.)
+#   - head_lines limits how many matching lines to process (only first line is used for extraction)
+#   - Variables are processed in the order they appear in config
+#   - If extraction fails, script will exit with error
+extract_variables:
+  VERSION:
+    name: VERSION
+    file_path: cmd/gajin/main.go
+    extraction:
+      type: grep_awk
+      grep_pattern: "AZ_VERSION"
+      awk_separator: '"'
+      awk_field: 2
+      head_lines: 1
+    variable_name: VERSION
+    add_to_releasenote: true
+    add_to_env: true
+  UPDATE:
+    name: UPDATE
+    file_path: cmd/gajin/main.go
+    extraction:
+      type: grep_awk
+      grep_pattern: "AZ_UPDATE"
+      awk_separator: '"'
+      awk_field: 2
+      head_lines: 1
+    variable_name: UPDATE
+    add_to_releasenote: true
+    add_to_env: true
+
+# Release assets - files to include in release
+files:
+  - name: config.full.yaml
+    path: examples/config.yaml
+    append_version: false
+    add_to_assets: true
+  - name: config.compact.yaml
+    path: examples/config.compact.yaml
+    append_version: false
+    add_to_assets: true
+
+
+# Zip configuration
+config:
+  conflict_check_mode: "pattern"
+
+default_excludes:
+  # enabled is now per-zip, not global
+  patterns:
+    - ".git/*"
+    - ".github/*"
+    - "version"
+
+zips:
+  - name: gajin
+    includes:
+      - "*"
+    excludes:
+      - "tests/**"
+      - "./version"
+    default_excludes:
+      enabled: true  # Enable default excludes for this zip (default: false)
+    append_version: true  # Append version to zip filename (default: false)
+    add_to_assets: true  # Add this zip to release assets (default: false)

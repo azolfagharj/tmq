@@ -1,0 +1,293 @@
+# tmq (TOML Query) - Cursor Development Rules
+
+## Project Overview
+tmq is a complete, standalone command-line tool for TOML files. Like jq for JSON, yq for YAML — but for TOML. Written in Go with focus on completeness, independence, and script-friendliness.
+
+## Core Principles
+- **Independent**: Single binary, no dependencies on jq, yq, or other tools
+- **Complete**: Query, set, delete, convert - everything needed for TOML manipulation
+- **Script-friendly**: Pipe support, clear exit codes, CI/CD ready
+- **Own Identity**: Not jq-compatible; our own syntax and design
+
+## Development Standards
+
+### 1. Code Quality & Clean Code
+- Follow Go best practices and official Go style guide
+- Use `gofmt` and `goimports` for consistent formatting
+- Meaningful variable/function names, clear comments
+- Single responsibility principle for functions
+- DRY (Don't Repeat Yourself) principle
+- Error handling: return errors, don't panic except in CLI main
+- Use context for cancellable operations
+
+### 2. Go Standards Compliance
+- Go 1.21+ minimum version
+- Use Go modules (`go.mod`)
+- Follow standard Go project layout
+- Use official Go libraries where possible
+- Proper package naming (lowercase, no underscores)
+- Use interfaces for testability and dependency injection
+- Align with [Effective Go](https://go.dev/doc/effective_go) and [Code Review Comments](https://go.dev/wiki/CodeReviewComments) (receiver names, error handling, imports, line length, etc.)
+- Run `go vet` and `gofmt` (or `goimports`); fix all reported issues
+
+### 3. TOML Standards Compliance
+- Full TOML 1.0.0 specification compliance
+- Support for all TOML data types and structures
+- Preserve formatting and comments when possible
+- Handle edge cases (arrays, nested tables, inline tables)
+- Proper encoding/decoding of special characters
+
+### 4. Testing Requirements
+- **Beyond Code Coverage**: Focus on quality metrics, not just coverage percentage
+- **F.I.R.S.T Principles**: Fast, Isolated, Repeatable, Self-Checking, Timely
+- **Fault Detection**: Tests must actually catch bugs and validate behavior
+- **Maintainability**: Tests should be easy to understand, modify, and extend
+- **Reliability**: Tests produce consistent results across runs
+- **Usability**: Tests serve as executable documentation
+
+#### Unit Test Quality Standards
+- **100% test coverage** required, but coverage is necessary not sufficient
+- Unit tests for every exported function and method
+- **Table-driven tests** for multiple scenarios (Go standard pattern)
+- **Subtests** using `t.Run()` for hierarchical organization
+- Test **edge cases**, **error conditions**, **boundary values**, and **invalid inputs**
+- **Explicit error messages**: Use `t.Errorf()` with clear "got/want" format
+- **Helper functions**: Mark with `t.Helper()` for clean stack traces
+- **Avoid assertion libraries**: Use Go's built-in testing for better error control
+- **Test isolation**: No dependencies between tests, no shared state
+- **Fast execution**: Individual tests < 100ms, full suite < 10 seconds
+- Mock external dependencies using interfaces and test doubles
+- **Behavior testing**: Test what code does, not how it does it
+- **Realistic test data**: Use meaningful constants, not random data
+
+#### Go-Specific Testing Patterns
+- **Test file naming**: `*_test.go` (see §5 for meaningful names)
+- **Test function naming**: `TestXxx` with descriptive names
+- **Use Go's built-in testing framework** - no external assertion libraries needed
+- **Benchmark tests** for performance validation (`func BenchmarkXxx`)
+- **Fuzz tests** for edge case discovery (`func FuzzXxx`)
+- **Race detection**: Run tests with `-race` flag
+- **Test helpers**: Create reusable helper functions for common assertions
+
+#### Test Quality Metrics
+- **Code Coverage**: 80-95% (not 100% absolute - some unreachable code exists)
+- **Test-to-Code Ratio**: 1:1 to 2:1 (balance between production and test code)
+- **Cyclomatic Complexity**: < 10 per test function
+- **Execution Time**: Full test suite < 10 seconds for fast feedback
+- **Flakiness Rate**: < 1% (tests should be deterministic)
+- **Mutation Testing Score**: Tests should catch artificial defects (future goal)
+
+### 5. Test File Naming & Size (Go Best Practices)
+- **Meaningful test file names**: Names must describe what is tested.
+  - Prefer `foo_test.go` for tests of `foo.go` when tests are small.
+  - When splitting: use focused names, e.g. `query_new_test.go` (tests for New), `query_execute_test.go` (tests for Execute), `parser_file_test.go` (file parsing).
+  - Avoid generic names like `misc_test.go` or `extra_test.go`.
+- **Test file size**: Keep under 500 lines per file
+- **Split large test files**: If >500 lines, split into multiple focused files by behavior/API
+- **Test function length**: Individual test functions < 50 lines
+- **Table-driven tests**: Can be longer if well-structured (< 100 lines)
+- **Naming for split files**: `*_test.go`, `*_internal_test.go`, `*_integration_test.go` only when the suffix meaning is clear
+- **Reason**: Tests act as documentation; names should make it obvious what each file validates
+
+#### Test Organization & Structure
+- **Arrange-Act-Assert**: Clear structure in each test
+- **Descriptive test names**: `TestUserValidation_EmptyName_ReturnsError`
+- **Given-When-Then**: Comments explaining test setup, action, and expectations
+- **Test data**: Use constants or factories, avoid magic numbers
+- **Error messages**: "Got X, want Y" format for clear failure diagnosis
+- **Avoid test pollution**: Each test leaves no side effects for others
+
+### 6. Project Structure
+```
+toml_query/
+├── .cursorrules           # This file
+├── .gitignore            # Git ignore rules
+├── go.mod               # Go module file
+├── go.sum               # Go dependencies
+├── README.md            # Main README (will be created)
+├── cmd/tmq/             # CLI entry point
+│   ├── main.go
+│   └── main_test.go
+├── internal/            # Internal packages
+│   ├── parser/          # TOML parsing logic
+│   ├── query/           # Query execution
+│   ├── modifier/        # Set/delete operations
+│   ├── converter/       # Format conversion
+│   └── ...
+├── pkg/                 # Public packages (if needed)
+└── protectedocs/        # Protected documentation (gitignored)
+```
+
+### 7. Go Doc Comments (godoc / go doc)
+Follow [Go Doc Comments](https://go.dev/doc/comment). All doc comments are used by `go doc`, godoc, and pkg.go.dev.
+
+- **Package comment (required)**: Every package has a comment introducing it, with no blank line before `package`. First sentence must start with "Package <name>" and be a complete sentence (e.g. `// Package query provides TOML query functionality for tmq.`).
+- **Exported names**: Every exported (capitalized) type, func, var, const has a doc comment immediately above it. First sentence starts with the name of the symbol (e.g. `// New creates a new query from a dot-separated path.`).
+- **Commands (cmd/)**: Package comment describes program behavior; first sentence conventionally starts with the program name (e.g. `// Tmq is a TOML query CLI.`).
+- **Complete sentences**: Use full sentences. For booleans use "reports whether" (not "returns true or false").
+- **One package comment per package**: In multi-file packages, put the package comment in exactly one file (or in doc.go).
+- **doc.go (required for all packages)**: **All packages must have a doc.go file** containing the package comment, examples, and extended documentation. Even packages with short comments should use doc.go for consistency and future extensibility. Contains only the package comment and `package <name>`. No implementation code.
+- **No internal implementation in doc**: Doc comments describe contract and usage, not algorithms or internals. Use inline comments for implementation details.
+- **Lists, code blocks, links**: Use indented code blocks for examples; doc links as `[Name]` or `[pkg.Name]` for symbols.
+
+### 8. Documentation Requirements
+- Update documentation for every change
+- Keep protectedocs/ files up to date with code changes
+- Document all public APIs (see §7 for Go doc comments)
+- Update ROADMAP.md progress
+- Add examples for new features
+- Update README.md as features are implemented
+- When adding or changing a package, add or update its package doc and exported symbol docs
+
+### 9. CLI Design
+- Use cobra for CLI framework
+- Consistent flag naming (--input, --output, -i for in-place)
+- Clear help messages and examples
+- Proper exit codes (0=success, 1=error, 2=usage error)
+- Support stdin/stdout piping
+- Graceful error messages
+
+### 10. Error Handling
+- Return errors instead of panicking
+- Use custom error types for different error categories
+- Provide meaningful error messages
+- Exit codes should reflect error severity
+
+### 11. Performance & Memory
+- Efficient TOML parsing (avoid full AST for simple queries)
+- Streaming support for large files
+- Memory-efficient operations
+- Reasonable performance benchmarks
+
+### 12. Security
+- No arbitrary code execution
+- Safe file operations
+- Input validation for all user inputs
+- No network operations unless explicitly needed
+
+## Development Workflow
+
+### For Each Feature/Change:
+1. **Plan**: Update ROADMAP.md and relevant docs in protectedocs/
+2. **Implement**: Write clean, tested code; ensure doc.go exists for all packages (§7); add/update Go doc comments for all exported symbols
+3. **Test**: 100% coverage + quality metrics (fault detection, maintainability, F.I.R.S.T); use meaningful test file names (§5); table-driven tests, subtests, clear error messages
+4. **Verify**: Run `go test -race`, ensure < 10s execution, deterministic results
+5. **Build**: **MANDATORY** - Always `go build` before testing with binary to ensure changes are applied
+6. **Document**: Update all relevant documentation (README, ROADMAP, GOALS, NEEDS, CONCEPT, FUTURE)
+7. **Complete Post-Implementation Checklist** (MANDATORY):
+   - [ ] **Tests completed and passing**: Unit tests, benchmarks, integration tests
+   - [ ] **Documentation updated**: README, ROADMAP, GOALS, NEEDS, CONCEPT, FUTURE
+   - [ ] **Code Review Checklist verified**: All quality gates passed
+   - [ ] **Help messages/examples updated**: CLI usage, flags, examples
+   - [ ] **Cross-platform tested**: Linux, macOS, Windows builds
+   - [ ] **Security audit**: Input validation, path traversal, file operations
+   - [ ] **Performance verified**: Benchmarks run, memory usage checked
+   - [ ] **Integration tested**: Works with existing features
+7. **Review**: Self-review against these rules
+
+### Commit Standards:
+- Clear, descriptive commit messages
+- Reference issue/PR numbers if applicable
+- Separate commits for different concerns
+- Use conventional commit format when possible
+
+### Code Review Checklist:
+- [ ] Code follows Go standards (Effective Go, Code Review Comments)
+- [ ] **Test quality**: Beyond coverage - fault detection, maintainability, F.I.R.S.T principles
+- [ ] 100% test coverage; test file names are meaningful and file sizes standard (§5)
+- [ ] Tests are well-structured: table-driven, subtests, clear error messages, factory functions
+- [ ] Tests are fast (< 10s total), isolated, repeatable, self-checking, race-free
+- [ ] Performance benchmarks added for performance-critical code
+- [ ] Fuzz testing considered for input validation functions
+- [ ] Library API compatibility maintained (if applicable)
+- [ ] Every package has doc.go with package comment; every exported name has a doc comment (§7)
+- [ ] Documentation (README, ROADMAP, GOALS, NEEDS, CONCEPT, FUTURE) updated
+- [ ] Error handling proper with clear exit codes and messages
+- [ ] Security considerations: input sanitization, safe file ops, no dangerous operations
+- [ ] No performance regressions; memory usage within limits
+- [ ] Bulk operations and validation modes work correctly
+- [ ] `go vet`, `gofmt`/`goimports`, and `go test -race` clean
+- [ ] Tests serve as executable documentation
+
+## Phase Implementation Order
+Follow ROADMAP.md phases sequentially:
+
+**Phase 1: Foundation**
+- Go module setup
+- TOML parsing with validation
+- Path queries with error handling
+- CLI framework with comprehensive flags
+- Performance optimization
+- Cross-platform compatibility
+- Security hardening
+
+**Phase 2.1: Write Operations**
+- Set/delete operations with type safety
+- In-place editing with backup/rollback
+- Batch operations support
+- Advanced write features (nested, arrays)
+- Comment preservation basics
+
+**Phase 2.2: Advanced I/O**
+- JSON/YAML input parsing
+- Validation & comparison modes
+- Bulk operations processing
+- Streaming support for large files
+
+**Phase 3: Production Ready**
+- Full comment preservation
+- Library API development
+- Plugin system architecture
+- Performance benchmarks
+- Fuzz testing and security audit
+
+**Phase 4: Ecosystem**
+- Package manager distribution
+- CI/CD integrations
+- Language bindings
+- Community plugins
+
+## Quality Gates
+- All code must pass `go vet`
+- All tests must pass (`go test ./...`)
+- **100% test coverage** required, but quality > quantity
+- **Test quality checks**: Fault detection, maintainability, reliability, F.I.R.S.T compliance
+- `gofmt` (or `goimports`) compliance
+- Documentation must be current; package and exported-symbol doc comments present (§7)
+- **All packages must have doc.go files** (§7)
+- No TODO comments in production code
+- Test files use meaningful names (§5)
+- **Test execution time**: Full suite < 10 seconds
+- **Test isolation**: No test dependencies or shared state
+- **Race-free**: `go test -race` passes
+- **Deterministic**: Tests produce same results across runs
+
+## Common Testing Mistakes (Avoid These)
+- **Coverage obsession**: 100% coverage ≠ quality tests
+- **Pseudo-tested methods**: Code executed but behavior not validated
+- **Slow tests**: Tests taking >100ms each or >10s total
+- **Brittle tests**: Break with slightest code changes
+- **No error messages**: Using `t.Fail()` without explanation
+- **Test interdependencies**: Tests affecting each other
+- **Testing implementation**: Testing how, not what the code does
+- **Magic numbers**: Hardcoded values without explanation
+- **Ignoring race conditions**: Not running `go test -race`
+- **No edge cases**: Only testing happy paths
+- **External dependencies**: Tests calling real APIs/databases
+
+## Go Standards References
+When in doubt, follow official and community standards:
+- [Effective Go](https://go.dev/doc/effective_go)
+- [Go Doc Comments](https://go.dev/doc/comment)
+- [Code Review Comments (Wiki)](https://go.dev/wiki/CodeReviewComments)
+- [Go Blog: Godoc](https://go.dev/blog/godoc)
+- [Package naming](https://go.dev/blog/package-names): short, lowercase, single word where possible
+
+## Testing Standards References
+- [Go Testing Best Practices](https://blog.jetbrains.com/go/2022/11/22/comprehensive-guide-to-testing-in-go)
+- [Unit Testing Principles](https://livebook.manning.com/book/effective-unit-testing/chapter-2)
+- [F.I.R.S.T Principles](https://www.red-gate.com/simple-talk/devops/testing/go-unit-tests-tips-from-the-trenches/)
+- [Test Quality Attributes](https://arxiv.org/html/2507.06343v1) (academic research)
+- [Go Test Comments](https://go.dev/wiki/TestComments)
+
+Remember: This is a production-quality tool. Every line of code must be maintainable, testable, and well-documented.

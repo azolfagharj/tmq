@@ -1,0 +1,75 @@
+# Example GitHub Actions workflow for building MkDocs documentation
+# Copy this to .github/workflows/docs.yml and customize as needed
+
+name: Build Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '.github/scripts/mkdocs/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '.github/scripts/mkdocs/**'
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: read
+
+jobs:
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required for git-revision-date-localized plugin
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'  # Cache pip dependencies
+
+      - name: Cache MkDocs dependencies
+        uses: actions/cache@v4
+        with:
+          path: .github/scripts/mkdocs/venv
+          key: mkdocs-${{ runner.os }}-${{ hashFiles('.github/scripts/mkdocs/requirements.txt') }}
+          restore-keys: |
+            mkdocs-${{ runner.os }}-
+
+      - name: Make build script executable
+        run: chmod +x .github/scripts/mkdocs/build.sh
+
+      - name: Build documentation
+        run: ./.github/scripts/mkdocs/build.sh
+        env:
+          CI_MODE: true
+          KEEP_VENV: true  # Keep venv for caching
+
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: docs/statics/**
+          retention-days: 7
+
+      # Optional: Deploy to GitHub Pages
+      # Uncomment the following steps if you want to deploy to GitHub Pages
+      #
+      # - name: Deploy to GitHub Pages
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./docs/statics
+      #     cname: docs.yourdomain.com  # Optional: custom domain
+

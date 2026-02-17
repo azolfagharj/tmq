@@ -1,0 +1,1053 @@
+#!/bin/bash
+#
+# az_release - Automated release script for GitHub Actions
+# Creates multiple zip files based on YAML configuration
+#
+# Usage: ./az_release
+# Required environment variables:
+#   - CONFIG_FILE: Path to YAML configuration file containing all settings
+#     The config file must include:
+#     - version_file: Path to file containing VERSION
+#     - update_file: Path to file containing UPDATED
+#     - release_notes_file: Path to output release notes file
+#     - release_assets: Comma-separated list of release assets
+#     - config: Configuration for zip creation
+#     - default_excludes: Default exclude patterns
+#     - zips: List of zip configurations
+AZ_VERSION="1.0.5"
+AZ_UPDATE="2025-12-09"
+# Exit on any error, treat unset variables as an error, and ensure pipe commands fail correctly.
+set -e
+set -u
+set -o pipefail
+set -E  # Enable ERR trap
+
+# ============================================================================
+# CONSTANTS
+# ============================================================================
+
+readonly SCRIPT_NAME="az_release"
+readonly YQ_VERSION="v4.40.5"
+readonly YQ_BINARY="yq_linux_amd64"
+readonly YQ_INSTALL_DIR="/tmp"
+readonly DEFAULT_CONFLICT_CHECK_MODE="pattern"
+readonly REQUIRED_COMMANDS=("zip" "find" "wget" "sort" "comm" "grep" "awk" "sed")
+
+# ============================================================================
+# GLOBAL VARIABLES
+# ============================================================================
+
+declare -a TEMP_FILES=()
+declare -a CREATED_ZIPS=()
+declare -a ZIP_NAMES=()
+declare -a CONFIGURED_FILES=()  # Files from configuration
+declare -a ZIP_ASSETS=()  # Zip files to add to release assets
+declare -a FINAL_RELEASE_FILES=()
+declare -A EXTRACTED_VARIABLES=()  # key=variable_name, value=extracted_value
+declare -a VARIABLE_NAMES=()  # Ordered list of variable names for processing
+CONFIG_FILE_PATH=""
+TEMP_CONFIG_FILE=""
+YQ_CMD=""
+CONFLICT_CHECK_MODE=""
+ZIP_COUNT=0
+RELEASE_NOTES_FILE=""
+
+# ============================================================================
+# LOGGING FUNCTIONS
+# ============================================================================
+
+log_info() {
+  echo "ℹ️  $1"
+}
+
+log_warn() {
+  echo "⚠️  Warning: $1" >&2
+}
+
+log_error() {
+  echo "❌ Error: $1" >&2
+  exit 1
+}
+
+log_debug() {
+  if [ "${DEBUG:-0}" = "1" ]; then
+    echo "🔍 Debug: $1" >&2
+  fi
+}
+
+log_success() {
+  echo "✅ $1"
+}
+
+# ============================================================================
+# UTILITY FUNCTIONS
+# ============================================================================
+
+# Trim whitespace from string
+trim_string() {
+  local str="$1"
+  echo "$str" | xargs
+}
+
+# Check if file is readable
+is_file_readable() {
+  local file="$1"
+  [ -f "$file" ] && [ -r "$file" ]
+}
+
+# Normalize path (remove leading ./)
+normalize_path() {
+  local path="$1"
+  echo "${path#./}"
+}
+
+# Register temporary file for cleanup
+register_temp_file() {
+  local file="$1"
+  TEMP_FILES+=("$file")
+}
+
+# Cleanup all temporary files
+cleanup_temp_files() {
+  local file
+  for file in "${TEMP_FILES[@]}"; do
+    if [ -n "$file" ] && [ -f "$file" ]; then
+      rm -f "$file"
+      log_debug "Cleaned up temporary file: $file"
+    fi
+  done
+  TEMP_FILES=()
+}
+
+# Cleanup handler
+cleanup() {
+  local exit_code=$?
+  log_debug "Cleanup handler called with exit code: $exit_code"
+  cleanup_temp_files
+  if [ -n "$TEMP_CONFIG_FILE" ] && [ -f "$TEMP_CONFIG_FILE" ]; then
+    rm -f "$TEMP_CONFIG_FILE"
+  fi
+  if [ $exit_code -ne 0 ]; then
+    log_error "Script exited with error code $exit_code"
+  fi
+}
+
+# Set up trap handlers
+trap cleanup EXIT
+trap 'cleanup; exit 130' INT TERM
+
+# ============================================================================
+# DEPENDENCY MANAGEMENT
+# ============================================================================
+
+# Check if a command exists
+command_exists() {
+  command -v "$1" &> /dev/null
+}
+
+# Check system dependencies
+check_system_dependencies() {
+  local cmd
+  local missing_commands=()
+
+  for cmd in "${REQUIRED_COMMANDS[@]}"; do
+    if ! command_exists "$cmd"; then
+      missing_commands+=("$cmd")
+    fi
+  done
+
+  if [ ${#missing_commands[@]} -gt 0 ]; then
+    log_error "Missing required commands: ${missing_commands[*]}. Please install them."
+  fi
+
+  log_success "All required commands are available"
+}
+
+# Install yq if not available
+install_yq() {
+  if command_exists yq; then
+    log_success "yq is already installed"
+    return 0
+  fi
+
+  log_info "Installing yq..."
+  local yq_path="${YQ_INSTALL_DIR}/yq"
+  local download_url="https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/${YQ_BINARY}"
+
+  if ! wget -q "$download_url" -O "$yq_path"; then
+    log_error "Failed to download yq from $download_url"
+  fi
+
+  chmod +x "$yq_path"
+
+  # Try to install to /usr/local/bin
+  if sudo mv "$yq_path" /usr/local/bin/yq 2>/dev/null || \
+     mv "$yq_path" /usr/local/bin/yq 2>/dev/null; then
+    log_success "yq installed to /usr/local/bin/yq"
+  else
+    # Fallback: use from /tmp and add to PATH
+    export PATH="${YQ_INSTALL_DIR}:${PATH}"
+    log_success "yq installed to ${YQ_INSTALL_DIR}/yq (using fallback location)"
+  fi
+
+  # Verify installation
+  if command_exists yq; then
+    log_success "yq verified and ready to use"
+  else
+    log_error "yq installation failed or yq command not found in PATH"
+  fi
+}
+
+# Get yq command path
+get_yq_command() {
+  if command_exists yq; then
+    echo "yq"
+  elif [ -f /tmp/yq ]; then
+    echo "/tmp/yq"
+  else
+    log_error "yq is not available"
+  fi
+}
+
+# ============================================================================
+# CONFIGURATION MANAGEMENT
+# ============================================================================
+
+# Load and validate environment variables
+load_environment_variables() {
+  log_info "Reading configuration from environment variables..."
+
+  # Only CONFIG_FILE is required as environment variable
+  if [ -z "${CONFIG_FILE:-}" ]; then
+    log_error "Environment variable CONFIG_FILE is required"
+  fi
+
+  CONFIG_FILE_PATH="$CONFIG_FILE"
+
+  if ! is_file_readable "$CONFIG_FILE_PATH"; then
+    log_error "Configuration file '$CONFIG_FILE_PATH' not found or not readable"
+  fi
+
+  log_success "Configuration file found: $CONFIG_FILE_PATH"
+}
+
+# Parse YAML configuration and extract all settings
+parse_yaml_config() {
+  log_info "Parsing YAML configuration from file: $CONFIG_FILE_PATH"
+
+  TEMP_CONFIG_FILE=$(mktemp)
+  register_temp_file "$TEMP_CONFIG_FILE"
+  cp "$CONFIG_FILE_PATH" "$TEMP_CONFIG_FILE"
+
+  # Validate YAML syntax
+  if ! $YQ_CMD eval '.' "$TEMP_CONFIG_FILE" > /dev/null 2>&1; then
+    log_error "Invalid YAML syntax in configuration file"
+  fi
+
+  # Extract all configuration values from YAML
+  RELEASE_NOTES_FILE=$($YQ_CMD eval '.release_notes_file // ""' "$TEMP_CONFIG_FILE")
+
+  # Validate required fields
+  if [ -z "$RELEASE_NOTES_FILE" ]; then
+    log_error "Required field 'release_notes_file' not found in configuration"
+  fi
+
+  log_success "YAML configuration parsed successfully"
+  log_info "Release notes file: $RELEASE_NOTES_FILE"
+}
+
+# Parse extract_variables configuration
+parse_extract_variables() {
+  log_info "Parsing extract_variables configuration..."
+
+  local var_count
+  var_count=$($YQ_CMD eval '.extract_variables | keys | length' "$TEMP_CONFIG_FILE")
+
+  if [ "$var_count" = "0" ] || [ "$var_count" = "null" ]; then
+    log_error "No extract_variables found in configuration"
+  fi
+
+  local var_key
+  local name
+  local file_path
+  local variable_name
+  local extraction_type
+  local grep_pattern
+  local awk_separator
+  local awk_field
+  local head_lines
+
+  # Get all variable keys in order
+  VARIABLE_NAMES=()
+  while IFS= read -r var_key; do
+    if [ -n "$var_key" ] && [ "$var_key" != "null" ]; then
+      VARIABLE_NAMES+=("$var_key")
+    fi
+  done < <($YQ_CMD eval '.extract_variables | keys[]' "$TEMP_CONFIG_FILE")
+
+  # Parse each variable
+  for var_key in "${VARIABLE_NAMES[@]}"; do
+    # Extract required fields
+    name=$($YQ_CMD eval ".extract_variables.$var_key.name // \"\"" "$TEMP_CONFIG_FILE")
+    file_path=$($YQ_CMD eval ".extract_variables.$var_key.file_path // \"\"" "$TEMP_CONFIG_FILE")
+    variable_name=$($YQ_CMD eval ".extract_variables.$var_key.variable_name // \"\"" "$TEMP_CONFIG_FILE")
+    extraction_type=$($YQ_CMD eval ".extract_variables.$var_key.extraction.type // \"\"" "$TEMP_CONFIG_FILE")
+
+    # Validate required fields
+    if [ -z "$variable_name" ]; then
+      log_error "Variable '$var_key': 'variable_name' is required but not found"
+    fi
+    if [ -z "$file_path" ]; then
+      log_error "Variable '$var_key': 'file_path' is required but not found"
+    fi
+    if [ -z "$extraction_type" ]; then
+      log_error "Variable '$var_key': 'extraction.type' is required but not found"
+    fi
+
+    # Validate extraction type
+    if [ "$extraction_type" != "grep_awk" ]; then
+      log_error "Variable '$var_key': Unsupported extraction type '$extraction_type'. Only 'grep_awk' is supported"
+    fi
+
+    # Extract extraction parameters for grep_awk
+    if [ "$extraction_type" = "grep_awk" ]; then
+      grep_pattern=$($YQ_CMD eval ".extract_variables.$var_key.extraction.grep_pattern // \"\"" "$TEMP_CONFIG_FILE")
+      awk_separator=$($YQ_CMD eval ".extract_variables.$var_key.extraction.awk_separator // \"\"" "$TEMP_CONFIG_FILE")
+      awk_field=$($YQ_CMD eval ".extract_variables.$var_key.extraction.awk_field // \"\"" "$TEMP_CONFIG_FILE")
+      head_lines=$($YQ_CMD eval ".extract_variables.$var_key.extraction.head_lines // 1" "$TEMP_CONFIG_FILE")
+
+      if [ -z "$grep_pattern" ]; then
+        log_error "Variable '$var_key': 'extraction.grep_pattern' is required for grep_awk type"
+      fi
+      if [ -z "$awk_separator" ]; then
+        log_error "Variable '$var_key': 'extraction.awk_separator' is required for grep_awk type"
+      fi
+      if [ -z "$awk_field" ]; then
+        log_error "Variable '$var_key': 'extraction.awk_field' is required for grep_awk type"
+      fi
+    fi
+
+    log_debug "Parsed variable '$var_key': variable_name=$variable_name, file_path=$file_path, type=$extraction_type"
+  done
+
+  log_success "Parsed ${#VARIABLE_NAMES[@]} variable(s) from extract_variables"
+}
+
+# Validate YAML structure
+validate_yaml_structure() {
+  local zip_count
+  zip_count=$($YQ_CMD eval '.zips | length' "$TEMP_CONFIG_FILE")
+
+  if [ "$zip_count" = "0" ] || [ "$zip_count" = "null" ]; then
+    log_error "No zip configurations found in ZIP_CONFIGS"
+  fi
+
+  ZIP_COUNT=$zip_count
+}
+
+# Extract configuration values
+extract_config_values() {
+  CONFLICT_CHECK_MODE=$($YQ_CMD eval '.config.conflict_check_mode // "'"$DEFAULT_CONFLICT_CHECK_MODE"'"' "$TEMP_CONFIG_FILE")
+
+  log_info "Conflict check mode: $CONFLICT_CHECK_MODE"
+  log_info "Number of zip configurations: $ZIP_COUNT"
+  log_info "Default excludes can be enabled/disabled per zip file"
+}
+
+# ============================================================================
+# FILE OPERATIONS
+# ============================================================================
+
+# Extract variable value from file using extraction configuration
+extract_variable_value() {
+  local var_key="$1"
+  local file_path="$2"
+  local extraction_type="$3"
+
+  if ! is_file_readable "$file_path"; then
+    log_error "File '$file_path' not found or not readable for variable '$var_key'"
+  fi
+
+  local value=""
+  local grep_pattern
+  local awk_separator
+  local awk_field
+  local head_lines
+
+  if [ "$extraction_type" = "grep_awk" ]; then
+    # Extract extraction parameters
+    grep_pattern=$($YQ_CMD eval ".extract_variables.$var_key.extraction.grep_pattern" "$TEMP_CONFIG_FILE")
+    awk_separator=$($YQ_CMD eval ".extract_variables.$var_key.extraction.awk_separator" "$TEMP_CONFIG_FILE")
+    awk_field=$($YQ_CMD eval ".extract_variables.$var_key.extraction.awk_field" "$TEMP_CONFIG_FILE")
+    head_lines=$($YQ_CMD eval ".extract_variables.$var_key.extraction.head_lines // 1" "$TEMP_CONFIG_FILE")
+
+    # Extract value using grep and awk
+    # Use head_lines to determine how many lines to take, then extract from first line
+    value=$(grep "$grep_pattern" "$file_path" | head -n "$head_lines" | head -n 1 | awk -F"$awk_separator" -v field="$awk_field" '{print $field}')
+
+    if [ -z "$value" ]; then
+      log_error "Could not extract value for variable '$var_key' from '$file_path' using pattern '$grep_pattern'"
+    fi
+  else
+    log_error "Unsupported extraction type '$extraction_type' for variable '$var_key'"
+  fi
+
+  echo "$value"
+}
+
+# Create release notes file
+create_release_notes() {
+  local notes_file="$1"
+
+  log_info "Creating release notes file: $notes_file..."
+
+  # Create temporary file for release notes content
+  local temp_notes
+  temp_notes=$(mktemp)
+  register_temp_file "$temp_notes"
+
+  # Add variables that have add_to_releasenote: true
+  local var_key
+  local variable_name
+  local name
+  local add_to_releasenote
+  local value
+
+  for var_key in "${VARIABLE_NAMES[@]}"; do
+    add_to_releasenote=$($YQ_CMD eval ".extract_variables.$var_key.add_to_releasenote // false" "$TEMP_CONFIG_FILE")
+
+    if [ "$add_to_releasenote" = "true" ]; then
+      variable_name=$($YQ_CMD eval ".extract_variables.$var_key.variable_name" "$TEMP_CONFIG_FILE")
+      name=$($YQ_CMD eval ".extract_variables.$var_key.name // \"$variable_name\"" "$TEMP_CONFIG_FILE")
+      value="${EXTRACTED_VARIABLES[$variable_name]}"
+
+      echo "# $name: $value" >> "$temp_notes"
+    fi
+  done
+
+  # Copy temp file to final location
+  cp "$temp_notes" "$notes_file"
+
+  if ! is_file_readable "$notes_file"; then
+    log_error "Failed to create release notes file '$notes_file'"
+  fi
+
+  log_success "Release notes created"
+}
+
+# ============================================================================
+# VALIDATION FUNCTIONS
+# ============================================================================
+
+# Validate a single zip configuration
+validate_zip_config() {
+  local zip_index="$1"
+  local name
+  local includes_count
+
+  name=$($YQ_CMD eval ".zips[$zip_index].name" "$TEMP_CONFIG_FILE")
+  includes_count=$($YQ_CMD eval ".zips[$zip_index].includes | length" "$TEMP_CONFIG_FILE")
+
+  # Check name exists
+  if [ "$name" = "null" ] || [ -z "$name" ]; then
+    log_error "Zip configuration at index $zip_index: 'name' is required but not found"
+  fi
+
+  # Check includes exists and not empty
+  if [ "$includes_count" = "0" ] || [ "$includes_count" = "null" ]; then
+    log_error "Zip configuration '$name': 'includes' is required and cannot be empty"
+  fi
+
+  echo "$name"
+}
+
+# Check for duplicate zip names
+check_duplicate_names() {
+  local -a names=()
+  local name
+  local found
+  local i
+
+  for ((i=0; i<ZIP_COUNT; i++)); do
+    name=$($YQ_CMD eval ".zips[$i].name" "$TEMP_CONFIG_FILE")
+    found=false
+
+    for existing_name in "${names[@]}"; do
+      if [ "$existing_name" = "$name" ]; then
+        found=true
+        break
+      fi
+    done
+
+    if [ "$found" = "true" ]; then
+      log_error "Duplicate zip name found: '$name'. Each zip must have a unique name"
+    fi
+
+    names+=("$name")
+  done
+}
+
+# Check pattern conflicts (pattern-level)
+check_pattern_conflicts_pattern() {
+  local zip_index="$1"
+  local name="$2"
+  local includes_count
+  local excludes_count
+  local include_pattern
+  local exclude_pattern
+  local i
+  local j
+
+  includes_count=$($YQ_CMD eval ".zips[$zip_index].includes | length" "$TEMP_CONFIG_FILE")
+  excludes_count=$($YQ_CMD eval ".zips[$zip_index].excludes | length" "$TEMP_CONFIG_FILE")
+
+  for ((i=0; i<includes_count; i++)); do
+    include_pattern=$($YQ_CMD eval ".zips[$zip_index].includes[$i]" "$TEMP_CONFIG_FILE")
+    for ((j=0; j<excludes_count; j++)); do
+      exclude_pattern=$($YQ_CMD eval ".zips[$zip_index].excludes[$j]" "$TEMP_CONFIG_FILE")
+      if [ "$include_pattern" = "$exclude_pattern" ]; then
+        log_error "Zip '$name': Pattern '$include_pattern' is found in both includes and excludes"
+      fi
+    done
+  done
+}
+
+# Check pattern conflicts (file-level)
+check_pattern_conflicts_file() {
+  local zip_index="$1"
+  local name="$2"
+  local temp_includes
+  local temp_excludes
+  local pattern
+  local excluded_file
+
+  temp_includes=$(mktemp)
+  temp_excludes=$(mktemp)
+  register_temp_file "$temp_includes"
+  register_temp_file "$temp_excludes"
+
+  # Get all files matching includes
+  $YQ_CMD eval ".zips[$zip_index].includes[]" "$TEMP_CONFIG_FILE" | while read -r pattern; do
+    find . -path "$pattern" -type f 2>/dev/null >> "$temp_includes" || true
+  done
+
+  # Get all files matching excludes
+  $YQ_CMD eval ".zips[$zip_index].excludes[]" "$TEMP_CONFIG_FILE" 2>/dev/null | while read -r pattern; do
+    find . -path "$pattern" -type f 2>/dev/null >> "$temp_excludes" || true
+  done
+
+  # Check for conflicts
+  if [ -f "$temp_excludes" ] && [ -s "$temp_excludes" ]; then
+    while IFS= read -r excluded_file; do
+      if grep -Fxq "$excluded_file" "$temp_includes" 2>/dev/null; then
+        log_error "Zip '$name': File '$excluded_file' matches both include and exclude patterns"
+      fi
+    done < "$temp_excludes"
+  fi
+}
+
+# Check pattern conflicts (wrapper)
+check_pattern_conflicts() {
+  local zip_index="$1"
+  local name="$2"
+
+  if [ "$CONFLICT_CHECK_MODE" = "pattern" ]; then
+    check_pattern_conflicts_pattern "$zip_index" "$name"
+  else
+    check_pattern_conflicts_file "$zip_index" "$name"
+  fi
+}
+
+# Validate all zip configurations
+validate_all_configs() {
+  log_info "Validating zip configurations..."
+
+  check_duplicate_names
+
+  local -a zip_names=()
+  local name
+  local i
+
+  for ((i=0; i<ZIP_COUNT; i++)); do
+    name=$(validate_zip_config "$i")
+    zip_names+=("$name")
+    check_pattern_conflicts "$i" "$name"
+  done
+
+  # Export zip names for use in other functions
+  ZIP_NAMES=("${zip_names[@]}")
+
+  log_success "All zip configurations validated"
+}
+
+# ============================================================================
+# PATTERN MATCHING FUNCTIONS
+# ============================================================================
+
+# Expand a single pattern to file list
+expand_pattern() {
+  local pattern="$1"
+  local output_file="$2"
+
+  # Remove quotes if present
+  pattern=$(echo "$pattern" | sed 's/^"//; s/"$//')
+
+  # Handle different pattern types
+  if [ "$pattern" = "*" ]; then
+    # Match all files recursively
+    find . -type f >> "$output_file" 2>/dev/null || true
+  elif [[ "$pattern" == *"**"* ]]; then
+    # ** pattern - use find with -path (recursive)
+    local base_pattern=${pattern//\*\*/*}
+    if [[ "$base_pattern" == "./"* ]]; then
+      find . -path "$base_pattern" -type f >> "$output_file" 2>/dev/null || true
+    else
+      find . -path "./$base_pattern" -type f >> "$output_file" 2>/dev/null || true
+    fi
+  elif [[ "$pattern" == *"*"* ]] || [[ "$pattern" == *"?"* ]]; then
+    # Simple glob pattern
+    if [[ "$pattern" == "./"* ]]; then
+      find . -path "$pattern" -type f >> "$output_file" 2>/dev/null || true
+    else
+      find . -path "./$pattern" -type f >> "$output_file" 2>/dev/null || true
+    fi
+  else
+    # Exact file or directory
+    if [ -f "$pattern" ]; then
+      echo "$pattern" >> "$output_file"
+    elif [ -d "$pattern" ]; then
+      find "$pattern" -type f >> "$output_file" 2>/dev/null || true
+    fi
+  fi
+}
+
+# Apply include patterns
+apply_include_patterns() {
+  local zip_index="$1"
+  local output_file="$2"
+  local includes_count
+  local pattern
+  local i
+
+  includes_count=$($YQ_CMD eval ".zips[$zip_index].includes | length" "$TEMP_CONFIG_FILE")
+
+  for ((i=0; i<includes_count; i++)); do
+    pattern=$($YQ_CMD eval ".zips[$zip_index].includes[$i]" "$TEMP_CONFIG_FILE")
+    expand_pattern "$pattern" "$output_file"
+  done
+
+  # Remove duplicates and sort
+  sort -u "$output_file" > "${output_file}.sorted"
+  mv "${output_file}.sorted" "$output_file"
+}
+
+# Apply exclude patterns
+apply_exclude_patterns() {
+  local patterns_source="$1"  # "default_excludes.patterns" or ".zips[$index].excludes"
+  local file_list="$2"
+  local patterns_count
+  local exclude_pattern
+  local temp_excluded
+  local i
+
+  patterns_count=$($YQ_CMD eval "$patterns_source | length" "$TEMP_CONFIG_FILE")
+
+  if [ "$patterns_count" = "0" ] || [ "$patterns_count" = "null" ]; then
+    return 0
+  fi
+
+  temp_excluded=$(mktemp)
+  register_temp_file "$temp_excluded"
+
+  for ((i=0; i<patterns_count; i++)); do
+    exclude_pattern=$($YQ_CMD eval "${patterns_source}"'['"$i"']' "$TEMP_CONFIG_FILE")
+    expand_pattern "$exclude_pattern" "$temp_excluded"
+  done
+
+  # Remove excluded files from list
+  comm -23 <(sort "$file_list") <(sort -u "$temp_excluded") > "${file_list}.filtered"
+  mv "${file_list}.filtered" "$file_list"
+}
+
+# Filter file list with all excludes
+filter_file_list() {
+  local zip_index="$1"
+  local file_list="$2"
+  local zip_default_excludes_enabled
+
+  # Check if this zip has its own default_excludes.enabled setting
+  # Default is false if not specified
+  zip_default_excludes_enabled=$($YQ_CMD eval ".zips[$zip_index].default_excludes.enabled // false" "$TEMP_CONFIG_FILE")
+
+  # If enabled for this zip, apply default exclude patterns
+  if [ "$zip_default_excludes_enabled" = "true" ]; then
+    apply_exclude_patterns ".default_excludes.patterns" "$file_list"
+  fi
+
+  # Apply zip-specific excludes
+  apply_exclude_patterns ".zips[$zip_index].excludes" "$file_list"
+}
+
+# ============================================================================
+# ZIP CREATION FUNCTIONS
+# ============================================================================
+
+# Create zip from file list
+create_zip_from_file_list() {
+  local zip_file="$1"
+  local file_list="$2"
+  local file_count=0
+
+  # Remove leading ./ from paths
+  sed 's|^\./||' "$file_list" > "${file_list}.clean"
+  register_temp_file "${file_list}.clean"
+
+  # Try using zip's -i@ option first
+  if zip -q -r "$zip_file" . -i@"${file_list}.clean" 2>/dev/null; then
+    log_debug "Created zip using -i@ option"
+    return 0
+  fi
+
+  # Fallback: add files individually
+  log_debug "Falling back to individual file addition"
+  rm -f "$zip_file"
+
+  while IFS= read -r file; do
+    if is_file_readable "$file"; then
+      if zip -q "$zip_file" "$file" 2>/dev/null; then
+        ((file_count++))
+      fi
+    fi
+  done < "${file_list}.clean"
+
+  if [ "$file_count" -eq 0 ]; then
+    log_error "Failed to add any files to zip '$zip_file'. Check file permissions and paths"
+  fi
+
+  log_debug "Added $file_count files to zip"
+}
+
+# Create a single zip file
+create_single_zip() {
+  local zip_index="$1"
+  local name="$2"
+  local zip_file="${name}.zip"
+
+  log_info "Creating zip: $zip_file"
+
+  # Create temporary file list
+  local temp_file_list
+  temp_file_list=$(mktemp)
+  register_temp_file "$temp_file_list"
+
+  # Apply includes
+  apply_include_patterns "$zip_index" "$temp_file_list"
+
+  # Apply excludes
+  filter_file_list "$zip_index" "$temp_file_list"
+
+  # Check if we have any files
+  if [ ! -s "$temp_file_list" ]; then
+    log_error "No files found to include in zip '$zip_file'. Check your include patterns"
+  fi
+
+  # Create zip file
+  create_zip_from_file_list "$zip_file" "$temp_file_list"
+
+  # Verify zip was created
+  if [ ! -f "$zip_file" ] || [ ! -s "$zip_file" ]; then
+    log_error "Failed to create zip file '$zip_file' or zip file is empty"
+  fi
+
+  CREATED_ZIPS+=("$zip_file")
+  log_success "Created: $zip_file"
+}
+
+# Create all zip files
+create_all_zips() {
+  log_info "Creating zip files..."
+
+  local i
+  for ((i=0; i<ZIP_COUNT; i++)); do
+    create_single_zip "$i" "${ZIP_NAMES[$i]}"
+  done
+
+  log_success "All zip files created"
+}
+
+# ============================================================================
+# RELEASE ASSETS MANAGEMENT
+# ============================================================================
+
+# Process zip files for release assets
+process_zip_assets() {
+  log_info "Processing zip files for release assets..."
+
+  local i
+  local zip_index
+  local zip_name
+  local add_to_assets
+  local append_version
+  local original_zip_file
+  local final_zip_file
+
+  for ((i=0; i<ZIP_COUNT; i++)); do
+    zip_name="${ZIP_NAMES[$i]}"
+    original_zip_file="${zip_name}.zip"
+
+    # Check if this zip should be added to assets
+    add_to_assets=$($YQ_CMD eval ".zips[$i].add_to_assets // false" "$TEMP_CONFIG_FILE")
+
+    if [ "$add_to_assets" != "true" ]; then
+      log_debug "Skipping zip '$original_zip_file' (add_to_assets is false)"
+      continue
+    fi
+
+    # Check if zip file exists
+    if [ ! -f "$original_zip_file" ]; then
+      log_warn "Zip file '$original_zip_file' not found, skipping"
+      continue
+    fi
+
+    # Check if we should append version
+    append_version=$($YQ_CMD eval ".zips[$i].append_version // false" "$TEMP_CONFIG_FILE")
+
+    if [ "$append_version" = "true" ] && [ -n "${EXTRACTED_VARIABLES[VERSION]:-}" ]; then
+      final_zip_file="${zip_name}_${EXTRACTED_VARIABLES[VERSION]}.zip"
+      # Copy zip file with version in name
+      cp "$original_zip_file" "$final_zip_file"
+      log_info "Copied '$original_zip_file' to '$final_zip_file'"
+      ZIP_ASSETS+=("$final_zip_file")
+    else
+      # Use original zip file name
+      ZIP_ASSETS+=("$original_zip_file")
+      log_info "Added zip '$original_zip_file' to release assets"
+    fi
+  done
+
+  log_success "Processed zip assets"
+}
+
+# Process files from configuration
+process_release_files() {
+  local files_count
+  local file_index
+  local file_name
+  local file_path
+  local append_version
+  local final_name
+
+  files_count=$($YQ_CMD eval '.files | length' "$TEMP_CONFIG_FILE")
+
+  if [ "$files_count" = "0" ] || [ "$files_count" = "null" ]; then
+    log_info "No files configured for release assets"
+    return 0
+  fi
+
+  log_info "Processing $files_count file(s) for release assets..."
+
+  for ((file_index=0; file_index<files_count; file_index++)); do
+    file_name=$($YQ_CMD eval ".files[$file_index].name // \"\"" "$TEMP_CONFIG_FILE")
+    file_path=$($YQ_CMD eval ".files[$file_index].path // \"\"" "$TEMP_CONFIG_FILE")
+    append_version=$($YQ_CMD eval ".files[$file_index].append_version // false" "$TEMP_CONFIG_FILE")
+
+    # Validate required fields
+    if [ -z "$file_name" ]; then
+      log_error "File at index $file_index: 'name' is required but not found"
+    fi
+    if [ -z "$file_path" ]; then
+      log_error "File '$file_name': 'path' is required but not found"
+    fi
+
+    # Check if source file exists
+    if ! is_file_readable "$file_path"; then
+      log_warn "File '$file_path' not found, skipping '$file_name'"
+      continue
+    fi
+
+    # Determine final name
+    if [ "$append_version" = "true" ] && [ -n "${EXTRACTED_VARIABLES[VERSION]:-}" ]; then
+      final_name="${file_name}_${EXTRACTED_VARIABLES[VERSION]}"
+    else
+      final_name="$file_name"
+    fi
+
+    # Copy file to final name if different from source
+    if [ "$final_name" != "$file_path" ]; then
+      cp "$file_path" "$final_name"
+      log_info "Copied '$file_path' to '$final_name'"
+      CONFIGURED_FILES+=("$final_name")
+    else
+      # If name is same as path, use original file
+      CONFIGURED_FILES+=("$file_path")
+      log_info "Added file '$file_path' to release assets"
+    fi
+  done
+
+  log_success "Processed release files"
+}
+
+# Filter release assets to include zip files and configured files
+filter_release_assets() {
+  local -a final_files=()
+  local zip_file
+
+  # Add zip files that have add_to_assets: true
+  for zip_file in "${ZIP_ASSETS[@]}"; do
+    final_files+=("$zip_file")
+  done
+
+  # Add files from configuration
+  for file in "${CONFIGURED_FILES[@]}"; do
+    final_files+=("$file")
+  done
+
+  printf '%s\n' "${final_files[@]}"
+}
+
+# Verify all release files exist
+verify_release_files() {
+  log_info "Verifying that all release assets exist..."
+
+  # Process files from configuration first
+  process_release_files
+
+  # Get all final files (zip files + processed files)
+  local -a files_to_verify
+  readarray -t files_to_verify < <(filter_release_assets)
+
+  local file
+  for file in "${files_to_verify[@]}"; do
+    if [ ! -f "$file" ]; then
+      log_error "Release asset '$file' not found. Ensure it is created before this step"
+    fi
+  done
+
+  log_success "All release assets verified"
+
+  # Export for use in GitHub Actions
+  FINAL_RELEASE_FILES=("${files_to_verify[@]}")
+}
+
+# ============================================================================
+# GITHUB ACTIONS INTEGRATION
+# ============================================================================
+
+# Set GitHub environment variables
+set_github_env() {
+  if [ -z "${GITHUB_ENV:-}" ]; then
+    return 0
+  fi
+
+  log_info "Setting environment variables for GitHub Actions..."
+
+  local var_key
+  local variable_name
+  local add_to_env
+  local value
+
+  for var_key in "${VARIABLE_NAMES[@]}"; do
+    add_to_env=$($YQ_CMD eval ".extract_variables.$var_key.add_to_env // false" "$TEMP_CONFIG_FILE")
+
+    if [ "$add_to_env" = "true" ]; then
+      variable_name=$($YQ_CMD eval ".extract_variables.$var_key.variable_name" "$TEMP_CONFIG_FILE")
+      value="${EXTRACTED_VARIABLES[$variable_name]}"
+
+      echo "${variable_name}=${value}" >> "$GITHUB_ENV"
+      log_debug "Added ${variable_name} to GITHUB_ENV"
+    fi
+  done
+
+  log_success "Environment variables set"
+}
+
+# Set GitHub outputs
+set_github_outputs() {
+  if [ -z "${GITHUB_OUTPUT:-}" ]; then
+    return 0
+  fi
+
+  log_info "Setting outputs for GitHub Actions..."
+  local files_string
+  files_string=$(printf "%s\n" "${FINAL_RELEASE_FILES[@]}")
+
+  {
+    echo "FILES_LIST<<EOF"
+    echo "$files_string"
+    echo "EOF"
+    echo "NOTES_FILE=${RELEASE_NOTES_FILE}"
+  } >> "$GITHUB_OUTPUT"
+}
+
+# ============================================================================
+# MAIN FUNCTION
+# ============================================================================
+
+main() {
+  log_info "Starting $SCRIPT_NAME script..."
+
+  # Initialize dependencies
+  check_system_dependencies
+  install_yq
+  YQ_CMD=$(get_yq_command)
+
+  # Load configuration
+  load_environment_variables
+  parse_yaml_config
+  parse_extract_variables
+  validate_yaml_structure
+  extract_config_values
+
+  # Perform initial checks - validate all file_paths from extract_variables
+  log_info "Performing initial checks..."
+  local var_key
+  local file_path
+  for var_key in "${VARIABLE_NAMES[@]}"; do
+    file_path=$($YQ_CMD eval ".extract_variables.$var_key.file_path" "$TEMP_CONFIG_FILE")
+    if ! is_file_readable "$file_path"; then
+      log_error "File '$file_path' for variable '$var_key' not found or not readable"
+    fi
+  done
+  log_success "Initial checks passed"
+
+  # Extract all variables
+  log_info "Extracting variables from files..."
+  local variable_name
+  local extraction_type
+  local value
+  for var_key in "${VARIABLE_NAMES[@]}"; do
+    file_path=$($YQ_CMD eval ".extract_variables.$var_key.file_path" "$TEMP_CONFIG_FILE")
+    extraction_type=$($YQ_CMD eval ".extract_variables.$var_key.extraction.type" "$TEMP_CONFIG_FILE")
+    variable_name=$($YQ_CMD eval ".extract_variables.$var_key.variable_name" "$TEMP_CONFIG_FILE")
+
+    value=$(extract_variable_value "$var_key" "$file_path" "$extraction_type")
+    EXTRACTED_VARIABLES["$variable_name"]="$value"
+
+    log_info "Extracted $variable_name: $value"
+  done
+  log_success "All variables extracted"
+
+  # Create release notes
+  create_release_notes "$RELEASE_NOTES_FILE"
+
+  # Validate configurations
+  validate_all_configs
+
+  # Create zip files
+  create_all_zips
+
+  # Process zip files for release assets
+  process_zip_assets
+
+  # Manage release assets
+  verify_release_files
+
+  # Set GitHub Actions outputs
+  set_github_env
+  set_github_outputs
+
+  log_success "$SCRIPT_NAME script finished successfully"
+}
+
+# Script execution
+main "$@"

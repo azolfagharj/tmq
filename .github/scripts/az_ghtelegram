@@ -1,0 +1,424 @@
+#!/bin/bash
+AZ_VERSION="1.0.4"
+AZ_UPDATE="2025-12-09"
+# Exit on any error, treat unset variables as an error, and ensure pipe commands fail correctly.
+set -e
+set -u
+set -o pipefail
+
+# --- Helper for logging ---
+log_error() {
+  echo "❌ Error: $1" >&2
+  exit 1
+}
+
+log_info() {
+  echo "ℹ️  $1"
+}
+
+log_success() {
+  echo "✅ $1"
+}
+
+# --- Utility Functions ---
+
+# Check if a command exists
+command_exists() {
+  command -v "$1" &> /dev/null
+}
+
+# Install jq if not available
+install_jq() {
+  if command_exists jq; then
+    log_success "jq is already installed"
+    return 0
+  fi
+
+  log_info "Installing jq..."
+
+  # Try to install with apt
+  if command_exists apt-get; then
+    if sudo apt-get update -qq >/dev/null 2>&1 && sudo apt-get install -y jq >/dev/null 2>&1; then
+      log_success "jq installed successfully"
+      return 0
+    fi
+  fi
+
+  log_info "jq installation failed or apt-get not available, will use fallback method"
+}
+
+# --- Read and Verify Configuration from Environment Variables ---
+echo "🔎 Reading configuration from environment variables..."
+
+# Set default API URL if not provided
+if [ -z "${TELEGRAM_API_URL:-}" ]; then
+  TELEGRAM_API_URL="https://api.telegram.org/bot"
+  log_info "TELEGRAM_API_URL not set, using default: $TELEGRAM_API_URL"
+fi
+
+if [ -z "${TELEGRAM_BOT_TOKEN:-}" ]; then
+  log_error "Environment variable TELEGRAM_BOT_TOKEN is not set."
+fi
+
+if [ -z "${TELEGRAM_CHAT_ID:-}" ]; then
+  log_error "Environment variable TELEGRAM_CHAT_ID is not set."
+fi
+
+if [ -z "${VERSION:-}" ]; then
+  log_error "Environment variable VERSION is not set."
+fi
+
+# Check if sending files is enabled (default: false)
+SEND_FILES="${SEND_FILES:-false}"
+if [ "$SEND_FILES" != "true" ] && [ "$SEND_FILES" != "false" ]; then
+  log_info "SEND_FILES has invalid value '$SEND_FILES', defaulting to 'false'"
+  SEND_FILES="false"
+fi
+
+log_success "Configuration loaded successfully."
+
+# --- Install jq if needed ---
+install_jq
+
+# --- Detect Operating System ---
+# Use RUNNER_OS from GitHub Actions (Linux, Windows, macOS)
+OS="${RUNNER_OS:-}"
+if [ -z "$OS" ]; then
+  OS="${GITHUB_RUNNER_OS:-}"
+fi
+
+# Try to get more detailed OS info from ImageOS if available
+OS_DETAIL="${ImageOS:-}"
+if [ -n "$OS_DETAIL" ] && [ "$OS" = "Linux" ]; then
+  # ImageOS format: ubuntu22, ubuntu20, etc.
+  OS="$OS_DETAIL"
+fi
+
+if [ -z "$OS" ]; then
+  # Fallback: try to detect from uname
+  if command -v uname >/dev/null 2>&1; then
+    UNAME_OS=$(uname -s)
+    case "$UNAME_OS" in
+      Linux*) OS="Linux" ;;
+      Darwin*) OS="macOS" ;;
+      MINGW*|MSYS*|CYGWIN*) OS="Windows" ;;
+      *) OS="Unknown" ;;
+    esac
+  else
+    OS="Unknown"
+  fi
+fi
+
+log_info "Detected Operating System: $OS"
+
+# --- Get Repository Information ---
+REPOSITORY="${GITHUB_REPOSITORY:-Unknown}"
+# Extract repository name from owner/repo format
+if [ "$REPOSITORY" != "Unknown" ]; then
+  REPO_NAME=$(basename "$REPOSITORY")
+else
+  REPO_NAME="Unknown"
+fi
+
+# Build repository URL
+REPO_URL=""
+if [ -n "${GITHUB_SERVER_URL:-}" ] && [ "$REPOSITORY" != "Unknown" ]; then
+  REPO_URL="${GITHUB_SERVER_URL}/${REPOSITORY}"
+fi
+
+# Build release URL
+# Try to get from action-gh-release output first (usually named 'url'), otherwise construct it
+RELEASE_URL=""
+# Check common output variable names from action-gh-release
+if [ -n "${RELEASE_URL:-}" ]; then
+  # Already set (from action output)
+  :
+elif [ -n "${RELEASE_URL_OUTPUT:-}" ]; then
+  # Custom output variable name
+  RELEASE_URL="$RELEASE_URL_OUTPUT"
+elif [ -n "${GITHUB_SERVER_URL:-}" ] && [ "$REPOSITORY" != "Unknown" ] && [ -n "${VERSION:-}" ]; then
+  # Construct release URL from GitHub variables
+  RELEASE_URL="${GITHUB_SERVER_URL}/${REPOSITORY}/releases/tag/${VERSION}"
+fi
+
+log_info "Repository: $REPO_NAME"
+log_info "GITHUB_SERVER_URL: ${GITHUB_SERVER_URL:-not set}"
+log_info "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY:-not set}"
+if [ -n "$REPO_URL" ]; then
+  log_info "Repository URL: $REPO_URL"
+else
+  log_info "Repository URL: not available (GITHUB_SERVER_URL or GITHUB_REPOSITORY missing)"
+fi
+
+# --- Get Workflow Information ---
+WORKFLOW_NAME="${GITHUB_WORKFLOW:-Unknown Workflow}"
+JOB_NAME="${GITHUB_JOB:-Unknown Job}"
+RUN_ID="${GITHUB_RUN_ID:-Unknown}"
+RUN_URL=""
+if [ -n "${GITHUB_SERVER_URL:-}" ] && [ -n "$REPOSITORY" ] && [ "$RUN_ID" != "Unknown" ]; then
+  RUN_URL="${GITHUB_SERVER_URL}/${REPOSITORY}/actions/runs/${RUN_ID}"
+fi
+
+# --- Check Workflow Status ---
+WORKFLOW_STATUS="${WORKFLOW_STATUS:-success}"
+PREPARE_RELEASE_STATUS="${PREPARE_RELEASE_STATUS:-success}"
+CREATE_RELEASE_STATUS="${CREATE_RELEASE_STATUS:-success}"
+
+# Determine overall status
+OVERALL_STATUS="success"
+ERROR_DETAILS=""
+
+if [ "$PREPARE_RELEASE_STATUS" != "success" ]; then
+  OVERALL_STATUS="failure"
+  ERROR_DETAILS="❌ Step 'Run release script' failed"
+fi
+
+if [ "$CREATE_RELEASE_STATUS" != "success" ]; then
+  OVERALL_STATUS="failure"
+  if [ -n "$ERROR_DETAILS" ]; then
+    ERROR_DETAILS="${ERROR_DETAILS}\n❌ Step 'Create release' failed"
+  else
+    ERROR_DETAILS="❌ Step 'Create release' failed"
+  fi
+fi
+
+# --- Prepare Telegram Message ---
+if [ "$OVERALL_STATUS" = "success" ]; then
+  MESSAGE="📦 *Repository:* \`${REPO_NAME}\`
+✅ *Release Successful*
+
+📦 *Version:* \`${VERSION}\`
+🔄 *Workflow:* ${WORKFLOW_NAME}
+💻 *Job:* ${JOB_NAME}
+🖥️  *OS:* ${OS}
+📝 *Release:* ${VERSION}
+
+🎉 All steps completed successfully!"
+
+  if [ -n "$REPO_URL" ] || [ -n "$RELEASE_URL" ]; then
+    MESSAGE="${MESSAGE}
+"
+    if [ -n "$REPO_URL" ]; then
+      MESSAGE="${MESSAGE}Repo:
+${REPO_URL}"
+    fi
+    if [ -n "$RELEASE_URL" ]; then
+      if [ -n "$REPO_URL" ]; then
+        MESSAGE="${MESSAGE}
+"
+      fi
+      MESSAGE="${MESSAGE}Release:
+${RELEASE_URL}"
+    fi
+  fi
+else
+  MESSAGE="📦 *Repository:* \`${REPO_NAME}\`
+❌ *Release Failed*
+
+📦 *Version:* \`${VERSION}\`
+🔄 *Workflow:* ${WORKFLOW_NAME}
+💻 *Job:* ${JOB_NAME}
+🖥️  *OS:* ${OS}
+📝 *Release:* ${VERSION}
+
+${ERROR_DETAILS}"
+
+  if [ -n "$RUN_URL" ]; then
+    MESSAGE="${MESSAGE}
+
+${RUN_URL}"
+  fi
+
+  if [ -n "$REPO_URL" ]; then
+    MESSAGE="${MESSAGE}
+
+${REPO_URL}"
+  fi
+fi
+
+# --- Send Telegram Message ---
+log_info "Sending Telegram notification..."
+
+# Function to escape JSON string
+escape_json() {
+  local str="$1"
+  # Escape backslashes first, then quotes, then newlines
+  # Using parameter expansion where possible, sed for complex patterns
+  str="${str//\\/\\\\}"  # Escape backslashes
+  str="${str//\"/\\\"}"  # Escape quotes
+  str="${str//$'\n'/\\n}"  # Escape newlines
+  echo "$str"
+}
+
+# Create a temporary file for JSON payload to avoid escaping issues
+TEMP_JSON=$(mktemp)
+trap 'rm -f "$TEMP_JSON"' EXIT
+
+# Escape message for JSON
+ESCAPED_MESSAGE=$(escape_json "$MESSAGE")
+
+# Build JSON payload safely
+{
+  echo '{'
+  echo '  "chat_id": "'"${TELEGRAM_CHAT_ID}"'",'
+  echo '  "text": "'"${ESCAPED_MESSAGE}"'",'
+  echo '  "parse_mode": "Markdown",'
+  echo '  "disable_web_page_preview": false'
+  echo '}'
+} > "$TEMP_JSON"
+
+# Send message to Telegram
+RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+  "${TELEGRAM_API_URL}${TELEGRAM_BOT_TOKEN}/sendMessage" \
+  -H "Content-Type: application/json" \
+  -d "@${TEMP_JSON}" 2>&1)
+
+# Extract HTTP status code (last line)
+HTTP_CODE=$(echo "$RESPONSE" | tail -n 1)
+RESPONSE_BODY=$(echo "$RESPONSE" | sed '$d')
+
+# Variable to store message ID for reply
+FIRST_MESSAGE_ID=""
+
+# Check if request was successful
+if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+  log_success "Telegram notification sent successfully."
+
+  # Extract message_id from response for reply
+  # Try jq first if available, otherwise use grep/sed
+  if command -v jq >/dev/null 2>&1; then
+    FIRST_MESSAGE_ID=$(echo "$RESPONSE_BODY" | jq -r '.result.message_id // empty' 2>/dev/null)
+  fi
+
+  # Fallback: extract message_id using grep/sed if jq is not available or didn't work
+  if [ -z "$FIRST_MESSAGE_ID" ] || [ "$FIRST_MESSAGE_ID" = "null" ]; then
+    FIRST_MESSAGE_ID=$(echo "$RESPONSE_BODY" | grep -o '"message_id":[0-9]*' | grep -o '[0-9]*' | head -n 1)
+  fi
+
+  if [ -n "$FIRST_MESSAGE_ID" ] && [ "$FIRST_MESSAGE_ID" != "null" ]; then
+    log_info "First message ID: $FIRST_MESSAGE_ID (will be used for reply)"
+  else
+    log_info "Could not extract message ID from response, files will be sent without reply"
+  fi
+else
+  log_error "Failed to send Telegram notification. HTTP Code: $HTTP_CODE, Response: $RESPONSE_BODY"
+fi
+
+# --- Send Files if Enabled ---
+if [ "$SEND_FILES" = "true" ] && [ -n "${FILES_LIST:-}" ]; then
+  log_info "SEND_FILES is enabled, preparing to send files..."
+
+  # Prepare caption with repository name, version and "Files"
+  FILE_CAPTION="📎 ${REPO_NAME} ${VERSION} Files"
+
+  # Add Repo and Release URLs to caption if available
+  if [ -n "$REPO_URL" ] || [ -n "$RELEASE_URL" ]; then
+    FILE_CAPTION="${FILE_CAPTION}
+
+"
+    if [ -n "$REPO_URL" ]; then
+      FILE_CAPTION="${FILE_CAPTION}Repo:
+${REPO_URL}"
+    fi
+    if [ -n "$RELEASE_URL" ]; then
+      if [ -n "$REPO_URL" ]; then
+        FILE_CAPTION="${FILE_CAPTION}
+
+"
+      fi
+      FILE_CAPTION="${FILE_CAPTION}Release:
+${RELEASE_URL}"
+    fi
+  fi
+
+  # Collect all valid files
+  FILES_ARRAY=()
+  FILE_NAMES=()
+  while IFS= read -r file_path || [ -n "$file_path" ]; do
+    # Trim whitespace
+    file_path=$(echo "$file_path" | xargs)
+
+    # Skip empty lines
+    if [ -z "$file_path" ]; then
+      continue
+    fi
+
+    # Check if file exists
+    if [ ! -f "$file_path" ]; then
+      log_info "File '$file_path' not found, skipping..."
+      continue
+    fi
+
+    FILES_ARRAY+=("$file_path")
+    FILE_NAMES+=("$(basename "$file_path")")
+    log_info "Found file: $file_path"
+  done <<< "$FILES_LIST"
+
+  # Send files using sendMediaGroup if we have files
+  if [ ${#FILES_ARRAY[@]} -gt 0 ]; then
+    log_info "Sending ${#FILES_ARRAY[@]} file(s) in a single message..."
+
+    # Build media array JSON
+    MEDIA_JSON="["
+    total_files=${#FILES_ARRAY[@]}
+    for i in "${!FILES_ARRAY[@]}"; do
+      if [ $i -gt 0 ]; then
+        MEDIA_JSON="${MEDIA_JSON},"
+      fi
+      MEDIA_JSON="${MEDIA_JSON}{\"type\":\"document\",\"media\":\"attach://file$((i+1))\""
+      # Add caption only to the last file (Telegram requirement for sendMediaGroup)
+      if [ $i -eq $((total_files - 1)) ]; then
+        MEDIA_JSON="${MEDIA_JSON},\"caption\":\"${FILE_CAPTION}\""
+      fi
+      MEDIA_JSON="${MEDIA_JSON}}"
+    done
+    MEDIA_JSON="${MEDIA_JSON}]"
+
+    # Build curl arguments array
+    CURL_ARGS=(
+      -s
+      -w "\n%{http_code}"
+      -X POST
+      "${TELEGRAM_API_URL}${TELEGRAM_BOT_TOKEN}/sendMediaGroup"
+      -F "chat_id=${TELEGRAM_CHAT_ID}"
+      -F "media=${MEDIA_JSON}"
+    )
+
+    # Add reply_to_message_id if first message ID is available
+    if [ -n "$FIRST_MESSAGE_ID" ] && [ "$FIRST_MESSAGE_ID" != "null" ]; then
+      CURL_ARGS+=(-F "reply_to_message_id=${FIRST_MESSAGE_ID}")
+      log_info "Files will be sent as reply to message ID: $FIRST_MESSAGE_ID"
+    fi
+
+    # Add each file to curl arguments
+    for i in "${!FILES_ARRAY[@]}"; do
+      CURL_ARGS+=(-F "file$((i+1))=@${FILES_ARRAY[$i]}")
+    done
+
+    # Execute curl command
+    FILE_RESPONSE=$(curl "${CURL_ARGS[@]}" 2>&1)
+
+    # Extract HTTP status code (last line)
+    FILE_HTTP_CODE=$(echo "$FILE_RESPONSE" | tail -n 1)
+    FILE_RESPONSE_BODY=$(echo "$FILE_RESPONSE" | sed '$d')
+
+    # Check if request was successful
+    if [ "$FILE_HTTP_CODE" -ge 200 ] && [ "$FILE_HTTP_CODE" -lt 300 ]; then
+      log_success "All files sent successfully in a single message with caption."
+    else
+      log_info "Failed to send files. HTTP Code: $FILE_HTTP_CODE, Response: $FILE_RESPONSE_BODY"
+      # Don't exit on file send failure, just log it
+    fi
+  else
+    log_info "No valid files found to send."
+  fi
+else
+  if [ "$SEND_FILES" != "true" ]; then
+    log_info "SEND_FILES is disabled, skipping file upload."
+  elif [ -z "${FILES_LIST:-}" ]; then
+    log_info "FILES_LIST is empty, skipping file upload."
+  fi
+fi
+
+echo "🎉 az_ghtelegram script finished successfully."
+

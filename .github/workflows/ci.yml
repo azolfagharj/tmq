@@ -1,0 +1,226 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  id-token: write
+
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache-dependency-path: go.sum
+
+      - name: Run tests
+        run: make test
+
+      - name: Run tests with coverage
+        run: make test-coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.out
+          fail_ci_if_error: false
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache-dependency-path: go.sum
+
+      - name: Install golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+          only-new-issues: false
+
+      - name: Run lint
+        run: make lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - goos: linux
+            goarch: amd64
+            suffix: ""
+          - goos: linux
+            goarch: arm64
+            suffix: ""
+          - goos: windows
+            goarch: amd64
+            suffix: ".exe"
+          - goos: darwin
+            goarch: amd64
+            suffix: ""
+          - goos: darwin
+            goarch: arm64
+            suffix: ""
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache-dependency-path: go.sum
+
+      - name: Verify project structure
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Listing files:"
+          ls -la
+          echo "Checking cmd/gajin:"
+          ls -la cmd/gajin/ || echo "cmd/gajin not found"
+          echo "Checking go.mod:"
+          cat go.mod | head -5
+          echo "Verifying package can be found:"
+          go list ./cmd/gajin || echo "Package not found"
+
+      - name: Build binary
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CGO_ENABLED: 0
+        run: |
+          mkdir -p release-binaries
+          go build -ldflags="-s -w" -o release-binaries/gajin${{ matrix.suffix }} ./cmd/gajin
+          mv release-binaries/gajin${{ matrix.suffix }} release-binaries/gajin-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.suffix }}
+
+      - name: Test binary
+        shell: bash
+        run: |
+          BINARY_NAME="gajin-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.suffix }}"
+          BINARY_PATH="./release-binaries/${BINARY_NAME}"
+
+          # Check if binary exists
+          if [ ! -f "$BINARY_PATH" ]; then
+            echo "Error: Binary not found at $BINARY_PATH"
+            exit 1
+          fi
+
+          # For linux/amd64, we can actually run it
+          if [ "${{ matrix.goos }}" = "linux" ] && [ "${{ matrix.goarch }}" = "amd64" ]; then
+            echo "Running binary test for linux/amd64..."
+            $BINARY_PATH --version
+          else
+            # For other platforms, verify file type and size
+            echo "Verifying binary for ${{ matrix.goos }}/${{ matrix.goarch }}..."
+            file "$BINARY_PATH"
+            ls -lh "$BINARY_PATH"
+            # Check that file is not empty
+            if [ ! -s "$BINARY_PATH" ]; then
+              echo "Error: Binary is empty"
+              exit 1
+            fi
+            echo "Binary verification passed for ${{ matrix.goos }}/${{ matrix.goarch }}"
+          fi
+
+      - name: List binaries
+        run: |
+          echo "Built binaries in release-binaries/:"
+          ls -lh release-binaries/
+
+      - name: Upload binaries artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-binaries-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: release-binaries/*
+          retention-days: 1
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: [test, lint, build]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x .github/scripts/*
+
+      - name: Download binaries artifact
+        uses: actions/download-artifact@v4
+        with:
+          pattern: release-binaries-*
+          path: release-binaries
+          merge-multiple: true
+
+      - name: Run release script
+        id: prepare_release
+        run: .github/scripts/az_release
+        env:
+          CONFIG_FILE: .github/scripts/config.yaml
+
+      - name: Append release binaries to FILES_LIST
+        id: append_files
+        run: |
+          # Read current FILES_LIST
+          CURRENT="${{ steps.prepare_release.outputs.FILES_LIST }}"
+
+          # Find all files in release-binaries and join by newline
+          NEW_FILES=$(find release-binaries/ -type f)
+
+          # Append new files to current
+          if [ -n "$CURRENT" ]; then
+            UPDATED="${CURRENT}"$'\n'"${NEW_FILES}"
+          else
+            UPDATED="${NEW_FILES}"
+          fi
+
+          # Set output with same name FILES_LIST (multiline format)
+          {
+            echo "FILES_LIST<<EOF"
+            echo "$UPDATED"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
+          echo "Added binaries to FILES_LIST:"
+          echo "$NEW_FILES"
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          body_path: ${{ steps.prepare_release.outputs.NOTES_FILE }}
+          files: ${{ steps.append_files.outputs.FILES_LIST }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send Telegram notification
+        if: always()
+        run: .github/scripts/az_ghtelegram
+        env:
+          TELEGRAM_API_URL: ${{ vars.TELEGRAM_API_URL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          VERSION: ${{ env.VERSION }}
+          WORKFLOW_STATUS: ${{ job.status }}
+          PREPARE_RELEASE_STATUS: ${{ steps.prepare_release.outcome }}
+          CREATE_RELEASE_STATUS: ${{ steps.create_release.outcome }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SEND_FILES: 'true'  # Set to 'false' to disable sending files
+          FILES_LIST: ${{ steps.append_files.outputs.FILES_LIST }}
