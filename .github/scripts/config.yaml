@@ -62,7 +62,7 @@ release_notes_file: release_notes.md
 extract_variables:
   VERSION:
     name: VERSION
-    file_path: cmd/gajin/main.go
+    file_path: cmd/tmq/main.go
     extraction:
       type: grep_awk
       grep_pattern: "AZ_VERSION"
@@ -74,7 +74,7 @@ extract_variables:
     add_to_env: true
   UPDATE:
     name: UPDATE
-    file_path: cmd/gajin/main.go
+    file_path: cmd/tmq/main.go
     extraction:
       type: grep_awk
       grep_pattern: "AZ_UPDATE"
@@ -86,15 +86,7 @@ extract_variables:
     add_to_env: true
 
 # Release assets - files to include in release
-files:
-  - name: config.full.yaml
-    path: examples/config.yaml
-    append_version: false
-    add_to_assets: true
-  - name: config.compact.yaml
-    path: examples/config.compact.yaml
-    append_version: false
-    add_to_assets: true
+files: []
 
 
 # Zip configuration
@@ -109,13 +101,14 @@ default_excludes:
     - "version"
 
 zips:
-  - name: gajin
+  - name: tmq
     includes:
       - "*"
     excludes:
-      - "tests/**"
-      - "./version"
+      - "protectedocs/**"
+      - ".cursorrules"
     default_excludes:
       enabled: true  # Enable default excludes for this zip (default: false)
     append_version: true  # Append version to zip filename (default: false)
     add_to_assets: true  # Add this zip to release assets (default: false)
+#
