@@ -12,14 +12,14 @@ theme:
   language: en
   palette:
     - scheme: default
-      primary: blue
-      accent: blue
+      primary: deep purple
+      accent: deep purple
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - scheme: slate
-      primary: blue
-      accent: blue
+      primary: deep purple
+      accent: deep purple
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -72,3 +72,12 @@ nav:
   - Command Reference: Command-Reference.md
   - Examples: Examples.md
   - Troubleshooting: Troubleshooting.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/azolfagharj/
+    - icon: fontawesome/brands/github
+      link: https://github.com/azolfagharj/tmq
+    - icon: fontawesome/solid/hand-holding-heart
+      link: https://azolfagharj.github.io/donate/
