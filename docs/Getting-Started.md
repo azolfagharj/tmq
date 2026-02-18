@@ -123,10 +123,10 @@ fi
 
 Now that you know the basics:
 
-1. **Query Operations**: Learn advanced querying in [Query Operations](Query-Operations)
-2. **Modifications**: Learn to modify TOML files in [Modification Operations](Modification-Operations)
-3. **Validation**: Check file validity in [Validation & Comparison](Validation-and-Comparison)
-4. **Examples**: See comprehensive examples in [Examples](Examples)
+1. **Query Operations**: Learn advanced querying in [Query Operations](Query-Operations.md)
+2. **Modifications**: Learn to modify TOML files in [Modification Operations](Modification-Operations.md)
+3. **Validation**: Check file validity in [Validation & Comparison](Validation-and-Comparison.md)
+4. **Examples**: See comprehensive examples in [Examples](Examples.md)
 
 ## Quick Reference
 
