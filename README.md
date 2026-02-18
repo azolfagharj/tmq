@@ -267,4 +267,3 @@ MIT License
 <a href="https://azolfagharj.github.io/donate/"><img src="https://img.shields.io/badge/Donate-Support%20Development-orange?style=for-the-badge" alt="Donate"></a>
 
 ---
-
