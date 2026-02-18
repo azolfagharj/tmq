@@ -1,0 +1,38 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+      - '.github/workflows/docs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Deploy MkDocs
+        uses: mhausenblas/mkdocs-deploy-gh-pages@1.26
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIREMENTS: requirements.txt
