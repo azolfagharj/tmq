@@ -29,8 +29,8 @@ var (
 )
 
 var (
-	AZ_VERSION string = "1.0.1"
-	AZ_UPDATE  string = "2024-02-17"
+	AZ_VERSION string = "1.0.2"
+	AZ_UPDATE  string = "2026-02-21"
 )
 
 // Exit codes for automation-friendly scripting
