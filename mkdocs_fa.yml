@@ -1,15 +1,16 @@
-site_name: tmq - TOML Query Tool
-site_description: A complete standalone TOML CLI tool. Like jq for JSON, yq for YAML — but for TOML.
+site_name: tmq - ابزار کوئری TOML
+site_description: ابزار خط‌فرمان مستقل برای TOML. مثل jq برای JSON، yq برای YAML — ولی برای TOML.
 site_author: azolfagharj
-site_url: https://tomlq.ir
-site_dir: site
+site_url: https://tomlq.ir/fa/
+site_dir: site/fa
 
 repo_url: https://github.com/azolfagharj/tmq
-edit_uri: edit/main/docs/
+edit_uri: edit/main/docs_fa/
 
 theme:
   name: material
-  language: en
+  language: fa
+  direction: rtl
   palette:
     - scheme: default
       primary: deep purple
@@ -61,19 +62,19 @@ markdown_extensions:
       permalink: true
 
 nav:
-  - Home: README.md
-  - Getting Started:
-    - Installation: Installation.md
-    - Quick Start: Getting-Started.md
-  - User Guide:
-    - Query Operations: Query-Operations.md
-    - Modification Operations: Modification-Operations.md
-    - Validation & Comparison: Validation-and-Comparison.md
-    - Bulk Operations: Bulk-Operations.md
-  - Reference:
-    - Command Reference: Command-Reference.md
-    - Examples: Examples.md
-  - Troubleshooting: Troubleshooting.md
+  - خانه: README.md
+  - شروع کار:
+    - نصب: Installation.md
+    - شروع سریع: Getting-Started.md
+  - راهنمای کاربر:
+    - عملیات کوئری: Query-Operations.md
+    - عملیات تغییر: Modification-Operations.md
+    - اعتبارسنجی و مقایسه: Validation-and-Comparison.md
+    - عملیات گروهی: Bulk-Operations.md
+  - مرجع:
+    - مرجع دستورات: Command-Reference.md
+    - مثال‌ها: Examples.md
+  - عیب‌یابی: Troubleshooting.md
 
 extra:
   alternate:
@@ -90,5 +91,3 @@ extra:
       link: https://github.com/azolfagharj/tmq
     - icon: fontawesome/solid/hand-holding-heart
       link: https://azolfagharj.github.io/donate/
-
-#

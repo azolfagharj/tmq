@@ -6,7 +6,9 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'docs_fa/**'
       - 'mkdocs.yml'
+      - 'mkdocs_fa.yml'
       - 'requirements.txt'
       - '.github/workflows/docs.yml'
   pull_request:
@@ -14,7 +16,9 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'docs_fa/**'
       - 'mkdocs.yml'
+      - 'mkdocs_fa.yml'
       - 'requirements.txt'
       - '.github/workflows/docs.yml'
 
@@ -41,8 +45,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build documentation
+      - name: Build English documentation
         run: mkdocs build
+
+      - name: Build Persian documentation
+        run: mkdocs build -f mkdocs_fa.yml
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
