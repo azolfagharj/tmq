@@ -87,10 +87,10 @@ go build -o bin/tmq ./cmd/tmq
 
 ```bash
 tmq --version
-# باید نشان دهد: tmq version 1.0.1
+# Should show: tmq version 1.0.1
 
 tmq --help
-# باید متن راهنما را نشان دهد
+# Should show help text
 ```
 
 ## نیازمندی‌های سیستم

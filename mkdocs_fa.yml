@@ -12,6 +12,8 @@ theme:
   name: material
   language: fa
   direction: rtl
+  icon:
+    alternate: fontawesome/solid/earth-americas
   font:
     text: Vazirmatn
   palette:

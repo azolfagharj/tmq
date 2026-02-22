@@ -6,19 +6,19 @@ tmq ابزارهایی برای اعتبارسنجی فایل‌های TOML و �
 
 ### اعتبارسنجی نحو پایه
 ```bash
-# بررسی معتبر بودن فایل TOML
+# Check if TOML file is valid
 tmq --validate config.toml
 
-# کد خروجی 0 اگر معتبر، 1 اگر نامعتبر
-echo $?  # بررسی کد خروجی
+# Returns exit code 0 if valid, 1 if invalid
+echo $?  # Check exit code
 ```
 
 ### اعتبارسنجی گروهی
 ```bash
-# اعتبارسنجی چند فایل
+# Validate multiple files
 tmq --validate config/*.toml
 
-# استفاده با find
+# Use with find
 find . -name "*.toml" -exec tmq --validate {} \;
 ```
 
@@ -28,15 +28,15 @@ find . -name "*.toml" -exec tmq --validate {} \;
 validate_toml() {
     local file="$1"
     if tmq --validate "$file" >/dev/null 2>&1; then
-        echo "✓ $file معتبر است"
+        echo "✓ $file is valid"
         return 0
     else
-        echo "✗ $file نامعتبر است"
+        echo "✗ $file is invalid"
         return 1
     fi
 }
 
-# اعتبارسنجی تمام فایل‌های TOML در پوشه
+# Validate all TOML files in directory
 for file in *.toml; do
     validate_toml "$file" || exit 1
 done
@@ -46,23 +46,23 @@ done
 
 ### مقایسهٔ پایهٔ فایل‌ها
 ```bash
-# مقایسهٔ دو فایل TOML
+# Compare two TOML files
 tmq --compare config1.toml config2.toml
 
-# کدهای خروجی:
-# 0 = فایل‌ها یکسان‌اند
-# 1 = فایل‌ها متفاوت‌اند
+# Exit codes:
+# 0 = files are identical
+# 1 = files are different
 ```
 
 ### خروجی مقایسهٔ تفصیلی
 ```bash
-# مشاهدهٔ اختلاف‌های تفصیلی
+# See detailed differences
 tmq --compare old-config.toml new-config.toml
 ```
 
 ### مقایسه در CI/CD
 ```bash
-# اگر پیکربندی به‌طور غیرمنتظره تغییر کرده، build ناموفق شود
+# Fail build if configuration changed unexpectedly
 if ! tmq --compare expected.toml actual.toml >/dev/null; then
     echo "Configuration mismatch!"
     tmq --compare expected.toml actual.toml
@@ -74,7 +74,7 @@ fi
 
 ### اعتبارسنجی با جزئیات خطا
 ```bash
-# tmq پیام‌های خطای تفصیلی نشان می‌دهد
+# tmq shows detailed error messages
 tmq --validate invalid.toml
 # Error: parse error: expected newline at line 5, column 10
 # DETAILS: Check your TOML syntax
@@ -83,10 +83,10 @@ tmq --validate invalid.toml
 
 ### مقایسه با خروجی
 ```bash
-# هدایت خروجی مقایسه به فایل
+# Redirect comparison output to file
 tmq --compare file1.toml file2.toml > differences.txt
 
-# استفاده در اسکریپت
+# Use in scripts
 if tmq --compare "$EXPECTED" "$ACTUAL" > diff.log; then
     echo "Files match"
 else
@@ -102,7 +102,7 @@ fi
 #!/bin/bash
 # .git/hooks/pre-commit
 
-# اعتبارسنجی تمام فایل‌های TOML
+# Validate all TOML files
 echo "Validating TOML files..."
 if ! find . -name "*.toml" -exec tmq --validate {} \;; then
     echo "TOML validation failed"
@@ -115,17 +115,17 @@ echo "All TOML files are valid"
 ### تشخیص انحراف پیکربندی
 ```bash
 #!/bin/bash
-# بررسی مطابقت پیکربندی production با پیکربندی مورد انتظار
+# Check if production config matches expected config
 
 PROD_CONFIG="prod-config.toml"
 EXPECTED_CONFIG="expected-config.toml"
 
 if tmq --compare "$EXPECTED_CONFIG" "$PROD_CONFIG" >/dev/null; then
-    echo "✓ پیکربندی production با پیکربندی مورد انتظار مطابقت دارد"
+    echo "✓ Production config matches expected configuration"
     exit 0
 else
-    echo "✗ انحراف پیکربندی تشخیص داده شد!"
-    echo "اختلاف‌ها:"
+    echo "✗ Configuration drift detected!"
+    echo "Differences:"
     tmq --compare "$EXPECTED_CONFIG" "$PROD_CONFIG"
     exit 1
 fi
@@ -169,13 +169,13 @@ jobs:
 
 ### خطاهای اعتبارسنجی
 ```bash
-# خطاهای نحو
+# Syntax errors
 tmq --validate malformed.toml
 # ERROR: TOML parsing failed
 # DETAILS: Expected newline at line 5, column 10
 # ACTION: Check your TOML syntax and fix any formatting issues
 
-# فایل پیدا نشد
+# File not found
 tmq --validate nonexistent.toml
 # ERROR: File operation error
 # DETAILS: Cannot read file 'nonexistent.toml'
@@ -184,13 +184,13 @@ tmq --validate nonexistent.toml
 
 ### خطاهای مقایسه
 ```bash
-# فایل پیدا نشد
+# File not found
 tmq --compare missing1.toml missing2.toml
 # ERROR: File operation error
 # DETAILS: Cannot read file 'missing1.toml'
 # ACTION: Ensure both files exist and are readable
 
-# خطای parse در یک فایل
+# Parse error in one file
 tmq --compare valid.toml invalid.toml
 # ERROR: TOML parsing failed
 # DETAILS: Invalid TOML in 'invalid.toml'
@@ -201,19 +201,19 @@ tmq --compare valid.toml invalid.toml
 
 ### خروجی اعتبارسنجی
 ```bash
-# اعتبارسنجی موفق (بدون خروجی، کد خروجی 0)
+# Successful validation (no output, exit code 0)
 tmq --validate valid.toml
 
-# اعتبارسنجی ناموفق (پیام خطا، کد خروجی 1)
+# Failed validation (error message, exit code 1)
 tmq --validate invalid.toml
 ```
 
 ### خروجی مقایسه
 ```bash
-# فایل‌های یکسان (بدون خروجی، کد خروجی 0)
+# Identical files (no output, exit code 0)
 tmq --compare same1.toml same1.toml
 
-# فایل‌های متفاوت (نمایش اختلاف‌ها، کد خروجی 1)
+# Different files (shows differences, exit code 1)
 tmq --compare old.toml new.toml
 # Files are different:
 # - old.toml: version = "1.0.0"
@@ -224,7 +224,7 @@ tmq --compare old.toml new.toml
 
 ### اعتبارسنجی در توسعه
 ```bash
-# افزودن به فرایند build
+# Add to your build process
 make validate-config:
     @for file in config/*.toml; do \
         echo "Validating $$file..."; \
@@ -235,35 +235,35 @@ make validate-config:
 
 ### تست پیکربندی
 ```bash
-# تست تغییرات پیکربندی
+# Test configuration changes
 #!/bin/bash
 
 CONFIG_FILE="app-config.toml"
 BACKUP_FILE="${CONFIG_FILE}.backup"
 
-# بکاپ پیکربندی فعلی
+# Backup current config
 cp "$CONFIG_FILE" "$BACKUP_FILE"
 
-# تغییرات تست
+# Make test changes
 tmq '.debug = true' -i "$CONFIG_FILE"
 tmq '.test_mode = true' -i "$CONFIG_FILE"
 
-# اعتبارسنجی تغییرات
+# Validate changes
 if tmq --validate "$CONFIG_FILE" >/dev/null; then
-    echo "✓ تغییرات پیکربندی معتبرند"
-    # اینجا اپلیکیشن را تست کنید
+    echo "✓ Configuration changes are valid"
+    # Test your application here
     # ./run-tests.sh
 else
-    echo "✗ پیکربندی پس از تغییرات نامعتبر است"
+    echo "✗ Invalid configuration after changes"
 fi
 
-# بازگردانی بکاپ
+# Restore backup
 mv "$BACKUP_FILE" "$CONFIG_FILE"
 ```
 
 ### یکپارچه‌سازی با کنترل نسخه
 ```bash
-# بررسی تغییرات پیکربندی در commitها
+# Check for configuration changes in commits
 git diff --name-only HEAD~1 | grep '\.toml$' | while read -r file; do
     echo "Checking $file..."
     if ! tmq --validate "$file" >/dev/null; then
@@ -276,7 +276,7 @@ done
 ### نظارت بر تغییرات پیکربندی
 ```bash
 #!/bin/bash
-# نظارت بر پیکربندی برای تغییرات غیرمجاز
+# Monitor configuration for unauthorized changes
 
 BASELINE="config-baseline.toml"
 CURRENT="config.toml"

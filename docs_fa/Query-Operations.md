@@ -73,14 +73,14 @@ ip = "192.168.1.10"
 ```
 
 ```bash
-# اولین سرور
+# First server
 tmq '.servers[0].name' config.toml    # "web1"
 tmq '.servers[0].ip' config.toml      # "192.168.1.1"
 
-# دومین سرور
+# Second server
 tmq '.servers[1].name' config.toml    # "web2"
 
-# سرور دیتابیس
+# Database server
 tmq '.servers[2].name' config.toml    # "db1"
 ```
 
@@ -91,11 +91,11 @@ tags = ["web", "api", "admin"]
 ```
 
 ```bash
-# دسترسی به کل آرایه‌ها
+# Access entire arrays
 tmq '.ports' config.toml      # [8080, 8443, 9000]
 tmq '.tags' config.toml       # ["web", "api", "admin"]
 
-# دسترسی به عناصر آرایه
+# Access array elements
 tmq '.ports[0]' config.toml   # 8080
 tmq '.ports[1]' config.toml   # 8443
 tmq '.tags[2]' config.toml    # "admin"
@@ -106,20 +106,20 @@ tmq '.tags[2]' config.toml    # "admin"
 ### خروجی پیش‌فرض TOML
 ```bash
 tmq '.database' config.toml
-# خروجی: host = "localhost"
+# Output: host = "localhost"
 #         port = 5432
 ```
 
 ### خروجی JSON
 ```bash
 tmq '.database' config.toml -o json
-# خروجی: {"host":"localhost","port":5432}
+# Output: {"host":"localhost","port":5432}
 ```
 
 ### خروجی YAML
 ```bash
 tmq '.database' config.toml -o yaml
-# خروجی: host: localhost
+# Output: host: localhost
 #         port: 5432
 ```
 
@@ -140,14 +140,14 @@ metrics = { enabled = true, port = 9090 }
 ```
 
 ```bash
-# دسترسی به آبجکت‌های تودرتو
+# Access nested objects
 tmq '.app.database.credentials' config.toml
-# خروجی: username = "admin"
+# Output: username = "admin"
 #         password = "secret"
 
 tmq '.app.database.credentials.username' config.toml    # "admin"
 tmq '.app.features.metrics' config.toml
-# خروجی: enabled = true
+# Output: enabled = true
 #         port = 9090
 ```
 
@@ -176,19 +176,19 @@ tmq '.metadata.tags' config.toml    # ["production", "stable"]
 
 ### دسترسی به همه چیز
 ```bash
-# نمایش کل فایل
+# Show entire file
 tmq '.' config.toml
 
-# همان بالا (ریشه صریح)
+# Same as above (explicit root)
 tmq '. .' config.toml
 ```
 
 ### ریشه با فرمت‌های مختلف
 ```bash
-# خروجی JSON کل فایل
+# JSON output of entire file
 tmq '.' config.toml -o json
 
-# خروجی YAML کل فایل
+# YAML output of entire file
 tmq '.' config.toml -o yaml
 ```
 
@@ -197,23 +197,23 @@ tmq '.' config.toml -o yaml
 ### کلیدهای ناموجود
 ```bash
 tmq '.nonexistent' config.toml
-# خطا: کلید 'nonexistent' پیدا نشد
-# کد خروج: 1
+# Error: key 'nonexistent' not found
+# Exit code: 1
 ```
 
 ### مسیرهای نامعتبر
 ```bash
 tmq '.invalid..path' config.toml
-# خطا: مسیر کوئری نامعتبر
-# کد خروج: 1
+# Error: invalid query path
+# Exit code: 1
 ```
 
 ### عدم تطابق نوع
 ```bash
-# تلاش برای دسترسی به اندیس آرایه روی غیر-آرایه
+# Attempt to index array on non-array
 tmq '.title[0]' config.toml
-# خطا: نمی‌توان به رشته اندیس زد
-# کد خروج: 1
+# Error: cannot index string
+# Exit code: 1
 ```
 
 ## نکات عملکرد
@@ -227,7 +227,7 @@ tmq '.title[0]' config.toml
 ### اسکریپت‌نویسی
 ```bash
 #!/bin/bash
-# کوئری امن با مدیریت خطا
+# Safe query with error handling
 DB_HOST=$(tmq '.database.host' config.toml 2>/dev/null) || {
     echo "Error: Could not read database host from config"
     exit 1
@@ -237,7 +237,7 @@ echo "Database host: $DB_HOST"
 
 ### اعتبارسنجی قبل از کوئری
 ```bash
-# بررسی معتبر بودن فایل قبل از کوئری
+# Check file is valid before querying
 if tmq '.' config.toml >/dev/null 2>&1; then
     VERSION=$(tmq '.version' config.toml)
     echo "Version: $VERSION"
@@ -249,9 +249,9 @@ fi
 
 ### استفاده از فرمت خروجی مناسب
 ```bash
-# برای اسکریپت‌ها، خروجی raw (پیش‌فرض)
+# For scripts, raw output (default)
 HOST=$(tmq '.database.host' config.toml)
 
-# برای پردازش داده، از JSON استفاده کنید
+# For data processing, use JSON
 tmq '.servers' config.toml -o json | jq '.[0].name'
 ```

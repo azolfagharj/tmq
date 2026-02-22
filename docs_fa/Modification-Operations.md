@@ -6,68 +6,68 @@ tmq تغییر در جای فایل‌های TOML را پشتیبانی می‌�
 
 ### تخصیص مقدار ساده
 ```bash
-# تنظیم مقدار رشته ساده
+# Set a simple string value
 tmq '.version = "2.0.0"' -i config.toml
 
-# تنظیم عدد
+# Set a number
 tmq '.port = 8080' -i config.toml
 
-# تنظیم بولین
+# Set a boolean
 tmq '.enabled = true' -i config.toml
 ```
 
 ### مقادیر جدول تودرتو
 ```toml
-# قبل
+# Before
 [database]
 host = "oldhost"
 ```
 
 ```bash
-# به‌روزرسانی مقدار تودرتو
+# Update nested value
 tmq '.database.host = "newhost"' -i config.toml
 ```
 
 ```toml
-# بعد
+# After
 [database]
 host = "newhost"
 ```
 
 ### ایجاد کلیدهای جدید
 ```bash
-# افزودن کلید سطح ریشه
+# Add new root-level key
 tmq '.new_key = "new_value"' -i config.toml
 
-# افزودن کلید تودرتو
+# Add nested key
 tmq '.database.pool_size = 10' -i config.toml
 ```
 
 ### تودرتوی عمیق
 ```bash
-# ایجاد ساختار تودرتوی عمیق
+# Create deep nested structure
 tmq '.app.cache.redis.ttl = 3600' -i config.toml
 
-# این ایجاد می‌کند:
+# This creates:
 # [app.cache.redis]
 # ttl = 3600
 ```
 
 ### مقادیر آرایه
 ```bash
-# تنظیم آرایه رشته
+# Set array of strings
 tmq '.tags = ["web", "api", "prod"]' -i config.toml
 
-# تنظیم آرایه عدد
+# Set array of numbers
 tmq '.ports = [8080, 8443, 9000]' -i config.toml
 ```
 
 ### آبجکت‌های پیچیده
 ```bash
-# تنظیم جدول درون‌خطی
+# Set an inline table
 tmq '.credentials = { username = "admin", password = "secret" }' -i config.toml
 
-# تنظیم آبجکت تودرتو
+# Set nested object
 tmq '.database = { host = "localhost", port = 5432 }' -i config.toml
 ```
 
@@ -75,19 +75,19 @@ tmq '.database = { host = "localhost", port = 5432 }' -i config.toml
 
 ### حذف کلیدهای ریشه
 ```bash
-# حذف کلید سطح بالا
+# Delete a top-level key
 tmq 'del(.obsolete_key)' -i config.toml
 ```
 
 ### حذف کلیدهای تودرتو
 ```bash
-# حذف از جدول تودرتو
+# Delete from nested table
 tmq 'del(.database.old_setting)' -i config.toml
 ```
 
 ### حذف عناصر آرایه
 ```bash
-# حذف اندیس مشخص آرایه
+# Delete specific array index
 tmq 'del(.servers[1])' -i config.toml
 ```
 
@@ -95,19 +95,19 @@ tmq 'del(.servers[1])' -i config.toml
 
 ### پیش‌نمایش تغییرات
 ```bash
-# مشاهدهٔ تغییرات بدون اصلاح فایل
+# See what would be changed without modifying the file
 tmq '.version = "3.0.0"' --dry-run config.toml
 
-# پیش‌نمایش حذف
+# Preview deletion
 tmq 'del(.obsolete_key)' --dry-run config.toml
 ```
 
 ### تغییرات امن
 ```bash
-# همیشه ابتدا با dry-run تست کنید
+# Always test with dry-run first
 tmq '.database.host = "prod-db"' --dry-run config.toml
 
-# اگر درست بود اعمال کنید
+# Then apply if it looks correct
 tmq '.database.host = "prod-db"' -i config.toml
 ```
 
@@ -115,7 +115,7 @@ tmq '.database.host = "prod-db"' -i config.toml
 
 ### به‌روزرسانی پیکربندی
 ```toml
-# config.toml قبل
+# config.toml before
 [app]
 version = "1.0.0"
 debug = true
@@ -126,14 +126,14 @@ port = 5432
 ```
 
 ```bash
-# به‌روزرسانی برای استقرار production
+# Update for production deployment
 tmq '.app.version = "1.1.0"' -i config.toml
 tmq '.app.debug = false' -i config.toml
 tmq '.database.host = "prod-db"' -i config.toml
 ```
 
 ```toml
-# config.toml بعد
+# config.toml after
 [app]
 version = "1.1.0"
 debug = false
@@ -145,22 +145,22 @@ port = 5432
 
 ### پیکربندی محیط‌محور
 ```bash
-# تنظیمات توسعه
+# Development settings
 tmq '.database.host = "localhost"' -i config.toml
 tmq '.debug = true' -i config.toml
 
-# تنظیمات production
+# Production settings
 tmq '.database.host = "prod.example.com"' -i config.toml
 tmq '.debug = false' -i config.toml
 ```
 
 ### عملیات پاکسازی
 ```bash
-# حذف تنظیمات منسوخ
+# Remove deprecated settings
 tmq 'del(.legacy_feature)' -i config.toml
 tmq 'del(.old_database_url)' -i config.toml
 
-# حذف کاربران تست
+# Remove test users
 tmq 'del(.test_users)' -i config.toml
 ```
 
@@ -168,41 +168,41 @@ tmq 'del(.test_users)' -i config.toml
 
 ### مسیرهای ناموجود
 ```bash
-# تنظیم والد ناموجود ساختار را ایجاد می‌کند
+# Setting non-existent parent creates the structure
 tmq '.new.deep.key = "value"' -i config.toml
-# ایجاد می‌کند: [new.deep]
+# Creates: [new.deep]
 #          key = "value"
 ```
 
 ### تعارض نوع
 ```bash
-# بازنویسی انواع مختلف مجاز است
-tmq '.value = "string"' -i config.toml  # قبلاً عدد بود
-tmq '.value = 42' -i config.toml        # قبلاً رشته بود
+# Overwriting different types is allowed
+tmq '.value = "string"' -i config.toml  # was a number
+tmq '.value = 42' -i config.toml        # was a string
 ```
 
 ### عملیات نامعتبر
 ```bash
-# نام‌های کلید نامعتبر
+# Invalid key names
 tmq '.invalid key = "value"' -i config.toml
-# خطا: عبارت set نامعتبر
+# Error: invalid set expression
 
-# نبودن کوتیشن برای رشته
+# Missing quotes for strings
 tmq '.name = John' -i config.toml
-# خطا: عبارت set نامعتبر
+# Error: invalid set expression
 ```
 
 ## استراتژی بکاپ
 
 ### بکاپ دستی
 ```bash
-# همیشه قبل از تغییر بکاپ بگیرید
+# Always backup before modification
 cp config.toml config.toml.backup
 
-# تغییرات
+# Make changes
 tmq '.version = "2.0.0"' -i config.toml
 
-# تأیید
+# Verify
 tmq '.version' config.toml
 ```
 
@@ -215,10 +215,10 @@ BACKUP_FILE="${CONFIG_FILE}.backup.$(date +%Y%m%d_%H%M%S)"
 cp "$CONFIG_FILE" "$BACKUP_FILE"
 echo "Backup created: $BACKUP_FILE"
 
-# تغییرات
+# Make changes
 tmq '.version = "2.0.0"' -i "$CONFIG_FILE"
 
-# تأیید
+# Verify
 if tmq '.version' "$CONFIG_FILE" >/dev/null; then
     echo "Update successful"
 else
@@ -237,19 +237,19 @@ fi
 
 ### اعتبارسنجی
 ```bash
-# اعتبارسنجی پس از تغییرات
+# Validate after modifications
 tmq '.' config.toml > /dev/null || echo "Invalid TOML after modification"
 ```
 
 ### عملیات اتمیک
 ```bash
-# برای به‌روزرسانی‌های حیاتی از فایل موقت استفاده کنید
+# Use temporary files for critical updates
 TEMP_FILE=$(mktemp)
 cp config.toml "$TEMP_FILE"
 
 tmq '.critical_setting = "new_value"' -i "$TEMP_FILE"
 
-# اعتبارسنجی
+# Validate
 if tmq '.' "$TEMP_FILE" >/dev/null; then
     mv "$TEMP_FILE" config.toml
     echo "Update successful"
@@ -261,11 +261,11 @@ fi
 
 ### کنترل نسخه
 ```bash
-# قبل و بعد از تغییرات commit کنید
+# Commit before and after modifications
 git add config.toml
 git commit -m "Update configuration via tmq"
 
-# تغییرات
+# Make changes
 tmq '.version = "2.0.0"' -i config.toml
 
 git add config.toml
@@ -277,7 +277,7 @@ git commit -m "Bump version to 2.0.0"
 #!/bin/bash
 set -e
 
-# تابع برای به‌روزرسانی امن پیکربندی
+# Function to safely update config
 update_config() {
     local key="$1"
     local value="$2"
@@ -285,7 +285,7 @@ update_config() {
 
     echo "Updating $key = $value in $file"
 
-    # ابتدا dry run
+    # Dry run first
     if tmq "$key = $value" --dry-run "$file" >/dev/null; then
         tmq "$key = $value" -i "$file"
         echo "✓ Updated successfully"
@@ -295,7 +295,7 @@ update_config() {
     fi
 }
 
-# به‌روزرسانی چند تنظیم
+# Update multiple settings
 update_config '.version' '"2.0.0"' config.toml
 update_config '.debug' 'false' config.toml
 update_config '.database.port' '5432' config.toml

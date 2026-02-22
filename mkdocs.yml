@@ -10,6 +10,8 @@ edit_uri: edit/main/docs/
 theme:
   name: material
   language: en
+  icon:
+    alternate: fontawesome/solid/earth-americas
   palette:
     - scheme: default
       primary: deep purple

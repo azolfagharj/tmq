@@ -58,32 +58,32 @@ EOF
 
 کوئری مقادیر:
 ```bash
-# دریافت عنوان
+# Get title
 tmq '.title' config.toml
-# خروجی: "My App"
+# Output: "My App"
 
-# دریافت نسخه
+# Get version
 tmq '.version' config.toml
-# خروجی: "1.0.0"
+# Output: "1.0.0"
 
-# دریافت host دیتابیس
+# Get database host
 tmq '.database.host' config.toml
-# خروجی: "localhost"
+# Output: "localhost"
 
-# دریافت پورت دیتابیس
+# Get database port
 tmq '.database.port' config.toml
-# خروجی: 5432
+# Output: 5432
 ```
 
 ### نمایش کل داده‌ها
 ```bash
-# نمایش کل فایل
+# Show entire file
 tmq '.' config.toml
 
-# فرمت JSON
+# Format as JSON
 tmq '.' config.toml -o json
 
-# فرمت YAML
+# Format as YAML
 tmq '.' config.toml -o yaml
 ```
 
@@ -91,10 +91,10 @@ tmq '.' config.toml -o yaml
 
 ### ورودی از stdin
 ```bash
-# خواندن از stdin
+# Read from stdin
 cat config.toml | tmq '.version'
 
-# استفاده با ابزارهای دیگر
+# Use with other tools
 echo 'version = "2.0.0"' | tmq '.version'
 ```
 
@@ -111,11 +111,11 @@ echo "Version: $VERSION"
 
 ### عملیات فایل
 ```bash
-# بررسی وجود فایل و معتبر بودن TOML
+# Check if file exists and is valid TOML
 if tmq '.' config.toml > /dev/null 2>&1; then
-    echo "config.toml معتبر است"
+    echo "config.toml is valid"
 else
-    echo "config.toml نامعتبر یا وجود ندارد"
+    echo "config.toml is invalid or missing"
 fi
 ```
 
