@@ -161,7 +161,7 @@
   <div class="md-select">
     
     <button class="md-header__button md-icon" aria-label="انتخاب زبان">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="m55.7 199.7 30.9 30.9c6 6 14.1 9.4 22.6 9.4h21.5c8.5 0 16.6 3.4 22.6 9.4l29.3 29.3c6 6 9.4 14.1 9.4 22.6v37.5c0 8.5 3.4 16.6 9.4 22.6l13.3 13.3c6 6 9.4 14.1 9.4 22.6V416c0 17.7 14.3 32 32 32s32-14.3 32-32v-2.7c0-8.5 3.4-16.6 9.4-22.6l45.3-45.3c6-6 9.4-14.1 9.4-22.6v-34.7c0-17.7-14.3-32-32-32h-82.7c-8.5 0-16.6-3.4-22.6-9.4l-16-16c-4.2-4.2-6.6-10-6.6-16 0-12.5 10.1-22.6 22.6-22.6h34.7c12.5 0 22.6-10.1 22.6-22.6 0-6-2.4-11.8-6.6-16l-19.7-19.7c-3.9-3.8-5.9-8.7-5.9-13.8s2-10 5.7-13.7L263 89c5.8-5.8 9.1-13.7 9.1-21.9 0-7.2-2.4-13.7-6.4-18.9-3.2-.1-6.4-.2-9.6-.2-95.4 0-175.7 64.2-200.3 151.7zM464 256c0-34.6-8.4-67.2-23.4-95.8-6.4.9-12.7 3.9-17.9 9.1l-13.4 13.4c-6 6-9.4 14.1-9.4 22.6V240c0 17.7 14.3 32 32 32H456c2.5 0 5-.3 7.3-.8.4-5 .5-10.1.5-15.2zM0 256a256 256 0 1 1 512 0 256 256 0 1 1-512 0"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
@@ -1314,17 +1314,17 @@
 <p>tmq ابزارهایی برای اعتبارسنجی فایل‌های TOML و مقایسهٔ اختلاف‌های بین آن‌ها فراهم می‌کند.</p>
 <h2 id="_2">اعتبارسنجی<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">اعتبارسنجی نحو پایه<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># بررسی معتبر بودن فایل TOML
+<pre><code class="language-bash"># Check if TOML file is valid
 tmq --validate config.toml
 
-# کد خروجی 0 اگر معتبر، 1 اگر نامعتبر
-echo $?  # بررسی کد خروجی
+# Returns exit code 0 if valid, 1 if invalid
+echo $?  # Check exit code
 </code></pre>
 <h3 id="_4">اعتبارسنجی گروهی<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># اعتبارسنجی چند فایل
+<pre><code class="language-bash"># Validate multiple files
 tmq --validate config/*.toml
 
-# استفاده با find
+# Use with find
 find . -name &quot;*.toml&quot; -exec tmq --validate {} \;
 </code></pre>
 <h3 id="_5">اعتبارسنجی در اسکریپت‌ها<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -1332,34 +1332,34 @@ find . -name &quot;*.toml&quot; -exec tmq --validate {} \;
 validate_toml() {
     local file=&quot;$1&quot;
     if tmq --validate &quot;$file&quot; &gt;/dev/null 2&gt;&amp;1; then
-        echo &quot;✓ $file معتبر است&quot;
+        echo &quot;✓ $file is valid&quot;
         return 0
     else
-        echo &quot;✗ $file نامعتبر است&quot;
+        echo &quot;✗ $file is invalid&quot;
         return 1
     fi
 }
 
-# اعتبارسنجی تمام فایل‌های TOML در پوشه
+# Validate all TOML files in directory
 for file in *.toml; do
     validate_toml &quot;$file&quot; || exit 1
 done
 </code></pre>
 <h2 id="_6">مقایسه<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">مقایسهٔ پایهٔ فایل‌ها<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># مقایسهٔ دو فایل TOML
+<pre><code class="language-bash"># Compare two TOML files
 tmq --compare config1.toml config2.toml
 
-# کدهای خروجی:
-# 0 = فایل‌ها یکسان‌اند
-# 1 = فایل‌ها متفاوت‌اند
+# Exit codes:
+# 0 = files are identical
+# 1 = files are different
 </code></pre>
 <h3 id="_8">خروجی مقایسهٔ تفصیلی<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># مشاهدهٔ اختلاف‌های تفصیلی
+<pre><code class="language-bash"># See detailed differences
 tmq --compare old-config.toml new-config.toml
 </code></pre>
 <h3 id="cicd">مقایسه در CI/CD<a class="headerlink" href="#cicd" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># اگر پیکربندی به‌طور غیرمنتظره تغییر کرده، build ناموفق شود
+<pre><code class="language-bash"># Fail build if configuration changed unexpectedly
 if ! tmq --compare expected.toml actual.toml &gt;/dev/null; then
     echo &quot;Configuration mismatch!&quot;
     tmq --compare expected.toml actual.toml
@@ -1368,17 +1368,17 @@ fi
 </code></pre>
 <h2 id="_9">استفادهٔ پیشرفته<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="_10">اعتبارسنجی با جزئیات خطا<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># tmq پیام‌های خطای تفصیلی نشان می‌دهد
+<pre><code class="language-bash"># tmq shows detailed error messages
 tmq --validate invalid.toml
 # Error: parse error: expected newline at line 5, column 10
 # DETAILS: Check your TOML syntax
 # ACTION: Fix the syntax error and try again
 </code></pre>
 <h3 id="_11">مقایسه با خروجی<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># هدایت خروجی مقایسه به فایل
+<pre><code class="language-bash"># Redirect comparison output to file
 tmq --compare file1.toml file2.toml &gt; differences.txt
 
-# استفاده در اسکریپت
+# Use in scripts
 if tmq --compare &quot;$EXPECTED&quot; &quot;$ACTUAL&quot; &gt; diff.log; then
     echo &quot;Files match&quot;
 else
@@ -1391,7 +1391,7 @@ fi
 <pre><code class="language-bash">#!/bin/bash
 # .git/hooks/pre-commit
 
-# اعتبارسنجی تمام فایل‌های TOML
+# Validate all TOML files
 echo &quot;Validating TOML files...&quot;
 if ! find . -name &quot;*.toml&quot; -exec tmq --validate {} \;; then
     echo &quot;TOML validation failed&quot;
@@ -1402,17 +1402,17 @@ echo &quot;All TOML files are valid&quot;
 </code></pre>
 <h3 id="_13">تشخیص انحراف پیکربندی<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash">#!/bin/bash
-# بررسی مطابقت پیکربندی production با پیکربندی مورد انتظار
+# Check if production config matches expected config
 
 PROD_CONFIG=&quot;prod-config.toml&quot;
 EXPECTED_CONFIG=&quot;expected-config.toml&quot;
 
 if tmq --compare &quot;$EXPECTED_CONFIG&quot; &quot;$PROD_CONFIG&quot; &gt;/dev/null; then
-    echo &quot;✓ پیکربندی production با پیکربندی مورد انتظار مطابقت دارد&quot;
+    echo &quot;✓ Production config matches expected configuration&quot;
     exit 0
 else
-    echo &quot;✗ انحراف پیکربندی تشخیص داده شد!&quot;
-    echo &quot;اختلاف‌ها:&quot;
+    echo &quot;✗ Configuration drift detected!&quot;
+    echo &quot;Differences:&quot;
     tmq --compare &quot;$EXPECTED_CONFIG&quot; &quot;$PROD_CONFIG&quot;
     exit 1
 fi
@@ -1451,26 +1451,26 @@ jobs:
 </code></pre>
 <h2 id="_14">پیام‌های خطا<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <h3 id="_15">خطاهای اعتبارسنجی<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># خطاهای نحو
+<pre><code class="language-bash"># Syntax errors
 tmq --validate malformed.toml
 # ERROR: TOML parsing failed
 # DETAILS: Expected newline at line 5, column 10
 # ACTION: Check your TOML syntax and fix any formatting issues
 
-# فایل پیدا نشد
+# File not found
 tmq --validate nonexistent.toml
 # ERROR: File operation error
 # DETAILS: Cannot read file 'nonexistent.toml'
 # ACTION: Ensure the file exists and is readable
 </code></pre>
 <h3 id="_16">خطاهای مقایسه<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># فایل پیدا نشد
+<pre><code class="language-bash"># File not found
 tmq --compare missing1.toml missing2.toml
 # ERROR: File operation error
 # DETAILS: Cannot read file 'missing1.toml'
 # ACTION: Ensure both files exist and are readable
 
-# خطای parse در یک فایل
+# Parse error in one file
 tmq --compare valid.toml invalid.toml
 # ERROR: TOML parsing failed
 # DETAILS: Invalid TOML in 'invalid.toml'
@@ -1478,17 +1478,17 @@ tmq --compare valid.toml invalid.toml
 </code></pre>
 <h2 id="_17">فرمت‌های خروجی<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <h3 id="_18">خروجی اعتبارسنجی<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># اعتبارسنجی موفق (بدون خروجی، کد خروجی 0)
+<pre><code class="language-bash"># Successful validation (no output, exit code 0)
 tmq --validate valid.toml
 
-# اعتبارسنجی ناموفق (پیام خطا، کد خروجی 1)
+# Failed validation (error message, exit code 1)
 tmq --validate invalid.toml
 </code></pre>
 <h3 id="_19">خروجی مقایسه<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># فایل‌های یکسان (بدون خروجی، کد خروجی 0)
+<pre><code class="language-bash"># Identical files (no output, exit code 0)
 tmq --compare same1.toml same1.toml
 
-# فایل‌های متفاوت (نمایش اختلاف‌ها، کد خروجی 1)
+# Different files (shows differences, exit code 1)
 tmq --compare old.toml new.toml
 # Files are different:
 # - old.toml: version = &quot;1.0.0&quot;
@@ -1496,7 +1496,7 @@ tmq --compare old.toml new.toml
 </code></pre>
 <h2 id="_20">بهترین روش‌ها<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
 <h3 id="_21">اعتبارسنجی در توسعه<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># افزودن به فرایند build
+<pre><code class="language-bash"># Add to your build process
 make validate-config:
     @for file in config/*.toml; do \
         echo &quot;Validating $$file...&quot;; \
@@ -1505,33 +1505,33 @@ make validate-config:
     @echo &quot;All configurations valid&quot;
 </code></pre>
 <h3 id="_22">تست پیکربندی<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># تست تغییرات پیکربندی
+<pre><code class="language-bash"># Test configuration changes
 #!/bin/bash
 
 CONFIG_FILE=&quot;app-config.toml&quot;
 BACKUP_FILE=&quot;${CONFIG_FILE}.backup&quot;
 
-# بکاپ پیکربندی فعلی
+# Backup current config
 cp &quot;$CONFIG_FILE&quot; &quot;$BACKUP_FILE&quot;
 
-# تغییرات تست
+# Make test changes
 tmq '.debug = true' -i &quot;$CONFIG_FILE&quot;
 tmq '.test_mode = true' -i &quot;$CONFIG_FILE&quot;
 
-# اعتبارسنجی تغییرات
+# Validate changes
 if tmq --validate &quot;$CONFIG_FILE&quot; &gt;/dev/null; then
-    echo &quot;✓ تغییرات پیکربندی معتبرند&quot;
-    # اینجا اپلیکیشن را تست کنید
+    echo &quot;✓ Configuration changes are valid&quot;
+    # Test your application here
     # ./run-tests.sh
 else
-    echo &quot;✗ پیکربندی پس از تغییرات نامعتبر است&quot;
+    echo &quot;✗ Invalid configuration after changes&quot;
 fi
 
-# بازگردانی بکاپ
+# Restore backup
 mv &quot;$BACKUP_FILE&quot; &quot;$CONFIG_FILE&quot;
 </code></pre>
 <h3 id="_23">یکپارچه‌سازی با کنترل نسخه<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># بررسی تغییرات پیکربندی در commitها
+<pre><code class="language-bash"># Check for configuration changes in commits
 git diff --name-only HEAD~1 | grep '\.toml$' | while read -r file; do
     echo &quot;Checking $file...&quot;
     if ! tmq --validate &quot;$file&quot; &gt;/dev/null; then
@@ -1542,7 +1542,7 @@ done
 </code></pre>
 <h3 id="_24">نظارت بر تغییرات پیکربندی<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
 <pre><code class="language-bash">#!/bin/bash
-# نظارت بر پیکربندی برای تغییرات غیرمجاز
+# Monitor configuration for unauthorized changes
 
 BASELINE=&quot;config-baseline.toml&quot;
 CURRENT=&quot;config.toml&quot;

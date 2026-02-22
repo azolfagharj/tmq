@@ -161,7 +161,7 @@
   <div class="md-select">
     
     <button class="md-header__button md-icon" aria-label="انتخاب زبان">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="m55.7 199.7 30.9 30.9c6 6 14.1 9.4 22.6 9.4h21.5c8.5 0 16.6 3.4 22.6 9.4l29.3 29.3c6 6 9.4 14.1 9.4 22.6v37.5c0 8.5 3.4 16.6 9.4 22.6l13.3 13.3c6 6 9.4 14.1 9.4 22.6V416c0 17.7 14.3 32 32 32s32-14.3 32-32v-2.7c0-8.5 3.4-16.6 9.4-22.6l45.3-45.3c6-6 9.4-14.1 9.4-22.6v-34.7c0-17.7-14.3-32-32-32h-82.7c-8.5 0-16.6-3.4-22.6-9.4l-16-16c-4.2-4.2-6.6-10-6.6-16 0-12.5 10.1-22.6 22.6-22.6h34.7c12.5 0 22.6-10.1 22.6-22.6 0-6-2.4-11.8-6.6-16l-19.7-19.7c-3.9-3.8-5.9-8.7-5.9-13.8s2-10 5.7-13.7L263 89c5.8-5.8 9.1-13.7 9.1-21.9 0-7.2-2.4-13.7-6.4-18.9-3.2-.1-6.4-.2-9.6-.2-95.4 0-175.7 64.2-200.3 151.7zM464 256c0-34.6-8.4-67.2-23.4-95.8-6.4.9-12.7 3.9-17.9 9.1l-13.4 13.4c-6 6-9.4 14.1-9.4 22.6V240c0 17.7 14.3 32 32 32H456c2.5 0 5-.3 7.3-.8.4-5 .5-10.1.5-15.2zM0 256a256 256 0 1 1 512 0 256 256 0 1 1-512 0"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
@@ -1347,87 +1347,87 @@
 <p>tmq تغییر در جای فایل‌های TOML را پشتیبانی می‌کند و اجازهٔ تنظیم مقادیر جدید یا حذف کلیدهای موجود را می‌دهد.</p>
 <h2 id="_2">تنظیم مقادیر<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">تخصیص مقدار ساده<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># تنظیم مقدار رشته ساده
+<pre><code class="language-bash"># Set a simple string value
 tmq '.version = &quot;2.0.0&quot;' -i config.toml
 
-# تنظیم عدد
+# Set a number
 tmq '.port = 8080' -i config.toml
 
-# تنظیم بولین
+# Set a boolean
 tmq '.enabled = true' -i config.toml
 </code></pre>
 <h3 id="_4">مقادیر جدول تودرتو<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<pre><code class="language-toml"># قبل
+<pre><code class="language-toml"># Before
 [database]
 host = &quot;oldhost&quot;
 </code></pre>
-<pre><code class="language-bash"># به‌روزرسانی مقدار تودرتو
+<pre><code class="language-bash"># Update nested value
 tmq '.database.host = &quot;newhost&quot;' -i config.toml
 </code></pre>
-<pre><code class="language-toml"># بعد
+<pre><code class="language-toml"># After
 [database]
 host = &quot;newhost&quot;
 </code></pre>
 <h3 id="_5">ایجاد کلیدهای جدید<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># افزودن کلید سطح ریشه
+<pre><code class="language-bash"># Add new root-level key
 tmq '.new_key = &quot;new_value&quot;' -i config.toml
 
-# افزودن کلید تودرتو
+# Add nested key
 tmq '.database.pool_size = 10' -i config.toml
 </code></pre>
 <h3 id="_6">تودرتوی عمیق<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># ایجاد ساختار تودرتوی عمیق
+<pre><code class="language-bash"># Create deep nested structure
 tmq '.app.cache.redis.ttl = 3600' -i config.toml
 
-# این ایجاد می‌کند:
+# This creates:
 # [app.cache.redis]
 # ttl = 3600
 </code></pre>
 <h3 id="_7">مقادیر آرایه<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># تنظیم آرایه رشته
+<pre><code class="language-bash"># Set array of strings
 tmq '.tags = [&quot;web&quot;, &quot;api&quot;, &quot;prod&quot;]' -i config.toml
 
-# تنظیم آرایه عدد
+# Set array of numbers
 tmq '.ports = [8080, 8443, 9000]' -i config.toml
 </code></pre>
 <h3 id="_8">آبجکت‌های پیچیده<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># تنظیم جدول درون‌خطی
+<pre><code class="language-bash"># Set an inline table
 tmq '.credentials = { username = &quot;admin&quot;, password = &quot;secret&quot; }' -i config.toml
 
-# تنظیم آبجکت تودرتو
+# Set nested object
 tmq '.database = { host = &quot;localhost&quot;, port = 5432 }' -i config.toml
 </code></pre>
 <h2 id="_9">عملیات حذف<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="_10">حذف کلیدهای ریشه<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># حذف کلید سطح بالا
+<pre><code class="language-bash"># Delete a top-level key
 tmq 'del(.obsolete_key)' -i config.toml
 </code></pre>
 <h3 id="_11">حذف کلیدهای تودرتو<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># حذف از جدول تودرتو
+<pre><code class="language-bash"># Delete from nested table
 tmq 'del(.database.old_setting)' -i config.toml
 </code></pre>
 <h3 id="_12">حذف عناصر آرایه<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># حذف اندیس مشخص آرایه
+<pre><code class="language-bash"># Delete specific array index
 tmq 'del(.servers[1])' -i config.toml
 </code></pre>
 <h2 id="dry-run">حالت Dry Run<a class="headerlink" href="#dry-run" title="Permanent link">&para;</a></h2>
 <h3 id="_13">پیش‌نمایش تغییرات<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># مشاهدهٔ تغییرات بدون اصلاح فایل
+<pre><code class="language-bash"># See what would be changed without modifying the file
 tmq '.version = &quot;3.0.0&quot;' --dry-run config.toml
 
-# پیش‌نمایش حذف
+# Preview deletion
 tmq 'del(.obsolete_key)' --dry-run config.toml
 </code></pre>
 <h3 id="_14">تغییرات امن<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># همیشه ابتدا با dry-run تست کنید
+<pre><code class="language-bash"># Always test with dry-run first
 tmq '.database.host = &quot;prod-db&quot;' --dry-run config.toml
 
-# اگر درست بود اعمال کنید
+# Then apply if it looks correct
 tmq '.database.host = &quot;prod-db&quot;' -i config.toml
 </code></pre>
 <h2 id="_15">مثال‌های پیشرفته<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <h3 id="_16">به‌روزرسانی پیکربندی<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<pre><code class="language-toml"># config.toml قبل
+<pre><code class="language-toml"># config.toml before
 [app]
 version = &quot;1.0.0&quot;
 debug = true
@@ -1436,12 +1436,12 @@ debug = true
 host = &quot;dev-db&quot;
 port = 5432
 </code></pre>
-<pre><code class="language-bash"># به‌روزرسانی برای استقرار production
+<pre><code class="language-bash"># Update for production deployment
 tmq '.app.version = &quot;1.1.0&quot;' -i config.toml
 tmq '.app.debug = false' -i config.toml
 tmq '.database.host = &quot;prod-db&quot;' -i config.toml
 </code></pre>
-<pre><code class="language-toml"># config.toml بعد
+<pre><code class="language-toml"># config.toml after
 [app]
 version = &quot;1.1.0&quot;
 debug = false
@@ -1451,52 +1451,52 @@ host = &quot;prod-db&quot;
 port = 5432
 </code></pre>
 <h3 id="_17">پیکربندی محیط‌محور<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># تنظیمات توسعه
+<pre><code class="language-bash"># Development settings
 tmq '.database.host = &quot;localhost&quot;' -i config.toml
 tmq '.debug = true' -i config.toml
 
-# تنظیمات production
+# Production settings
 tmq '.database.host = &quot;prod.example.com&quot;' -i config.toml
 tmq '.debug = false' -i config.toml
 </code></pre>
 <h3 id="_18">عملیات پاکسازی<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># حذف تنظیمات منسوخ
+<pre><code class="language-bash"># Remove deprecated settings
 tmq 'del(.legacy_feature)' -i config.toml
 tmq 'del(.old_database_url)' -i config.toml
 
-# حذف کاربران تست
+# Remove test users
 tmq 'del(.test_users)' -i config.toml
 </code></pre>
 <h2 id="_19">مدیریت خطا<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <h3 id="_20">مسیرهای ناموجود<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># تنظیم والد ناموجود ساختار را ایجاد می‌کند
+<pre><code class="language-bash"># Setting non-existent parent creates the structure
 tmq '.new.deep.key = &quot;value&quot;' -i config.toml
-# ایجاد می‌کند: [new.deep]
+# Creates: [new.deep]
 #          key = &quot;value&quot;
 </code></pre>
 <h3 id="_21">تعارض نوع<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># بازنویسی انواع مختلف مجاز است
-tmq '.value = &quot;string&quot;' -i config.toml  # قبلاً عدد بود
-tmq '.value = 42' -i config.toml        # قبلاً رشته بود
+<pre><code class="language-bash"># Overwriting different types is allowed
+tmq '.value = &quot;string&quot;' -i config.toml  # was a number
+tmq '.value = 42' -i config.toml        # was a string
 </code></pre>
 <h3 id="_22">عملیات نامعتبر<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># نام‌های کلید نامعتبر
+<pre><code class="language-bash"># Invalid key names
 tmq '.invalid key = &quot;value&quot;' -i config.toml
-# خطا: عبارت set نامعتبر
+# Error: invalid set expression
 
-# نبودن کوتیشن برای رشته
+# Missing quotes for strings
 tmq '.name = John' -i config.toml
-# خطا: عبارت set نامعتبر
+# Error: invalid set expression
 </code></pre>
 <h2 id="_23">استراتژی بکاپ<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
 <h3 id="_24">بکاپ دستی<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># همیشه قبل از تغییر بکاپ بگیرید
+<pre><code class="language-bash"># Always backup before modification
 cp config.toml config.toml.backup
 
-# تغییرات
+# Make changes
 tmq '.version = &quot;2.0.0&quot;' -i config.toml
 
-# تأیید
+# Verify
 tmq '.version' config.toml
 </code></pre>
 <h3 id="_25">بکاپ اسکریپتی<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
@@ -1507,10 +1507,10 @@ BACKUP_FILE=&quot;${CONFIG_FILE}.backup.$(date +%Y%m%d_%H%M%S)&quot;
 cp &quot;$CONFIG_FILE&quot; &quot;$BACKUP_FILE&quot;
 echo &quot;Backup created: $BACKUP_FILE&quot;
 
-# تغییرات
+# Make changes
 tmq '.version = &quot;2.0.0&quot;' -i &quot;$CONFIG_FILE&quot;
 
-# تأیید
+# Verify
 if tmq '.version' &quot;$CONFIG_FILE&quot; &gt;/dev/null; then
     echo &quot;Update successful&quot;
 else
@@ -1526,17 +1526,17 @@ fi
 </ul>
 <h2 id="_27">بهترین روش‌ها<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h2>
 <h3 id="_28">اعتبارسنجی<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># اعتبارسنجی پس از تغییرات
+<pre><code class="language-bash"># Validate after modifications
 tmq '.' config.toml &gt; /dev/null || echo &quot;Invalid TOML after modification&quot;
 </code></pre>
 <h3 id="_29">عملیات اتمیک<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># برای به‌روزرسانی‌های حیاتی از فایل موقت استفاده کنید
+<pre><code class="language-bash"># Use temporary files for critical updates
 TEMP_FILE=$(mktemp)
 cp config.toml &quot;$TEMP_FILE&quot;
 
 tmq '.critical_setting = &quot;new_value&quot;' -i &quot;$TEMP_FILE&quot;
 
-# اعتبارسنجی
+# Validate
 if tmq '.' &quot;$TEMP_FILE&quot; &gt;/dev/null; then
     mv &quot;$TEMP_FILE&quot; config.toml
     echo &quot;Update successful&quot;
@@ -1546,11 +1546,11 @@ else
 fi
 </code></pre>
 <h3 id="_30">کنترل نسخه<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># قبل و بعد از تغییرات commit کنید
+<pre><code class="language-bash"># Commit before and after modifications
 git add config.toml
 git commit -m &quot;Update configuration via tmq&quot;
 
-# تغییرات
+# Make changes
 tmq '.version = &quot;2.0.0&quot;' -i config.toml
 
 git add config.toml
@@ -1560,7 +1560,7 @@ git commit -m &quot;Bump version to 2.0.0&quot;
 <pre><code class="language-bash">#!/bin/bash
 set -e
 
-# تابع برای به‌روزرسانی امن پیکربندی
+# Function to safely update config
 update_config() {
     local key=&quot;$1&quot;
     local value=&quot;$2&quot;
@@ -1568,7 +1568,7 @@ update_config() {
 
     echo &quot;Updating $key = $value in $file&quot;
 
-    # ابتدا dry run
+    # Dry run first
     if tmq &quot;$key = $value&quot; --dry-run &quot;$file&quot; &gt;/dev/null; then
         tmq &quot;$key = $value&quot; -i &quot;$file&quot;
         echo &quot;✓ Updated successfully&quot;
@@ -1578,7 +1578,7 @@ update_config() {
     fi
 }
 
-# به‌روزرسانی چند تنظیم
+# Update multiple settings
 update_config '.version' '&quot;2.0.0&quot;' config.toml
 update_config '.debug' 'false' config.toml
 update_config '.database.port' '5432' config.toml
