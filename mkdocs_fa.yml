@@ -1,4 +1,4 @@
-site_name: ./tmq - TOML Query Tool
+site_name: tmq - TOML Query Tool
 site_description: ابزار خط‌فرمان مستقل برای TOML. مثل jq برای JSON، yq برای YAML  ولی برای TOML.
 site_author: azolfagharj
 site_url: https://tomlq.ir/fa/
