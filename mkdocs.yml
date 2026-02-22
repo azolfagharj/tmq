@@ -31,7 +31,6 @@ theme:
     - content.footnote.tooltips
     - content.tooltips
     - header.autohide
-    - navigation.expand
     - navigation.footer
     - navigation.indexes
     - navigation.instant
