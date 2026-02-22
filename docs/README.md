@@ -10,15 +10,33 @@ tmq = ToMl + Query
 
 ## Quick Links
 
-- [Installation](Installation) - Download and setup instructions
-- [Getting Started](Getting-Started) - Basic usage and examples
-- [Query Operations](Query-Operations) - Reading and accessing TOML data
-- [Modification Operations](Modification-Operations) - Setting and deleting values
-- [Validation & Comparison](Validation-and-Comparison) - Checking and comparing TOML files
-- [Bulk Operations](Bulk-Operations) - Processing multiple files
-- [Command Reference](Command-Reference) - Complete CLI reference
-- [Examples](Examples) - Comprehensive usage examples
-- [Troubleshooting](Troubleshooting) - Common issues and solutions
+<div class="grid cards" markdown>
+
+-   :material-rocket-launch:{ .lg .middle } __[Getting Started](Getting-Started.md)__
+
+    ---
+
+    [Installation](Installation.md) · [Quick Start](Getting-Started.md)
+
+-   :material-book-open-page-variant:{ .lg .middle } __[User Guide](Query-Operations.md)__
+
+    ---
+
+    [Query Operations](Query-Operations.md) · [Modification Operations](Modification-Operations.md) · [Validation & Comparison](Validation-and-Comparison.md) · [Bulk Operations](Bulk-Operations.md)
+
+-   :material-file-document-multiple:{ .lg .middle } __[Reference](Command-Reference.md)__
+
+    ---
+
+    [Command Reference](Command-Reference.md) · [Examples](Examples.md)
+
+-   :material-help-circle:{ .lg .middle } __[Troubleshooting](Troubleshooting.md)__
+
+    ---
+
+    Common issues and solutions
+
+</div>
 
 ## Features Overview
 
