@@ -1,4 +1,4 @@
-site_name: tmq - TOML Query Tool
+site_name: ./tmq - TOML Query Tool
 site_description: A complete standalone TOML CLI tool. Like jq for JSON, yq for YAML — but for TOML.
 site_author: azolfagharj
 site_url: https://tomlq.ir
