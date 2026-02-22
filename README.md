@@ -2,10 +2,10 @@
 
 [![CI](https://github.com/azolfagharj/tmq/actions/workflows/ci.yml/badge.svg)](https://github.com/azolfagharj/tmq/actions) [![Documentation](https://img.shields.io/badge/Documentation-Wiki-blue?logo=github)](https://github.com/azolfagharj/tmq/wiki) [![Donate](https://img.shields.io/badge/Donate-to%20Keep%20This%20Project%20Alive-orange)](https://azolfagharj.github.io/donate/)
 
-**Complete standalone TOML CLI processor .** supporting query, modification, and format conversion
+**Complete standalone TOML CLI processor .** tmq is a lightweight, portable, cross-platform, and fully featured command-line TOML processor. Like jq for JSON and yq for YAML, tmq is for TOML. supporting query, modification, and format conversion
 
 ```
-tmq = ToMl + Query
+tmq = TOML + Query
 ```
 
 A fast, script-friendly command-line tool for querying, modifying, and converting TOML files. Works with pipes, supports bulk operations, and provides clear exit codes for automation.
