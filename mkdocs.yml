@@ -3,7 +3,7 @@ site_description: A complete standalone TOML CLI tool. Like jq for JSON, yq for 
 site_author: azolfagharj
 site_url: https://tomlq.ir
 
-#repo_name: GitHub
+
 repo_url: https://github.com/azolfagharj/tmq
 edit_uri: edit/main/docs/
 
