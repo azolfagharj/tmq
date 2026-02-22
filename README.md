@@ -12,7 +12,7 @@ A fast, script-friendly command-line tool for querying, modifying, and convertin
 
 ## 📚 Documentation
 
-📖 **[Complete Documentation & Wiki](https://github.com/azolfagharj/tmq/wiki)** - Installation, usage examples, troubleshooting, and command reference
+📖 **[Complete Documentation & Wiki](https://tomlq.ir/)** - Installation, usage examples, troubleshooting, and command reference
 
 ## Installation
 
