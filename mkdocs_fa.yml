@@ -3,6 +3,7 @@ site_description: ابزار خط‌فرمان مستقل برای TOML. مثل 
 site_author: azolfagharj
 site_url: https://tomlq.ir/fa/
 site_dir: site/fa
+docs_dir: docs_fa
 
 repo_url: https://github.com/azolfagharj/tmq
 edit_uri: edit/main/docs_fa/
