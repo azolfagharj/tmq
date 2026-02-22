@@ -1,24 +1,24 @@
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="fa" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A complete standalone TOML CLI tool. Like jq for JSON, yq for YAML — but for TOML.">
+        <meta name="description" content="ابزار خط‌فرمان مستقل برای TOML. مثل jq برای JSON، yq برای YAML — ولی برای TOML.">
       
       
         <meta name="author" content="azolfagharj">
       
       
-        <link rel="canonical" href="https://tomlq.ir/Installation/">
+        <link rel="canonical" href="https://tomlq.ir/fa/Query-Operations/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../Getting-Started/">
       
       
-        <link rel="next" href="../Getting-Started/">
+        <link rel="next" href="../Modification-Operations/">
       
       
         
@@ -33,7 +33,7 @@
     
     
       
-        <title>Installation - tmq - TOML Query Tool</title>
+        <title>عملیات کوئری - tmq - ابزار کوئری TOML</title>
       
     
     
@@ -75,7 +75,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -84,8 +84,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
-          Skip to content
+        <a href="#query-operations" class="md-skip">
+          پرش به محتویات
         </a>
       
     </div>
@@ -99,8 +99,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="tmq - TOML Query Tool" class="md-header__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-header__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,13 +114,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            tmq - TOML Query Tool
+            tmq - ابزار کوئری TOML
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              عملیات کوئری
             
           </span>
         </div>
@@ -160,7 +160,7 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
+    <button class="md-header__button md-icon" aria-label="انتخاب زبان">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
@@ -194,21 +194,21 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="جستجو">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -221,7 +221,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            راه‌اندازی جستجو
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -233,7 +233,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -248,7 +248,7 @@
   
     
       
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -264,10 +264,32 @@
   
     
   
-  Home
+  خانه
 
       </a>
     </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Installation/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  شروع کار
+
+        </a>
+      </li>
+    
   
 
       
@@ -287,29 +309,7 @@
   
     
   
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../Query-Operations/" class="md-tabs__link">
-          
-  
-  
-    
-  
-  User Guide
+  راهنمای کاربر
 
         </a>
       </li>
@@ -331,7 +331,7 @@
   
     
   
-  Reference
+  مرجع
 
         </a>
       </li>
@@ -351,7 +351,7 @@
   
     
   
-  Troubleshooting
+  عیب‌یابی
 
       </a>
     </li>
@@ -386,19 +386,19 @@
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="tmq - TOML Query Tool" class="md-nav__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-nav__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    tmq - TOML Query Tool
+    tmq - ابزار کوئری TOML
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -425,7 +425,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    خانه
   
 
     
@@ -442,12 +442,137 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شروع کار
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    شروع کار
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نصب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Getting-Started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شروع سریع
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
   
     
     
+      
+        
+      
+        
       
         
       
@@ -469,17 +594,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Getting Started
+    راهنمای کاربر
   
 
     
@@ -490,12 +615,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Getting Started
+    راهنمای کاربر
   
 
           </label>
@@ -524,7 +649,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    عملیات کوئری
   
 
     
@@ -542,7 +667,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    عملیات کوئری
   
 
     
@@ -554,7 +679,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
   
   
   
@@ -563,27 +688,49 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      فهرست موضوعات
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#download-binary" class="md-nav__link">
+  <a href="#basic-queries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download Binary
+        Basic Queries
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Download Binary">
+    <nav class="md-nav" aria-label="Basic Queries">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#available-binaries" class="md-nav__link">
+  <a href="#root-level-keys" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Available Binaries
+        Root Level Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-nesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep Nesting
       
     </span>
   </a>
@@ -596,22 +743,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#quick-setup" class="md-nav__link">
+  <a href="#array-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick Setup
+        Array Operations
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Quick Setup">
+    <nav class="md-nav" aria-label="Array Operations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#linux-amd64" class="md-nav__link">
+  <a href="#access-array-elements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Linux (AMD64)
+        Access Array Elements
       
     </span>
   </a>
@@ -619,43 +766,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#linux-arm64" class="md-nav__link">
+  <a href="#array-of-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Linux (ARM64)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos-apple-silicon" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        macOS (Apple Silicon)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos-intel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        macOS (Intel)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#windows-amd64" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Windows (AMD64)
+        Array of Values
       
     </span>
   </a>
@@ -668,33 +782,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#manual-installation" class="md-nav__link">
+  <a href="#output-formats" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Manual Installation
+        Output Formats
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-from-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build from Source
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Build from Source">
+    <nav class="md-nav" aria-label="Output Formats">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#default-toml-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Default TOML Output
       
     </span>
   </a>
@@ -702,10 +805,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-steps" class="md-nav__link">
+  <a href="#json-output" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build Steps
+        JSON Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaml-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML Output
       
     </span>
   </a>
@@ -718,55 +832,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify-installation" class="md-nav__link">
+  <a href="#advanced-queries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify Installation
+        Advanced Queries
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        System Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updating" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updating
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
+    <nav class="md-nav" aria-label="Advanced Queries">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#permission-denied" class="md-nav__link">
+  <a href="#complex-structures" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permission Denied
+        Complex Structures
       
     </span>
   </a>
@@ -774,10 +855,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#command-not-found" class="md-nav__link">
+  <a href="#mixed-data-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Command Not Found
+        Mixed Data Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query Root
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Query Root">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Access Everything
       
     </span>
   </a>
@@ -785,10 +894,121 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#download-issues" class="md-nav__link">
+  <a href="#root-with-different-formats" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download Issues
+        Root with Different Formats
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-existent-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-existent Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invalid Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-mismatches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type Mismatches
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scripting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-before-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Before Query
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-appropriate-output-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use Appropriate Output Format
       
     </span>
   </a>
@@ -816,131 +1036,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../Getting-Started/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Quick Start
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    User Guide
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    User Guide
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Query-Operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Query Operations
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../Modification-Operations/" class="md-nav__link">
         
   
@@ -948,7 +1043,7 @@
   <span class="md-ellipsis">
     
   
-    Modification Operations
+    عملیات تغییر
   
 
     
@@ -976,7 +1071,7 @@
   <span class="md-ellipsis">
     
   
-    Validation & Comparison
+    اعتبارسنجی و مقایسه
   
 
     
@@ -1004,7 +1099,7 @@
   <span class="md-ellipsis">
     
   
-    Bulk Operations
+    عملیات گروهی
   
 
     
@@ -1061,7 +1156,7 @@
   <span class="md-ellipsis">
     
   
-    Reference
+    مرجع
   
 
     
@@ -1077,7 +1172,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Reference
+    مرجع
   
 
           </label>
@@ -1097,7 +1192,7 @@
   <span class="md-ellipsis">
     
   
-    Command Reference
+    مرجع دستورات
   
 
     
@@ -1125,7 +1220,7 @@
   <span class="md-ellipsis">
     
   
-    Examples
+    مثال‌ها
   
 
     
@@ -1160,7 +1255,7 @@
   <span class="md-ellipsis">
     
   
-    Troubleshooting
+    عیب‌یابی
   
 
     
@@ -1193,133 +1288,204 @@
   
 
 
-<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
-<p>tmq is distributed as pre-compiled binaries for multiple platforms. No external dependencies required.</p>
-<h2 id="download-binary">Download Binary<a class="headerlink" href="#download-binary" title="Permanent link">&para;</a></h2>
-<p>Download the latest release from <a href="https://github.com/azolfagharj/tmq/releases">GitHub Releases</a>.</p>
-<h3 id="available-binaries">Available Binaries<a class="headerlink" href="#available-binaries" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Architecture</th>
-<th>Filename</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Linux</td>
-<td>AMD64</td>
-<td><code>tmq-linux-amd64</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td>ARM64</td>
-<td><code>tmq-linux-arm64</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td>Intel</td>
-<td><code>tmq-darwin-amd64</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td>Apple Silicon</td>
-<td><code>tmq-darwin-arm64</code></td>
-</tr>
-<tr>
-<td>Windows</td>
-<td>AMD64</td>
-<td><code>tmq-windows-amd64.exe</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="quick-setup">Quick Setup<a class="headerlink" href="#quick-setup" title="Permanent link">&para;</a></h2>
-<h3 id="linux-amd64">Linux (AMD64)<a class="headerlink" href="#linux-amd64" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-amd64
-chmod +x tmq-linux-amd64
-sudo mv tmq-linux-amd64 /usr/local/bin/tmq
+<h1 id="query-operations">Query Operations<a class="headerlink" href="#query-operations" title="Permanent link">&para;</a></h1>
+<p>tmq provides powerful querying capabilities to extract data from TOML files using a simple dot notation syntax.</p>
+<h2 id="basic-queries">Basic Queries<a class="headerlink" href="#basic-queries" title="Permanent link">&para;</a></h2>
+<h3 id="root-level-keys">Root Level Keys<a class="headerlink" href="#root-level-keys" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># config.toml
+title = &quot;My App&quot;
+version = &quot;1.0.0&quot;
+enabled = true
 </code></pre>
-<h3 id="linux-arm64">Linux (ARM64)<a class="headerlink" href="#linux-arm64" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-arm64
-chmod +x tmq-linux-arm64
-sudo mv tmq-linux-arm64 /usr/local/bin/tmq
+<pre><code class="language-bash">tmq '.title' config.toml     # &quot;My App&quot;
+tmq '.version' config.toml   # &quot;1.0.0&quot;
+tmq '.enabled' config.toml   # true
 </code></pre>
-<h3 id="macos-apple-silicon">macOS (Apple Silicon)<a class="headerlink" href="#macos-apple-silicon" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-darwin-arm64
-chmod +x tmq-darwin-arm64
-sudo mv tmq-darwin-arm64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="macos-intel">macOS (Intel)<a class="headerlink" href="#macos-intel" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-darwin-amd64
-chmod +x tmq-darwin-amd64
-sudo mv tmq-darwin-amd64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="windows-amd64">Windows (AMD64)<a class="headerlink" href="#windows-amd64" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Download: https://github.com/azolfagharj/tmq/releases/latest/download/tmq-windows-amd64.exe</li>
-<li>Rename to <code>tmq.exe</code></li>
-<li>Add to your PATH</li>
-</ol>
-<h2 id="manual-installation">Manual Installation<a class="headerlink" href="#manual-installation" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Download</strong> the appropriate binary for your system</li>
-<li><strong>Make executable</strong> (Linux/macOS):
-   <code>bash
-   chmod +x tmq-*</code></li>
-<li><strong>Rename</strong> to <code>tmq</code> (or <code>tmq.exe</code> on Windows):
-   <code>bash
-   mv tmq-linux-amd64 tmq</code></li>
-<li><strong>Move to PATH</strong> (optional but recommended):
-   <code>bash
-   sudo mv tmq /usr/local/bin/</code></li>
-</ol>
-<h2 id="build-from-source">Build from Source<a class="headerlink" href="#build-from-source" title="Permanent link">&para;</a></h2>
-<p>If you prefer to build from source:</p>
-<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Go 1.23 or later</li>
-</ul>
-<h3 id="build-steps">Build Steps<a class="headerlink" href="#build-steps" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">git clone https://github.com/azolfagharj/tmq.git
-cd tmq
-go build -o bin/tmq ./cmd/tmq
-</code></pre>
-<h2 id="verify-installation">Verify Installation<a class="headerlink" href="#verify-installation" title="Permanent link">&para;</a></h2>
-<p>After installation, verify tmq is working:</p>
-<pre><code class="language-bash">tmq --version
-# Should show: tmq version 1.0.1
+<h3 id="nested-tables">Nested Tables<a class="headerlink" href="#nested-tables" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml">[database]
+host = &quot;localhost&quot;
+port = 5432
+ssl = false
 
-tmq --help
-# Should show help text
+[server]
+host = &quot;0.0.0.0&quot;
+port = 8080
 </code></pre>
-<h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
+<pre><code class="language-bash">tmq '.database.host' config.toml    # &quot;localhost&quot;
+tmq '.database.port' config.toml    # 5432
+tmq '.server.host' config.toml      # &quot;0.0.0.0&quot;
+</code></pre>
+<h3 id="deep-nesting">Deep Nesting<a class="headerlink" href="#deep-nesting" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml">[app]
+[app.config]
+[app.config.database]
+host = &quot;db.example.com&quot;
+port = 3306
+
+[app.config.cache]
+type = &quot;redis&quot;
+ttl = 3600
+</code></pre>
+<pre><code class="language-bash">tmq '.app.config.database.host' config.toml   # &quot;db.example.com&quot;
+tmq '.app.config.cache.type' config.toml      # &quot;redis&quot;
+tmq '.app.config.cache.ttl' config.toml       # 3600
+</code></pre>
+<h2 id="array-operations">Array Operations<a class="headerlink" href="#array-operations" title="Permanent link">&para;</a></h2>
+<h3 id="access-array-elements">Access Array Elements<a class="headerlink" href="#access-array-elements" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml">[[servers]]
+name = &quot;web1&quot;
+ip = &quot;192.168.1.1&quot;
+
+[[servers]]
+name = &quot;web2&quot;
+ip = &quot;192.168.1.2&quot;
+
+[[servers]]
+name = &quot;db1&quot;
+ip = &quot;192.168.1.10&quot;
+</code></pre>
+<pre><code class="language-bash"># First server
+tmq '.servers[0].name' config.toml    # &quot;web1&quot;
+tmq '.servers[0].ip' config.toml      # &quot;192.168.1.1&quot;
+
+# Second server
+tmq '.servers[1].name' config.toml    # &quot;web2&quot;
+
+# Database server
+tmq '.servers[2].name' config.toml    # &quot;db1&quot;
+</code></pre>
+<h3 id="array-of-values">Array of Values<a class="headerlink" href="#array-of-values" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml">ports = [8080, 8443, 9000]
+tags = [&quot;web&quot;, &quot;api&quot;, &quot;admin&quot;]
+</code></pre>
+<pre><code class="language-bash"># Access entire arrays
+tmq '.ports' config.toml      # [8080, 8443, 9000]
+tmq '.tags' config.toml       # [&quot;web&quot;, &quot;api&quot;, &quot;admin&quot;]
+
+# Access array elements
+tmq '.ports[0]' config.toml   # 8080
+tmq '.ports[1]' config.toml   # 8443
+tmq '.tags[2]' config.toml    # &quot;admin&quot;
+</code></pre>
+<h2 id="output-formats">Output Formats<a class="headerlink" href="#output-formats" title="Permanent link">&para;</a></h2>
+<h3 id="default-toml-output">Default TOML Output<a class="headerlink" href="#default-toml-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">tmq '.database' config.toml
+# Output: host = &quot;localhost&quot;
+#         port = 5432
+</code></pre>
+<h3 id="json-output">JSON Output<a class="headerlink" href="#json-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">tmq '.database' config.toml -o json
+# Output: {&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:5432}
+</code></pre>
+<h3 id="yaml-output">YAML Output<a class="headerlink" href="#yaml-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">tmq '.database' config.toml -o yaml
+# Output: host: localhost
+#         port: 5432
+</code></pre>
+<h2 id="advanced-queries">Advanced Queries<a class="headerlink" href="#advanced-queries" title="Permanent link">&para;</a></h2>
+<h3 id="complex-structures">Complex Structures<a class="headerlink" href="#complex-structures" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml">[app]
+name = &quot;myapp&quot;
+
+[app.database]
+host = &quot;db.example.com&quot;
+credentials = { username = &quot;admin&quot;, password = &quot;secret&quot; }
+
+[app.features]
+logging = true
+metrics = { enabled = true, port = 9090 }
+</code></pre>
+<pre><code class="language-bash"># Access nested objects
+tmq '.app.database.credentials' config.toml
+# Output: username = &quot;admin&quot;
+#         password = &quot;secret&quot;
+
+tmq '.app.database.credentials.username' config.toml    # &quot;admin&quot;
+tmq '.app.features.metrics' config.toml
+# Output: enabled = true
+#         port = 9090
+</code></pre>
+<h3 id="mixed-data-types">Mixed Data Types<a class="headerlink" href="#mixed-data-types" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># config.toml
+version = &quot;1.2.3&quot;
+debug = true
+timeout = 30
+pi = 3.14159
+
+[metadata]
+created = 2024-01-15T10:30:00Z
+tags = [&quot;production&quot;, &quot;stable&quot;]
+</code></pre>
+<pre><code class="language-bash">tmq '.version' config.toml     # &quot;1.2.3&quot;
+tmq '.debug' config.toml       # true
+tmq '.timeout' config.toml     # 30
+tmq '.pi' config.toml          # 3.14159
+tmq '.metadata.tags' config.toml    # [&quot;production&quot;, &quot;stable&quot;]
+</code></pre>
+<h2 id="query-root">Query Root<a class="headerlink" href="#query-root" title="Permanent link">&para;</a></h2>
+<h3 id="access-everything">Access Everything<a class="headerlink" href="#access-everything" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Show entire file
+tmq '.' config.toml
+
+# Same as above (explicit root)
+tmq '. .' config.toml
+</code></pre>
+<h3 id="root-with-different-formats">Root with Different Formats<a class="headerlink" href="#root-with-different-formats" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># JSON output of entire file
+tmq '.' config.toml -o json
+
+# YAML output of entire file
+tmq '.' config.toml -o yaml
+</code></pre>
+<h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
+<h3 id="non-existent-keys">Non-existent Keys<a class="headerlink" href="#non-existent-keys" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">tmq '.nonexistent' config.toml
+# Error: key 'nonexistent' not found
+# Exit code: 1
+</code></pre>
+<h3 id="invalid-paths">Invalid Paths<a class="headerlink" href="#invalid-paths" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">tmq '.invalid..path' config.toml
+# Error: invalid query path
+# Exit code: 1
+</code></pre>
+<h3 id="type-mismatches">Type Mismatches<a class="headerlink" href="#type-mismatches" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Trying to access array index on a non-array
+tmq '.title[0]' config.toml
+# Error: cannot index into string
+# Exit code: 1
+</code></pre>
+<h2 id="performance-notes">Performance Notes<a class="headerlink" href="#performance-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>OS</strong>: Linux, macOS, Windows</li>
-<li><strong>Architecture</strong>: AMD64, ARM64</li>
-<li><strong>Memory</strong>: Minimal (works with &lt; 10MB RAM)</li>
-<li><strong>Storage</strong>: ~5MB for the binary</li>
-<li><strong>No external dependencies</strong> - completely self-contained</li>
+<li>Queries are evaluated in constant time O(1)</li>
+<li>Memory usage scales with the size of the queried data</li>
+<li>Large files (&gt;100MB) may require increased memory limits</li>
 </ul>
-<h2 id="updating">Updating<a class="headerlink" href="#updating" title="Permanent link">&para;</a></h2>
-<p>To update to the latest version:</p>
-<ol>
-<li>Download the new binary from <a href="https://github.com/azolfagharj/tmq/releases">releases</a></li>
-<li>Replace the old binary</li>
-<li>Make sure it's executable (<code>chmod +x tmq</code>)</li>
-</ol>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="permission-denied">Permission Denied<a class="headerlink" href="#permission-denied" title="Permanent link">&para;</a></h3>
-<p>If you get "permission denied" when running tmq:</p>
-<pre><code class="language-bash">chmod +x /path/to/tmq
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="scripting">Scripting<a class="headerlink" href="#scripting" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Safe querying with error handling
+DB_HOST=$(tmq '.database.host' config.toml 2&gt;/dev/null) || {
+    echo &quot;Error: Could not read database host from config&quot;
+    exit 1
+}
+echo &quot;Database host: $DB_HOST&quot;
 </code></pre>
-<h3 id="command-not-found">Command Not Found<a class="headerlink" href="#command-not-found" title="Permanent link">&para;</a></h3>
-<p>If <code>tmq</code> command is not found:
-- Make sure it's in your PATH: <code>echo $PATH</code>
-- Or use the full path: <code>/usr/local/bin/tmq</code></p>
-<h3 id="download-issues">Download Issues<a class="headerlink" href="#download-issues" title="Permanent link">&para;</a></h3>
-<p>If wget fails, try using curl:</p>
-<pre><code class="language-bash">curl -L -o tmq https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-amd64
+<h3 id="validation-before-query">Validation Before Query<a class="headerlink" href="#validation-before-query" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Check if file is valid before querying
+if tmq '.' config.toml &gt;/dev/null 2&gt;&amp;1; then
+    VERSION=$(tmq '.version' config.toml)
+    echo &quot;Version: $VERSION&quot;
+else
+    echo &quot;Invalid TOML file&quot;
+    exit 1
+fi
+</code></pre>
+<h3 id="use-appropriate-output-format">Use Appropriate Output Format<a class="headerlink" href="#use-appropriate-output-format" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># For scripts, use raw output (default)
+HOST=$(tmq '.database.host' config.toml)
+
+# For data processing, use JSON
+tmq '.servers' config.toml -o json | jq '.[0].name'
 </code></pre>
 
 
@@ -1346,7 +1512,7 @@ tmq --help
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
+  برگشت به بالا
 </button>
         
       </main>
@@ -1355,33 +1521,33 @@ tmq --help
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+          <a href="../Getting-Started/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: شروع سریع">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Previous
+                قبلی
               </span>
               <div class="md-ellipsis">
-                Home
+                شروع سریع
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Getting-Started/" class="md-footer__link md-footer__link--next" aria-label="Next: Quick Start">
+          <a href="../Modification-Operations/" class="md-footer__link md-footer__link--next" aria-label="بعدی: عملیات تغییر">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Next
+                بعدی
               </span>
               <div class="md-ellipsis">
-                Quick Start
+                عملیات تغییر
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1456,7 +1622,7 @@ tmq --help
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

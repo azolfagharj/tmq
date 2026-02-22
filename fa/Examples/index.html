@@ -1,24 +1,24 @@
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="fa" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A complete standalone TOML CLI tool. Like jq for JSON, yq for YAML — but for TOML.">
+        <meta name="description" content="ابزار خط‌فرمان مستقل برای TOML. مثل jq برای JSON، yq برای YAML — ولی برای TOML.">
       
       
         <meta name="author" content="azolfagharj">
       
       
-        <link rel="canonical" href="https://tomlq.ir/Command-Reference/">
+        <link rel="canonical" href="https://tomlq.ir/fa/Examples/">
       
       
-        <link rel="prev" href="../Bulk-Operations/">
+        <link rel="prev" href="../Command-Reference/">
       
       
-        <link rel="next" href="../Examples/">
+        <link rel="next" href="../Troubleshooting/">
       
       
         
@@ -33,7 +33,7 @@
     
     
       
-        <title>Command Reference - tmq - TOML Query Tool</title>
+        <title>مثال‌ها - tmq - ابزار کوئری TOML</title>
       
     
     
@@ -75,7 +75,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -84,8 +84,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#command-reference" class="md-skip">
-          Skip to content
+        <a href="#examples" class="md-skip">
+          پرش به محتویات
         </a>
       
     </div>
@@ -99,8 +99,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="tmq - TOML Query Tool" class="md-header__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-header__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,13 +114,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            tmq - TOML Query Tool
+            tmq - ابزار کوئری TOML
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Command Reference
+              مثال‌ها
             
           </span>
         </div>
@@ -160,7 +160,7 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
+    <button class="md-header__button md-icon" aria-label="انتخاب زبان">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
@@ -194,21 +194,21 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="جستجو">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -221,7 +221,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            راه‌اندازی جستجو
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -233,7 +233,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -248,7 +248,7 @@
   
     
       
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -264,7 +264,7 @@
   
     
   
-  Home
+  خانه
 
       </a>
     </li>
@@ -285,7 +285,7 @@
   
     
   
-  Getting Started
+  شروع کار
 
         </a>
       </li>
@@ -307,7 +307,7 @@
   
     
   
-  User Guide
+  راهنمای کاربر
 
         </a>
       </li>
@@ -325,13 +325,13 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../Command-Reference/" class="md-tabs__link">
           
   
   
     
   
-  Reference
+  مرجع
 
         </a>
       </li>
@@ -351,7 +351,7 @@
   
     
   
-  Troubleshooting
+  عیب‌یابی
 
       </a>
     </li>
@@ -386,19 +386,19 @@
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="tmq - TOML Query Tool" class="md-nav__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-nav__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    tmq - TOML Query Tool
+    tmq - ابزار کوئری TOML
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -425,7 +425,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    خانه
   
 
     
@@ -474,7 +474,7 @@
   <span class="md-ellipsis">
     
   
-    Getting Started
+    شروع کار
   
 
     
@@ -490,7 +490,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Getting Started
+    شروع کار
   
 
           </label>
@@ -510,7 +510,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    نصب
   
 
     
@@ -538,7 +538,7 @@
   <span class="md-ellipsis">
     
   
-    Quick Start
+    شروع سریع
   
 
     
@@ -599,7 +599,7 @@
   <span class="md-ellipsis">
     
   
-    User Guide
+    راهنمای کاربر
   
 
     
@@ -615,7 +615,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    User Guide
+    راهنمای کاربر
   
 
           </label>
@@ -635,7 +635,7 @@
   <span class="md-ellipsis">
     
   
-    Query Operations
+    عملیات کوئری
   
 
     
@@ -663,7 +663,7 @@
   <span class="md-ellipsis">
     
   
-    Modification Operations
+    عملیات تغییر
   
 
     
@@ -691,7 +691,7 @@
   <span class="md-ellipsis">
     
   
-    Validation & Comparison
+    اعتبارسنجی و مقایسه
   
 
     
@@ -719,7 +719,7 @@
   <span class="md-ellipsis">
     
   
-    Bulk Operations
+    عملیات گروهی
   
 
     
@@ -781,7 +781,7 @@
   <span class="md-ellipsis">
     
   
-    Reference
+    مرجع
   
 
     
@@ -797,11 +797,39 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Reference
+    مرجع
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Command-Reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    مرجع دستورات
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -826,7 +854,7 @@
   <span class="md-ellipsis">
     
   
-    Command Reference
+    مثال‌ها
   
 
     
@@ -844,7 +872,7 @@
   <span class="md-ellipsis">
     
   
-    Command Reference
+    مثال‌ها
   
 
     
@@ -856,7 +884,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
   
   
   
@@ -865,38 +893,27 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      فهرست موضوعات
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#synopsis" class="md-nav__link">
+  <a href="#basic-configuration-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Synopsis
+        Basic Configuration Management
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#global-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Global Options
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Global Options">
+    <nav class="md-nav" aria-label="Basic Configuration Management">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#output-options" class="md-nav__link">
+  <a href="#application-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Output Options
+        Application Configuration
       
     </span>
   </a>
@@ -904,54 +921,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modification-options" class="md-nav__link">
+  <a href="#environment-specific-configs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modification Options
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dry-run" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dry Run
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#comparison" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Comparison
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#information" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Information
+        Environment-Specific Configs
       
     </span>
   </a>
@@ -964,22 +937,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#query-syntax" class="md-nav__link">
+  <a href="#web-server-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Query Syntax
+        Web Server Configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Query Syntax">
+    <nav class="md-nav" aria-label="Web Server Configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-queries" class="md-nav__link">
+  <a href="#nginx-style-config" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic Queries
+        Nginx-style Config
       
     </span>
   </a>
@@ -987,21 +960,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-operations" class="md-nav__link">
+  <a href="#database-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Set Operations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#delete-operations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Delete Operations
+        Database Configuration
       
     </span>
   </a>
@@ -1014,22 +976,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
+  <a href="#cicd-pipeline-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Examples
+        CI/CD Pipeline Examples
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Examples">
+    <nav class="md-nav" aria-label="CI/CD Pipeline Examples">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#query-examples" class="md-nav__link">
+  <a href="#github-actions-config" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Query Examples
+        GitHub Actions Config
       
     </span>
   </a>
@@ -1037,32 +999,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modification-examples" class="md-nav__link">
+  <a href="#docker-compose-override" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modification Examples
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation Examples
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#comparison-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Comparison Examples
+        Docker Compose Override
       
     </span>
   </a>
@@ -1075,45 +1015,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#exit-codes" class="md-nav__link">
+  <a href="#package-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exit Codes
+        Package Management
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-messages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error Messages
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Error Messages">
+    <nav class="md-nav" aria-label="Package Management">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#common-errors" class="md-nav__link">
+  <a href="#package-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Errors
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Common Errors">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parse-errors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parse Errors
+        Package Configuration
       
     </span>
   </a>
@@ -1121,87 +1038,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#file-errors" class="md-nav__link">
+  <a href="#cargotoml-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        File Errors
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation-errors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation Errors
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Environment Variables
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#file-formats" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        File Formats
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="File Formats">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#toml-input" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        TOML Input
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        JSON Output
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#yaml-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        YAML Output
+        Cargo.toml Example
       
     </span>
   </a>
@@ -1214,22 +1054,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#performance" class="md-nav__link">
+  <a href="#configuration-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Performance
+        Configuration Validation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Performance">
+    <nav class="md-nav" aria-label="Configuration Validation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#benchmarks" class="md-nav__link">
+  <a href="#schema-validation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Benchmarks
+        Schema Validation
       
     </span>
   </a>
@@ -1237,10 +1077,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#optimization-tips" class="md-nav__link">
+  <a href="#configuration-migration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Optimization Tips
+        Configuration Migration
       
     </span>
   </a>
@@ -1253,22 +1093,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#platform-support" class="md-nav__link">
+  <a href="#monitoring-and-alerting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Platform Support
+        Monitoring and Alerting
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Platform Support">
+    <nav class="md-nav" aria-label="Monitoring and Alerting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#supported-platforms" class="md-nav__link">
+  <a href="#health-check-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Platforms
+        Health Check Configuration
       
     </span>
   </a>
@@ -1276,10 +1116,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#binary-names" class="md-nav__link">
+  <a href="#log-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Binary Names
+        Log Configuration
       
     </span>
   </a>
@@ -1292,22 +1132,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#limitations" class="md-nav__link">
+  <a href="#multi-environment-management" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Limitations
+        Multi-Environment Management
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Limitations">
+    <nav class="md-nav" aria-label="Multi-Environment Management">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#current-limitations" class="md-nav__link">
+  <a href="#environment-overrides" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Current Limitations
+        Environment Overrides
       
     </span>
   </a>
@@ -1315,21 +1155,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#file-size-limits" class="md-nav__link">
+  <a href="#feature-flags" class="md-nav__link">
     <span class="md-ellipsis">
       
-        File Size Limits
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#path-length-limits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Path Length Limits
+        Feature Flags
       
     </span>
   </a>
@@ -1342,34 +1171,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
+  <a href="#backup-and-recovery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        Backup and Recovery
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Troubleshooting">
+    <nav class="md-nav" aria-label="Backup and Recovery">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
+  <a href="#configuration-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Issues
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Common Issues">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#command-not-found" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        "command not found"
+        Configuration Backup
       
     </span>
   </a>
@@ -1377,59 +1194,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#permission-denied" class="md-nav__link">
+  <a href="#configuration-restore" class="md-nav__link">
     <span class="md-ellipsis">
       
-        "permission denied"
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directory-not-found" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        "directory not found"
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#invalid-query" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Invalid query
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debug-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Debug Mode
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-help" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Getting Help
+        Configuration Restore
       
     </span>
   </a>
@@ -1442,22 +1210,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#version-history" class="md-nav__link">
+  <a href="#advanced-scripting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Version History
+        Advanced Scripting
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Version History">
+    <nav class="md-nav" aria-label="Advanced Scripting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#v101" class="md-nav__link">
+  <a href="#dynamic-configuration-generation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        v1.0.1
+        Dynamic Configuration Generation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-diff-and-patch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Diff and Patch
       
     </span>
   </a>
@@ -1473,34 +1252,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Examples/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Examples
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1527,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    Troubleshooting
+    عیب‌یابی
   
 
     
@@ -1560,363 +1311,568 @@
   
 
 
-<h1 id="command-reference">Command Reference<a class="headerlink" href="#command-reference" title="Permanent link">&para;</a></h1>
-<p>Complete reference for all tmq commands, flags, and options.</p>
-<h2 id="synopsis">Synopsis<a class="headerlink" href="#synopsis" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">tmq [OPTIONS] [QUERY] [FILE...]
-tmq [OPTIONS] --validate [FILE...]
-tmq [OPTIONS] --compare FILE1 FILE2
+<h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h1>
+<p>Comprehensive collection of tmq usage examples for common scenarios.</p>
+<h2 id="basic-configuration-management">Basic Configuration Management<a class="headerlink" href="#basic-configuration-management" title="Permanent link">&para;</a></h2>
+<h3 id="application-configuration">Application Configuration<a class="headerlink" href="#application-configuration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># app.toml
+[app]
+name = &quot;myapp&quot;
+version = &quot;1.0.0&quot;
+debug = true
+
+[database]
+host = &quot;localhost&quot;
+port = 5432
+name = &quot;myapp_db&quot;
+
+[logging]
+level = &quot;info&quot;
+file = &quot;/var/log/myapp.log&quot;
 </code></pre>
-<h2 id="global-options">Global Options<a class="headerlink" href="#global-options" title="Permanent link">&para;</a></h2>
-<h3 id="output-options">Output Options<a class="headerlink" href="#output-options" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>-o, --output FORMAT</code>: Output format (<code>toml</code>, <code>json</code>, <code>yaml</code>)</li>
-<li>Default: <code>toml</code></li>
-<li>Example: <code>tmq '.data' config.toml -o json</code></li>
-</ul>
-<h3 id="modification-options">Modification Options<a class="headerlink" href="#modification-options" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>-i, --inplace</code>: Modify files in-place</li>
-<li>Must be used with set/delete operations</li>
-<li>Example: <code>tmq '.version = "2.0"' -i config.toml</code></li>
-</ul>
-<h3 id="dry-run">Dry Run<a class="headerlink" href="#dry-run" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>--dry-run</code>: Preview changes without modifying files</li>
-<li>Shows what would be done</li>
-<li>Exit code 0 for success, 1 for errors</li>
-<li>Example: <code>tmq '.version = "2.0"' --dry-run config.toml</code></li>
-</ul>
-<h3 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>--validate</code>: Validate TOML syntax</li>
-<li>Exit code 0 if valid, 1 if invalid</li>
-<li>Can process multiple files</li>
-<li>Example: <code>tmq --validate config.toml</code></li>
-</ul>
-<h3 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>--compare FILE1 FILE2</code>: Compare two TOML files</li>
-<li>Exit code 0 if identical, 1 if different</li>
-<li>Shows detailed differences</li>
-<li>Example: <code>tmq --compare old.toml new.toml</code></li>
-</ul>
-<h3 id="information">Information<a class="headerlink" href="#information" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>-v, --version</code>: Show version information</li>
-<li><code>-h, --help</code>: Show help text</li>
-</ul>
-<h2 id="query-syntax">Query Syntax<a class="headerlink" href="#query-syntax" title="Permanent link">&para;</a></h2>
-<h3 id="basic-queries">Basic Queries<a class="headerlink" href="#basic-queries" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Root key
-.key
+<pre><code class="language-bash"># Get application info
+tmq '.app.name' app.toml          # &quot;myapp&quot;
+tmq '.app.version' app.toml       # &quot;1.0.0&quot;
 
-# Nested table
-.table.key
+# Database configuration
+tmq '.database' app.toml
+# Output: host = &quot;localhost&quot;
+#         port = 5432
+#         name = &quot;myapp_db&quot;
 
-# Deep nesting
-.app.database.host
-
-# Array element
-.array[0]
-
-# Array element with nesting
-.servers[1].name
+# Update for production
+tmq '.app.debug = false' -i app.toml
+tmq '.database.host = &quot;prod-db.example.com&quot;' -i app.toml
 </code></pre>
-<h3 id="set-operations">Set Operations<a class="headerlink" href="#set-operations" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Simple assignment
-.key = &quot;value&quot;
-
-# Number assignment
-.port = 8080
-
-# Boolean assignment
-.enabled = true
-
-# Array assignment
-.tags = [&quot;web&quot;, &quot;api&quot;]
-
-# Object assignment
-.config = { host = &quot;localhost&quot;, port = 5432 }
-</code></pre>
-<h3 id="delete-operations">Delete Operations<a class="headerlink" href="#delete-operations" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Delete root key
-del(.key)
-
-# Delete nested key
-del(.table.key)
-
-# Delete array element
-del(.array[0])
-</code></pre>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="query-examples">Query Examples<a class="headerlink" href="#query-examples" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Simple query
-tmq '.version' config.toml
-
-# Nested query
-tmq '.database.host' config.toml
-
-# Array query
-tmq '.servers[0].name' config.toml
-
-# Multiple files
-tmq '.version' config/*.toml
-
-# JSON output
-tmq '.config' file.toml -o json
-
-# YAML output
-tmq '.config' file.toml -o yaml
-</code></pre>
-<h3 id="modification-examples">Modification Examples<a class="headerlink" href="#modification-examples" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Set string value
-tmq '.version = &quot;2.0.0&quot;' -i config.toml
-
-# Set nested value
-tmq '.database.host = &quot;prod-db&quot;' -i config.toml
-
-# Set array
-tmq '.ports = [8080, 8443]' -i config.toml
-
-# Delete key
-tmq 'del(.obsolete)' -i config.toml
-
-# Dry run
-tmq '.version = &quot;test&quot;' --dry-run config.toml
-</code></pre>
-<h3 id="validation-examples">Validation Examples<a class="headerlink" href="#validation-examples" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Single file
-tmq --validate config.toml
-
-# Multiple files
-tmq --validate *.toml
-
-# In script
-if tmq --validate config.toml; then
-    echo &quot;Valid TOML&quot;
-fi
-</code></pre>
-<h3 id="comparison-examples">Comparison Examples<a class="headerlink" href="#comparison-examples" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Compare files
-tmq --compare config1.toml config2.toml
-
-# In script
-if tmq --compare expected.toml actual.toml; then
-    echo &quot;Files match&quot;
-fi
-</code></pre>
-<h2 id="exit-codes">Exit Codes<a class="headerlink" href="#exit-codes" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Meaning</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>Success</td>
-<td>Operation completed successfully</td>
-</tr>
-<tr>
-<td>1</td>
-<td>Parse Error</td>
-<td>TOML parsing failed or query error</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Usage Error</td>
-<td>Invalid command-line arguments</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Security Error</td>
-<td>Path traversal or security violation</td>
-</tr>
-<tr>
-<td>4</td>
-<td>File Error</td>
-<td>File not found, permission denied, etc.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="error-messages">Error Messages<a class="headerlink" href="#error-messages" title="Permanent link">&para;</a></h2>
-<p>tmq provides structured error messages:</p>
-<pre><code>ERROR: &lt;error_type&gt;
-DETAILS: &lt;detailed_description&gt;
-ACTION: &lt;suggested_fix&gt;
-</code></pre>
-<h3 id="common-errors">Common Errors<a class="headerlink" href="#common-errors" title="Permanent link">&para;</a></h3>
-<h4 id="parse-errors">Parse Errors<a class="headerlink" href="#parse-errors" title="Permanent link">&para;</a></h4>
-<pre><code class="language-bash">tmq '.invalid..' config.toml
-# ERROR: Invalid query path
-# DETAILS: Query path cannot be empty
-# ACTION: Check your query syntax
-</code></pre>
-<h4 id="file-errors">File Errors<a class="headerlink" href="#file-errors" title="Permanent link">&para;</a></h4>
-<pre><code class="language-bash">tmq '.' nonexistent.toml
-# ERROR: File operation error
-# DETAILS: Cannot read file 'nonexistent.toml'
-# ACTION: Ensure the file exists and is readable
-</code></pre>
-<h4 id="validation-errors">Validation Errors<a class="headerlink" href="#validation-errors" title="Permanent link">&para;</a></h4>
-<pre><code class="language-bash">tmq --validate malformed.toml
-# ERROR: TOML parsing failed
-# DETAILS: Expected newline at line 5, column 10
-# ACTION: Fix the TOML syntax error
-</code></pre>
-<h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
-<p>tmq does not use environment variables for configuration. All options are specified via command-line flags.</p>
-<h2 id="file-formats">File Formats<a class="headerlink" href="#file-formats" title="Permanent link">&para;</a></h2>
-<h3 id="toml-input">TOML Input<a class="headerlink" href="#toml-input" title="Permanent link">&para;</a></h3>
-<p>tmq accepts standard TOML 1.0.0 format:</p>
-<pre><code class="language-toml"># Comments are preserved in output
-title = &quot;Example&quot;
+<h3 id="environment-specific-configs">Environment-Specific Configs<a class="headerlink" href="#environment-specific-configs" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># config.toml
+environment = &quot;development&quot;
 
 [database]
 host = &quot;localhost&quot;
 port = 5432
 
-[[servers]]
-name = &quot;web1&quot;
-ip = &quot;192.168.1.1&quot;
+[features]
+debug = true
+metrics = false
 </code></pre>
-<h3 id="json-output">JSON Output<a class="headerlink" href="#json-output" title="Permanent link">&para;</a></h3>
-<pre><code class="language-json">{
-  &quot;title&quot;: &quot;Example&quot;,
-  &quot;database&quot;: {
-    &quot;host&quot;: &quot;localhost&quot;,
-    &quot;port&quot;: 5432
-  },
-  &quot;servers&quot;: [
-    {
-      &quot;name&quot;: &quot;web1&quot;,
-      &quot;ip&quot;: &quot;192.168.1.1&quot;
-    }
-  ]
-}
-</code></pre>
-<h3 id="yaml-output">YAML Output<a class="headerlink" href="#yaml-output" title="Permanent link">&para;</a></h3>
-<pre><code class="language-yaml">title: Example
-database:
-  host: localhost
-  port: 5432
-servers:
-- name: web1
-  ip: 192.168.1.1
-</code></pre>
-<h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
-<h3 id="benchmarks">Benchmarks<a class="headerlink" href="#benchmarks" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Query operations: O(1) - constant time</li>
-<li>File parsing: O(n) where n is file size</li>
-<li>Memory usage: &lt; 10MB for typical files</li>
-<li>Large files: Scales linearly with size</li>
-</ul>
-<h3 id="optimization-tips">Optimization Tips<a class="headerlink" href="#optimization-tips" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Use specific queries instead of full file output</li>
-<li>Prefer JSON/YAML output for programmatic use</li>
-<li>Use bulk operations for multiple files</li>
-</ul>
-<h2 id="platform-support">Platform Support<a class="headerlink" href="#platform-support" title="Permanent link">&para;</a></h2>
-<h3 id="supported-platforms">Supported Platforms<a class="headerlink" href="#supported-platforms" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Linux</strong>: amd64, arm64</li>
-<li><strong>macOS</strong>: amd64 (Intel), arm64 (Apple Silicon)</li>
-<li><strong>Windows</strong>: amd64</li>
-</ul>
-<h3 id="binary-names">Binary Names<a class="headerlink" href="#binary-names" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>tmq-linux-amd64</code> (Linux Intel/AMD)</li>
-<li><code>tmq-linux-arm64</code> (Linux ARM)</li>
-<li><code>tmq-darwin-amd64</code> (macOS Intel)</li>
-<li><code>tmq-darwin-arm64</code> (macOS Apple Silicon)</li>
-<li><code>tmq-windows-amd64.exe</code> (Windows)</li>
-</ul>
-<h2 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h2>
-<h3 id="current-limitations">Current Limitations<a class="headerlink" href="#current-limitations" title="Permanent link">&para;</a></h3>
-<ul>
-<li>No JSON/YAML → TOML conversion (planned)</li>
-<li>No comment preservation in modifications (planned)</li>
-<li>No plugin system (planned)</li>
-<li>No library API (planned)</li>
-</ul>
-<h3 id="file-size-limits">File Size Limits<a class="headerlink" href="#file-size-limits" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Maximum file size: 100MB</li>
-<li>Recommended: &lt; 10MB for optimal performance</li>
-</ul>
-<h3 id="path-length-limits">Path Length Limits<a class="headerlink" href="#path-length-limits" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Maximum path length: 1024 characters</li>
-<li>Maximum nesting depth: 100 levels</li>
-</ul>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
-<h4 id="command-not-found">"command not found"<a class="headerlink" href="#command-not-found" title="Permanent link">&para;</a></h4>
-<pre><code class="language-bash"># Check if tmq is in PATH
-which tmq
+<pre><code class="language-bash"># Switch to production
+tmq '.environment = &quot;production&quot;' -i config.toml
+tmq '.database.host = &quot;prod-db.cluster.com&quot;' -i config.toml
+tmq '.database.port = 3306' -i config.toml
+tmq '.features.debug = false' -i config.toml
+tmq '.features.metrics = true' -i config.toml
 
-# Or use full path
-/path/to/tmq --version
-</code></pre>
-<h4 id="permission-denied">"permission denied"<a class="headerlink" href="#permission-denied" title="Permanent link">&para;</a></h4>
-<pre><code class="language-bash"># Make executable
-chmod +x tmq
-
-# Or run with full permissions
-sudo ./tmq --version
-</code></pre>
-<h4 id="directory-not-found">"directory not found"<a class="headerlink" href="#directory-not-found" title="Permanent link">&para;</a></h4>
-<pre><code class="language-bash"># Check file exists
-ls -la config.toml
-
-# Check current directory
-pwd
-
-# Use absolute path
-tmq '.' /full/path/to/config.toml
-</code></pre>
-<h4 id="invalid-query">Invalid query<a class="headerlink" href="#invalid-query" title="Permanent link">&para;</a></h4>
-<pre><code class="language-bash"># Check syntax
-tmq --help
-
-# Test with simple query
+# Verify changes
 tmq '.' config.toml
 </code></pre>
-<h3 id="debug-mode">Debug Mode<a class="headerlink" href="#debug-mode" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Use verbose output (when available)
-tmq --help
+<h2 id="web-server-configuration">Web Server Configuration<a class="headerlink" href="#web-server-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="nginx-style-config">Nginx-style Config<a class="headerlink" href="#nginx-style-config" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># nginx.toml
+[server]
+listen = 80
+server_name = &quot;example.com&quot;
+root = &quot;/var/www/html&quot;
 
-# Check file contents
-cat config.toml
+[ssl]
+enabled = false
+certificate = &quot;/etc/ssl/certs/example.crt&quot;
+key = &quot;/etc/ssl/private/example.key&quot;
 
-# Validate file
-tmq --validate config.toml
+[[locations]]
+path = &quot;/&quot;
+try_files = [&quot;$uri&quot;, &quot;$uri/&quot;, &quot;/index.html&quot;]
+
+[[locations]]
+path = &quot;/api&quot;
+proxy_pass = &quot;http://localhost:3000&quot;
 </code></pre>
-<h3 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash"># Show help
-tmq --help
+<pre><code class="language-bash"># Server configuration
+tmq '.server' nginx.toml
 
-# Show version
-tmq --version
+# SSL setup
+tmq '.ssl.enabled = true' -i nginx.toml
+tmq '.ssl.certificate = &quot;/etc/letsencrypt/live/example.com/fullchain.pem&quot;' -i nginx.toml
+tmq '.ssl.key = &quot;/etc/letsencrypt/live/example.com/privkey.pem&quot;' -i nginx.toml
 
-# Report issues: https://github.com/azolfagharj/tmq/issues
+# Add API location
+tmq '.locations = [{ path = &quot;/api&quot;, proxy_pass = &quot;http://api:8080&quot; }]' -i nginx.toml
 </code></pre>
-<h2 id="version-history">Version History<a class="headerlink" href="#version-history" title="Permanent link">&para;</a></h2>
-<h3 id="v101">v1.0.1<a class="headerlink" href="#v101" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Initial release</li>
-<li>Query, set, delete operations</li>
-<li>Validation and comparison</li>
-<li>Bulk operations</li>
-<li>JSON/YAML output</li>
-<li>Cross-platform binaries</li>
-</ul>
+<h3 id="database-configuration">Database Configuration<a class="headerlink" href="#database-configuration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># database.toml
+[connection]
+host = &quot;localhost&quot;
+port = 5432
+database = &quot;myapp&quot;
+username = &quot;app_user&quot;
+ssl_mode = &quot;require&quot;
+
+[pool]
+min_connections = 2
+max_connections = 20
+idle_timeout = 300
+
+[migrations]
+enabled = true
+path = &quot;./migrations&quot;
+</code></pre>
+<pre><code class="language-bash"># Connection string
+HOST=$(tmq '.connection.host' database.toml)
+PORT=$(tmq '.connection.port' database.toml)
+DB=$(tmq '.connection.database' database.toml)
+USER=$(tmq '.connection.username' database.toml)
+
+echo &quot;postgresql://$USER@$HOST:$PORT/$DB&quot;
+
+# Pool configuration
+tmq '.pool' database.toml -o json
+
+# Enable migrations
+tmq '.migrations.enabled = true' -i database.toml
+</code></pre>
+<h2 id="cicd-pipeline-examples">CI/CD Pipeline Examples<a class="headerlink" href="#cicd-pipeline-examples" title="Permanent link">&para;</a></h2>
+<h3 id="github-actions-config">GitHub Actions Config<a class="headerlink" href="#github-actions-config" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># .github/config.toml
+[build]
+go_version = &quot;1.23&quot;
+platforms = [&quot;linux/amd64&quot;, &quot;linux/arm64&quot;, &quot;darwin/amd64&quot;, &quot;darwin/arm64&quot;]
+
+[test]
+race_detector = true
+coverage = true
+threshold = 80
+
+[release]
+draft = false
+prerelease = false
+generate_release_notes = true
+</code></pre>
+<pre><code class="language-bash"># Update Go version across all workflows
+find .github/workflows -name &quot;*.yml&quot; -exec \
+    tmq '.build.go_version = &quot;1.24&quot;' -i {} \;
+
+# Update test coverage threshold
+tmq '.test.threshold = 85' -i .github/config.toml
+
+# Enable race detector
+tmq '.test.race_detector = true' -i .github/config.toml
+</code></pre>
+<h3 id="docker-compose-override">Docker Compose Override<a class="headerlink" href="#docker-compose-override" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># docker-compose.override.toml
+[services.app]
+image = &quot;myapp:latest&quot;
+ports = [&quot;8080:8080&quot;]
+environment = [&quot;NODE_ENV=development&quot;]
+
+[services.db]
+image = &quot;postgres:13&quot;
+environment = [&quot;POSTGRES_DB=myapp_dev&quot;]
+volumes = [&quot;./data:/var/lib/postgresql/data&quot;]
+</code></pre>
+<pre><code class="language-bash"># Switch to production images
+tmq '.services.app.image = &quot;myapp:v1.2.0&quot;' -i docker-compose.override.toml
+tmq '.services.db.image = &quot;postgres:15&quot;' -i docker-compose.override.toml
+
+# Update environment
+tmq '.services.app.environment = [&quot;NODE_ENV=production&quot;]' -i docker-compose.override.toml
+</code></pre>
+<h2 id="package-management">Package Management<a class="headerlink" href="#package-management" title="Permanent link">&para;</a></h2>
+<h3 id="package-configuration">Package Configuration<a class="headerlink" href="#package-configuration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># package.toml
+[package]
+name = &quot;tmq&quot;
+version = &quot;1.0.0&quot;
+description = &quot;TOML Query Tool&quot;
+authors = [&quot;Your Name &lt;your@email.com&gt;&quot;]
+
+[dependencies]
+toml = &quot;1.0.0&quot;
+clap = &quot;4.0&quot;
+
+[build]
+target = &quot;x86_64-unknown-linux-gnu&quot;
+release = true
+</code></pre>
+<pre><code class="language-bash"># Version management
+CURRENT_VERSION=$(tmq '.package.version' package.toml)
+echo &quot;Current version: $CURRENT_VERSION&quot;
+
+# Update version
+NEW_VERSION=&quot;1.0.1&quot;
+tmq &quot;.package.version = \&quot;$NEW_VERSION\&quot;&quot; -i package.toml
+
+# Update dependencies
+tmq '.dependencies.toml = &quot;1.1.0&quot;' -i package.toml
+</code></pre>
+<h3 id="cargotoml-example">Cargo.toml Example<a class="headerlink" href="#cargotoml-example" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># Cargo.toml
+[package]
+name = &quot;my-crate&quot;
+version = &quot;0.1.0&quot;
+edition = &quot;2021&quot;
+
+[dependencies]
+serde = { version = &quot;1.0&quot;, features = [&quot;derive&quot;] }
+tokio = { version = &quot;1.0&quot;, features = [&quot;full&quot;] }
+
+[profile.release]
+opt-level = 3
+lto = true
+</code></pre>
+<pre><code class="language-bash"># Dependency updates
+tmq '.dependencies.serde.version = &quot;1.1&quot;' -i Cargo.toml
+tmq '.dependencies.tokio.version = &quot;1.1&quot;' -i Cargo.toml
+
+# Profile optimization
+tmq '.profile.release.opt-level = 3' -i Cargo.toml
+tmq '.profile.release.lto = true' -i Cargo.toml
+</code></pre>
+<h2 id="configuration-validation">Configuration Validation<a class="headerlink" href="#configuration-validation" title="Permanent link">&para;</a></h2>
+<h3 id="schema-validation">Schema Validation<a class="headerlink" href="#schema-validation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Validate configuration against schema
+
+validate_config() {
+    local file=&quot;$1&quot;
+
+    # Check required fields
+    required_fields=(&quot;.app.name&quot; &quot;.database.host&quot; &quot;.server.port&quot;)
+    for field in &quot;${required_fields[@]}&quot;; do
+        if ! tmq &quot;$field&quot; &quot;$file&quot; &gt;/dev/null 2&gt;&amp;1; then
+            echo &quot;Missing required field: $field&quot;
+            return 1
+        fi
+    done
+
+    # Check port range
+    port=$(tmq '.server.port' &quot;$file&quot;)
+    if [ &quot;$port&quot; -lt 1024 ] || [ &quot;$port&quot; -gt 65535 ]; then
+        echo &quot;Invalid port: $port&quot;
+        return 1
+    fi
+
+    return 0
+}
+
+# Validate all configs
+for config in config/*.toml; do
+    if validate_config &quot;$config&quot;; then
+        echo &quot;✓ $config is valid&quot;
+    else
+        echo &quot;✗ $config is invalid&quot;
+        exit 1
+    fi
+done
+</code></pre>
+<h3 id="configuration-migration">Configuration Migration<a class="headerlink" href="#configuration-migration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Migrate old configuration format to new format
+
+migrate_config() {
+    local file=&quot;$1&quot;
+
+    # Migrate old field names
+    if tmq '.old_database_host' &quot;$file&quot; &gt;/dev/null 2&gt;&amp;1; then
+        host=$(tmq '.old_database_host' &quot;$file&quot;)
+        tmq &quot;.database.host = $host&quot; -i &quot;$file&quot;
+        tmq 'del(.old_database_host)' -i &quot;$file&quot;
+    fi
+
+    # Add new required fields with defaults
+    tmq '.database.port = 5432' -i &quot;$file&quot;
+    tmq '.features.logging = true' -i &quot;$file&quot;
+    tmq '.version = &quot;1.0.0&quot;' -i &quot;$file&quot;
+}
+
+# Migrate all configurations
+for config in config/*.toml; do
+    echo &quot;Migrating $config...&quot;
+    migrate_config &quot;$config&quot;
+done
+
+# Validate migrated configs
+tmq --validate config/*.toml
+</code></pre>
+<h2 id="monitoring-and-alerting">Monitoring and Alerting<a class="headerlink" href="#monitoring-and-alerting" title="Permanent link">&para;</a></h2>
+<h3 id="health-check-configuration">Health Check Configuration<a class="headerlink" href="#health-check-configuration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># health.toml
+[checks]
+[checks.database]
+enabled = true
+query = &quot;SELECT 1&quot;
+timeout = 5
+
+[checks.redis]
+enabled = true
+key = &quot;health&quot;
+timeout = 2
+
+[alerts]
+[alerts.email]
+enabled = true
+recipients = [&quot;admin@example.com&quot;]
+
+[alerts.slack]
+enabled = false
+webhook = &quot;https://hooks.slack.com/...&quot;
+</code></pre>
+<pre><code class="language-bash"># Enable health checks
+tmq '.checks.database.enabled = true' -i health.toml
+tmq '.checks.redis.enabled = true' -i health.toml
+
+# Configure alerts
+tmq '.alerts.email.enabled = true' -i health.toml
+tmq '.alerts.slack.enabled = false' -i health.toml
+
+# Update timeouts
+tmq '.checks.database.timeout = 10' -i health.toml
+tmq '.checks.redis.timeout = 3' -i health.toml
+</code></pre>
+<h3 id="log-configuration">Log Configuration<a class="headerlink" href="#log-configuration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># logging.toml
+[logger]
+level = &quot;info&quot;
+format = &quot;json&quot;
+
+[outputs]
+[outputs.console]
+enabled = true
+level = &quot;debug&quot;
+
+[outputs.file]
+enabled = true
+path = &quot;/var/log/app.log&quot;
+max_size = &quot;10MB&quot;
+max_age = &quot;30d&quot;
+
+[outputs.syslog]
+enabled = false
+facility = &quot;user&quot;
+</code></pre>
+<pre><code class="language-bash"># Change log level
+tmq '.logger.level = &quot;debug&quot;' -i logging.toml
+
+# Enable file logging
+tmq '.outputs.file.enabled = true' -i logging.toml
+tmq '.outputs.file.path = &quot;/var/log/myapp.log&quot;' -i logging.toml
+
+# Configure log rotation
+tmq '.outputs.file.max_size = &quot;50MB&quot;' -i logging.toml
+tmq '.outputs.file.max_age = &quot;7d&quot;' -i logging.toml
+</code></pre>
+<h2 id="multi-environment-management">Multi-Environment Management<a class="headerlink" href="#multi-environment-management" title="Permanent link">&para;</a></h2>
+<h3 id="environment-overrides">Environment Overrides<a class="headerlink" href="#environment-overrides" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Manage multiple environments
+
+ENVIRONMENTS=(&quot;development&quot; &quot;staging&quot; &quot;production&quot;)
+BASE_CONFIG=&quot;config/base.toml&quot;
+
+for env in &quot;${ENVIRONMENTS[@]}&quot;; do
+    config_file=&quot;config/$env.toml&quot;
+
+    # Copy base config
+    cp &quot;$BASE_CONFIG&quot; &quot;$config_file&quot;
+
+    # Apply environment-specific overrides
+    case $env in
+        &quot;development&quot;)
+            tmq '.debug = true' -i &quot;$config_file&quot;
+            tmq '.database.host = &quot;localhost&quot;' -i &quot;$config_file&quot;
+            tmq '.logging.level = &quot;debug&quot;' -i &quot;$config_file&quot;
+            ;;
+        &quot;staging&quot;)
+            tmq '.debug = false' -i &quot;$config_file&quot;
+            tmq '.database.host = &quot;staging-db.example.com&quot;' -i &quot;$config_file&quot;
+            tmq '.logging.level = &quot;info&quot;' -i &quot;$config_file&quot;
+            ;;
+        &quot;production&quot;)
+            tmq '.debug = false' -i &quot;$config_file&quot;
+            tmq '.database.host = &quot;prod-db-cluster.example.com&quot;' -i &quot;$config_file&quot;
+            tmq '.logging.level = &quot;warn&quot;' -i &quot;$config_file&quot;
+            ;;
+    esac
+
+    echo &quot;Generated $config_file&quot;
+done
+
+# Validate all generated configs
+tmq --validate config/*.toml
+</code></pre>
+<h3 id="feature-flags">Feature Flags<a class="headerlink" href="#feature-flags" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># features.toml
+[features]
+new_ui = false
+api_v2 = false
+experimental = false
+beta_features = false
+
+[rollout]
+percentage = 0
+user_groups = []
+</code></pre>
+<pre><code class="language-bash"># Enable features for beta users
+tmq '.features.new_ui = true' -i features.toml
+tmq '.features.api_v2 = true' -i features.toml
+
+# Configure rollout
+tmq '.rollout.percentage = 25' -i features.toml
+tmq '.rollout.user_groups = [&quot;beta&quot;, &quot;premium&quot;]' -i features.toml
+
+# Gradual rollout
+tmq '.rollout.percentage = 50' -i features.toml
+tmq '.rollout.percentage = 75' -i features.toml
+tmq '.rollout.percentage = 100' -i features.toml
+</code></pre>
+<h2 id="backup-and-recovery">Backup and Recovery<a class="headerlink" href="#backup-and-recovery" title="Permanent link">&para;</a></h2>
+<h3 id="configuration-backup">Configuration Backup<a class="headerlink" href="#configuration-backup" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Backup configuration with versioning
+
+backup_config() {
+    local source_dir=&quot;$1&quot;
+    local backup_dir=&quot;$2&quot;
+
+    timestamp=$(date +%Y%m%d_%H%M%S)
+    backup_path=&quot;$backup_dir/backup_$timestamp&quot;
+
+    mkdir -p &quot;$backup_path&quot;
+
+    # Copy all configs
+    cp &quot;$source_dir&quot;/*.toml &quot;$backup_path/&quot;
+
+    # Create manifest
+    cat &gt; &quot;$backup_path/manifest.txt&quot; &lt;&lt; EOF
+Backup created: $(date)
+Source: $source_dir
+Files: $(ls -1 &quot;$backup_path&quot;/*.toml | wc -l)
+
+Configuration versions:
+$(for file in &quot;$backup_path&quot;/*.toml; do
+    version=$(tmq '.version // &quot;unknown&quot;' &quot;$file&quot; 2&gt;/dev/null || echo &quot;unknown&quot;)
+    echo &quot;$(basename &quot;$file&quot;): $version&quot;
+done)
+EOF
+
+    echo &quot;Backup created: $backup_path&quot;
+}
+
+# Usage
+backup_config &quot;config&quot; &quot;backups&quot;
+</code></pre>
+<h3 id="configuration-restore">Configuration Restore<a class="headerlink" href="#configuration-restore" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Restore configuration from backup
+
+restore_config() {
+    local backup_path=&quot;$1&quot;
+    local target_dir=&quot;$2&quot;
+
+    if [ ! -d &quot;$backup_path&quot; ]; then
+        echo &quot;Backup not found: $backup_path&quot;
+        return 1
+    fi
+
+    echo &quot;Restoring from $backup_path...&quot;
+
+    # Validate backup files
+    if ! tmq --validate &quot;$backup_path&quot;/*.toml &gt;/dev/null 2&gt;&amp;1; then
+        echo &quot;Backup contains invalid files&quot;
+        return 1
+    fi
+
+    # Create restore point
+    restore_backup=&quot;$target_dir/restore_backup_$(date +%s)&quot;
+    mkdir -p &quot;$restore_backup&quot;
+    cp &quot;$target_dir&quot;/*.toml &quot;$restore_backup/&quot; 2&gt;/dev/null || true
+
+    # Restore files
+    cp &quot;$backup_path&quot;/*.toml &quot;$target_dir/&quot;
+
+    # Validate restored files
+    if tmq --validate &quot;$target_dir&quot;/*.toml &gt;/dev/null 2&gt;&amp;1; then
+        echo &quot;✓ Restore successful&quot;
+        echo &quot;Previous state backed up to: $restore_backup&quot;
+        return 0
+    else
+        echo &quot;✗ Restore failed - restoring previous state&quot;
+        cp &quot;$restore_backup&quot;/*.toml &quot;$target_dir/&quot; 2&gt;/dev/null || true
+        return 1
+    fi
+}
+
+# Usage
+restore_config &quot;backups/backup_20240115_143000&quot; &quot;config&quot;
+</code></pre>
+<h2 id="advanced-scripting">Advanced Scripting<a class="headerlink" href="#advanced-scripting" title="Permanent link">&para;</a></h2>
+<h3 id="dynamic-configuration-generation">Dynamic Configuration Generation<a class="headerlink" href="#dynamic-configuration-generation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Generate configuration based on environment variables
+
+generate_config() {
+    local output_file=&quot;$1&quot;
+
+    cat &gt; &quot;$output_file&quot; &lt;&lt; EOF
+[app]
+name = &quot;$(tmq '.app.name' base.toml)&quot;
+version = &quot;$(tmq '.app.version' base.toml)&quot;
+environment = &quot;${ENVIRONMENT:-development}&quot;
+
+[database]
+host = &quot;${DB_HOST:-localhost}&quot;
+port = ${DB_PORT:-5432}
+name = &quot;${DB_NAME:-myapp}&quot;
+
+[features]
+debug = ${DEBUG:-false}
+metrics = ${METRICS:-true}
+EOF
+
+    # Validate generated config
+    if tmq --validate &quot;$output_file&quot; &gt;/dev/null 2&gt;&amp;1; then
+        echo &quot;Generated valid config: $output_file&quot;
+    else
+        echo &quot;Generated invalid config&quot;
+        return 1
+    fi
+}
+
+generate_config &quot;config/generated.toml&quot;
+</code></pre>
+<h3 id="configuration-diff-and-patch">Configuration Diff and Patch<a class="headerlink" href="#configuration-diff-and-patch" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Show configuration changes between versions
+
+config_diff() {
+    local old_file=&quot;$1&quot;
+    local new_file=&quot;$2&quot;
+
+    echo &quot;Configuration changes:&quot;
+    echo &quot;======================&quot;
+
+    # Compare versions
+    old_version=$(tmq '.version // &quot;unknown&quot;' &quot;$old_file&quot;)
+    new_version=$(tmq '.version // &quot;unknown&quot;' &quot;$new_file&quot;)
+
+    if [ &quot;$old_version&quot; != &quot;$new_version&quot; ]; then
+        echo &quot;Version: $old_version → $new_version&quot;
+    fi
+
+    # Compare key settings
+    keys_to_check=(&quot;.database.host&quot; &quot;.database.port&quot; &quot;.debug&quot; &quot;.logging.level&quot;)
+
+    for key in &quot;${keys_to_check[@]}&quot;; do
+        old_value=$(tmq &quot;$key&quot; &quot;$old_file&quot; 2&gt;/dev/null || echo &quot;not set&quot;)
+        new_value=$(tmq &quot;$key&quot; &quot;$new_file&quot; 2&gt;/dev/null || echo &quot;not set&quot;)
+
+        if [ &quot;$old_value&quot; != &quot;$new_value&quot; ]; then
+            echo &quot;$key: $old_value → $new_value&quot;
+        fi
+    done
+}
+
+config_diff &quot;config/v1.0.toml&quot; &quot;config/v1.1.toml&quot;
+</code></pre>
 
 
 
@@ -1942,7 +1898,7 @@ tmq --version
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
+  برگشت به بالا
 </button>
         
       </main>
@@ -1951,33 +1907,33 @@ tmq --version
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
         
           
-          <a href="../Bulk-Operations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Bulk Operations">
+          <a href="../Command-Reference/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: مرجع دستورات">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Previous
+                قبلی
               </span>
               <div class="md-ellipsis">
-                Bulk Operations
+                مرجع دستورات
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Examples/" class="md-footer__link md-footer__link--next" aria-label="Next: Examples">
+          <a href="../Troubleshooting/" class="md-footer__link md-footer__link--next" aria-label="بعدی: عیب‌یابی">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Next
+                بعدی
               </span>
               <div class="md-ellipsis">
-                Examples
+                عیب‌یابی
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2052,7 +2008,7 @@ tmq --version
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

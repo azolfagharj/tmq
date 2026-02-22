@@ -1,24 +1,24 @@
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="fa" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A complete standalone TOML CLI tool. Like jq for JSON, yq for YAML — but for TOML.">
+        <meta name="description" content="ابزار خط‌فرمان مستقل برای TOML. مثل jq برای JSON، yq برای YAML — ولی برای TOML.">
       
       
         <meta name="author" content="azolfagharj">
       
       
-        <link rel="canonical" href="https://tomlq.ir/Installation/">
+        <link rel="canonical" href="https://tomlq.ir/fa/Modification-Operations/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../Query-Operations/">
       
       
-        <link rel="next" href="../Getting-Started/">
+        <link rel="next" href="../Validation-and-Comparison/">
       
       
         
@@ -33,7 +33,7 @@
     
     
       
-        <title>Installation - tmq - TOML Query Tool</title>
+        <title>عملیات تغییر - tmq - ابزار کوئری TOML</title>
       
     
     
@@ -75,7 +75,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -84,8 +84,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
-          Skip to content
+        <a href="#modification-operations" class="md-skip">
+          پرش به محتویات
         </a>
       
     </div>
@@ -99,8 +99,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="tmq - TOML Query Tool" class="md-header__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-header__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,13 +114,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            tmq - TOML Query Tool
+            tmq - ابزار کوئری TOML
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              عملیات تغییر
             
           </span>
         </div>
@@ -160,7 +160,7 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
+    <button class="md-header__button md-icon" aria-label="انتخاب زبان">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
@@ -194,21 +194,21 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="جستجو">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -221,7 +221,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            راه‌اندازی جستجو
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -233,7 +233,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -248,7 +248,7 @@
   
     
       
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -264,10 +264,32 @@
   
     
   
-  Home
+  خانه
 
       </a>
     </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Installation/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  شروع کار
+
+        </a>
+      </li>
+    
   
 
       
@@ -281,35 +303,13 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
-          
-  
-  
-    
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
         <a href="../Query-Operations/" class="md-tabs__link">
           
   
   
     
   
-  User Guide
+  راهنمای کاربر
 
         </a>
       </li>
@@ -331,7 +331,7 @@
   
     
   
-  Reference
+  مرجع
 
         </a>
       </li>
@@ -351,7 +351,7 @@
   
     
   
-  Troubleshooting
+  عیب‌یابی
 
       </a>
     </li>
@@ -386,19 +386,19 @@
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="tmq - TOML Query Tool" class="md-nav__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-nav__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    tmq - TOML Query Tool
+    tmq - ابزار کوئری TOML
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -425,7 +425,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    خانه
   
 
     
@@ -442,12 +442,137 @@
       
   
   
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شروع کار
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    شروع کار
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    نصب
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Getting-Started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    شروع سریع
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
   
     
     
+      
+        
+      
+        
       
         
       
@@ -469,17 +594,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Getting Started
+    راهنمای کاربر
   
 
     
@@ -490,16 +615,44 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Getting Started
+    راهنمای کاربر
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Query-Operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    عملیات کوئری
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -524,7 +677,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    عملیات تغییر
   
 
     
@@ -542,7 +695,7 @@
   <span class="md-ellipsis">
     
   
-    Installation
+    عملیات تغییر
   
 
     
@@ -554,7 +707,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
   
   
   
@@ -563,27 +716,82 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      فهرست موضوعات
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#download-binary" class="md-nav__link">
+  <a href="#setting-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download Binary
+        Setting Values
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Download Binary">
+    <nav class="md-nav" aria-label="Setting Values">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#available-binaries" class="md-nav__link">
+  <a href="#basic-value-assignment" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Available Binaries
+        Basic Value Assignment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-table-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nested Table Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-new-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating New Keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deep-nesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deep Nesting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#array-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complex-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Complex Objects
       
     </span>
   </a>
@@ -596,22 +804,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#quick-setup" class="md-nav__link">
+  <a href="#deletion-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick Setup
+        Deletion Operations
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Quick Setup">
+    <nav class="md-nav" aria-label="Deletion Operations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#linux-amd64" class="md-nav__link">
+  <a href="#delete-root-keys" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Linux (AMD64)
+        Delete Root Keys
       
     </span>
   </a>
@@ -619,10 +827,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#linux-arm64" class="md-nav__link">
+  <a href="#delete-nested-keys" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Linux (ARM64)
+        Delete Nested Keys
       
     </span>
   </a>
@@ -630,32 +838,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#macos-apple-silicon" class="md-nav__link">
+  <a href="#delete-array-elements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        macOS (Apple Silicon)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos-intel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        macOS (Intel)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#windows-amd64" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Windows (AMD64)
+        Delete Array Elements
       
     </span>
   </a>
@@ -668,33 +854,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#manual-installation" class="md-nav__link">
+  <a href="#dry-run-mode" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Manual Installation
+        Dry Run Mode
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-from-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build from Source
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Build from Source">
+    <nav class="md-nav" aria-label="Dry Run Mode">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#preview-changes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Prerequisites
+        Preview Changes
       
     </span>
   </a>
@@ -702,10 +877,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-steps" class="md-nav__link">
+  <a href="#safe-modifications" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build Steps
+        Safe Modifications
       
     </span>
   </a>
@@ -718,55 +893,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verify-installation" class="md-nav__link">
+  <a href="#advanced-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verify Installation
+        Advanced Examples
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        System Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updating" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updating
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
+    <nav class="md-nav" aria-label="Advanced Examples">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#permission-denied" class="md-nav__link">
+  <a href="#configuration-updates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Permission Denied
+        Configuration Updates
       
     </span>
   </a>
@@ -774,10 +916,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#command-not-found" class="md-nav__link">
+  <a href="#environment-specific-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Command Not Found
+        Environment-Specific Configuration
       
     </span>
   </a>
@@ -785,10 +927,171 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#download-issues" class="md-nav__link">
+  <a href="#cleanup-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download Issues
+        Cleanup Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#non-existent-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-existent Paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-conflicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type Conflicts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invalid Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup Strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backup Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manual-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manual Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripted-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripted Backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atomic-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atomic Operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script Integration
       
     </span>
   </a>
@@ -816,159 +1119,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../Getting-Started/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Quick Start
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    User Guide
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    User Guide
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Query-Operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Query Operations
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Modification-Operations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Modification Operations
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../Validation-and-Comparison/" class="md-nav__link">
         
   
@@ -976,7 +1126,7 @@
   <span class="md-ellipsis">
     
   
-    Validation & Comparison
+    اعتبارسنجی و مقایسه
   
 
     
@@ -1004,7 +1154,7 @@
   <span class="md-ellipsis">
     
   
-    Bulk Operations
+    عملیات گروهی
   
 
     
@@ -1061,7 +1211,7 @@
   <span class="md-ellipsis">
     
   
-    Reference
+    مرجع
   
 
     
@@ -1077,7 +1227,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Reference
+    مرجع
   
 
           </label>
@@ -1097,7 +1247,7 @@
   <span class="md-ellipsis">
     
   
-    Command Reference
+    مرجع دستورات
   
 
     
@@ -1125,7 +1275,7 @@
   <span class="md-ellipsis">
     
   
-    Examples
+    مثال‌ها
   
 
     
@@ -1160,7 +1310,7 @@
   <span class="md-ellipsis">
     
   
-    Troubleshooting
+    عیب‌یابی
   
 
     
@@ -1193,133 +1343,245 @@
   
 
 
-<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
-<p>tmq is distributed as pre-compiled binaries for multiple platforms. No external dependencies required.</p>
-<h2 id="download-binary">Download Binary<a class="headerlink" href="#download-binary" title="Permanent link">&para;</a></h2>
-<p>Download the latest release from <a href="https://github.com/azolfagharj/tmq/releases">GitHub Releases</a>.</p>
-<h3 id="available-binaries">Available Binaries<a class="headerlink" href="#available-binaries" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Platform</th>
-<th>Architecture</th>
-<th>Filename</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Linux</td>
-<td>AMD64</td>
-<td><code>tmq-linux-amd64</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td>ARM64</td>
-<td><code>tmq-linux-arm64</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td>Intel</td>
-<td><code>tmq-darwin-amd64</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td>Apple Silicon</td>
-<td><code>tmq-darwin-arm64</code></td>
-</tr>
-<tr>
-<td>Windows</td>
-<td>AMD64</td>
-<td><code>tmq-windows-amd64.exe</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="quick-setup">Quick Setup<a class="headerlink" href="#quick-setup" title="Permanent link">&para;</a></h2>
-<h3 id="linux-amd64">Linux (AMD64)<a class="headerlink" href="#linux-amd64" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-amd64
-chmod +x tmq-linux-amd64
-sudo mv tmq-linux-amd64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="linux-arm64">Linux (ARM64)<a class="headerlink" href="#linux-arm64" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-arm64
-chmod +x tmq-linux-arm64
-sudo mv tmq-linux-arm64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="macos-apple-silicon">macOS (Apple Silicon)<a class="headerlink" href="#macos-apple-silicon" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-darwin-arm64
-chmod +x tmq-darwin-arm64
-sudo mv tmq-darwin-arm64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="macos-intel">macOS (Intel)<a class="headerlink" href="#macos-intel" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-darwin-amd64
-chmod +x tmq-darwin-amd64
-sudo mv tmq-darwin-amd64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="windows-amd64">Windows (AMD64)<a class="headerlink" href="#windows-amd64" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Download: https://github.com/azolfagharj/tmq/releases/latest/download/tmq-windows-amd64.exe</li>
-<li>Rename to <code>tmq.exe</code></li>
-<li>Add to your PATH</li>
-</ol>
-<h2 id="manual-installation">Manual Installation<a class="headerlink" href="#manual-installation" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Download</strong> the appropriate binary for your system</li>
-<li><strong>Make executable</strong> (Linux/macOS):
-   <code>bash
-   chmod +x tmq-*</code></li>
-<li><strong>Rename</strong> to <code>tmq</code> (or <code>tmq.exe</code> on Windows):
-   <code>bash
-   mv tmq-linux-amd64 tmq</code></li>
-<li><strong>Move to PATH</strong> (optional but recommended):
-   <code>bash
-   sudo mv tmq /usr/local/bin/</code></li>
-</ol>
-<h2 id="build-from-source">Build from Source<a class="headerlink" href="#build-from-source" title="Permanent link">&para;</a></h2>
-<p>If you prefer to build from source:</p>
-<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Go 1.23 or later</li>
-</ul>
-<h3 id="build-steps">Build Steps<a class="headerlink" href="#build-steps" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">git clone https://github.com/azolfagharj/tmq.git
-cd tmq
-go build -o bin/tmq ./cmd/tmq
-</code></pre>
-<h2 id="verify-installation">Verify Installation<a class="headerlink" href="#verify-installation" title="Permanent link">&para;</a></h2>
-<p>After installation, verify tmq is working:</p>
-<pre><code class="language-bash">tmq --version
-# Should show: tmq version 1.0.1
+<h1 id="modification-operations">Modification Operations<a class="headerlink" href="#modification-operations" title="Permanent link">&para;</a></h1>
+<p>tmq supports in-place modification of TOML files, allowing you to set new values or delete existing keys.</p>
+<h2 id="setting-values">Setting Values<a class="headerlink" href="#setting-values" title="Permanent link">&para;</a></h2>
+<h3 id="basic-value-assignment">Basic Value Assignment<a class="headerlink" href="#basic-value-assignment" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Set a simple string value
+tmq '.version = &quot;2.0.0&quot;' -i config.toml
 
-tmq --help
-# Should show help text
+# Set a number
+tmq '.port = 8080' -i config.toml
+
+# Set a boolean
+tmq '.enabled = true' -i config.toml
 </code></pre>
-<h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="nested-table-values">Nested Table Values<a class="headerlink" href="#nested-table-values" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># Before
+[database]
+host = &quot;oldhost&quot;
+</code></pre>
+<pre><code class="language-bash"># Update nested value
+tmq '.database.host = &quot;newhost&quot;' -i config.toml
+</code></pre>
+<pre><code class="language-toml"># After
+[database]
+host = &quot;newhost&quot;
+</code></pre>
+<h3 id="creating-new-keys">Creating New Keys<a class="headerlink" href="#creating-new-keys" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Add new root-level key
+tmq '.new_key = &quot;new_value&quot;' -i config.toml
+
+# Add nested key
+tmq '.database.pool_size = 10' -i config.toml
+</code></pre>
+<h3 id="deep-nesting">Deep Nesting<a class="headerlink" href="#deep-nesting" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Create deep nested structure
+tmq '.app.cache.redis.ttl = 3600' -i config.toml
+
+# This creates:
+# [app.cache.redis]
+# ttl = 3600
+</code></pre>
+<h3 id="array-values">Array Values<a class="headerlink" href="#array-values" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Set array of strings
+tmq '.tags = [&quot;web&quot;, &quot;api&quot;, &quot;prod&quot;]' -i config.toml
+
+# Set array of numbers
+tmq '.ports = [8080, 8443, 9000]' -i config.toml
+</code></pre>
+<h3 id="complex-objects">Complex Objects<a class="headerlink" href="#complex-objects" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Set an inline table
+tmq '.credentials = { username = &quot;admin&quot;, password = &quot;secret&quot; }' -i config.toml
+
+# Set nested object
+tmq '.database = { host = &quot;localhost&quot;, port = 5432 }' -i config.toml
+</code></pre>
+<h2 id="deletion-operations">Deletion Operations<a class="headerlink" href="#deletion-operations" title="Permanent link">&para;</a></h2>
+<h3 id="delete-root-keys">Delete Root Keys<a class="headerlink" href="#delete-root-keys" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Delete a top-level key
+tmq 'del(.obsolete_key)' -i config.toml
+</code></pre>
+<h3 id="delete-nested-keys">Delete Nested Keys<a class="headerlink" href="#delete-nested-keys" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Delete from nested table
+tmq 'del(.database.old_setting)' -i config.toml
+</code></pre>
+<h3 id="delete-array-elements">Delete Array Elements<a class="headerlink" href="#delete-array-elements" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Delete specific array index
+tmq 'del(.servers[1])' -i config.toml
+</code></pre>
+<h2 id="dry-run-mode">Dry Run Mode<a class="headerlink" href="#dry-run-mode" title="Permanent link">&para;</a></h2>
+<h3 id="preview-changes">Preview Changes<a class="headerlink" href="#preview-changes" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># See what would be changed without modifying the file
+tmq '.version = &quot;3.0.0&quot;' --dry-run config.toml
+
+# Preview deletion
+tmq 'del(.obsolete_key)' --dry-run config.toml
+</code></pre>
+<h3 id="safe-modifications">Safe Modifications<a class="headerlink" href="#safe-modifications" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Always test with dry-run first
+tmq '.database.host = &quot;prod-db&quot;' --dry-run config.toml
+
+# Then apply if it looks correct
+tmq '.database.host = &quot;prod-db&quot;' -i config.toml
+</code></pre>
+<h2 id="advanced-examples">Advanced Examples<a class="headerlink" href="#advanced-examples" title="Permanent link">&para;</a></h2>
+<h3 id="configuration-updates">Configuration Updates<a class="headerlink" href="#configuration-updates" title="Permanent link">&para;</a></h3>
+<pre><code class="language-toml"># config.toml before
+[app]
+version = &quot;1.0.0&quot;
+debug = true
+
+[database]
+host = &quot;dev-db&quot;
+port = 5432
+</code></pre>
+<pre><code class="language-bash"># Update for production deployment
+tmq '.app.version = &quot;1.1.0&quot;' -i config.toml
+tmq '.app.debug = false' -i config.toml
+tmq '.database.host = &quot;prod-db&quot;' -i config.toml
+</code></pre>
+<pre><code class="language-toml"># config.toml after
+[app]
+version = &quot;1.1.0&quot;
+debug = false
+
+[database]
+host = &quot;prod-db&quot;
+port = 5432
+</code></pre>
+<h3 id="environment-specific-configuration">Environment-Specific Configuration<a class="headerlink" href="#environment-specific-configuration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Development settings
+tmq '.database.host = &quot;localhost&quot;' -i config.toml
+tmq '.debug = true' -i config.toml
+
+# Production settings
+tmq '.database.host = &quot;prod.example.com&quot;' -i config.toml
+tmq '.debug = false' -i config.toml
+</code></pre>
+<h3 id="cleanup-operations">Cleanup Operations<a class="headerlink" href="#cleanup-operations" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Remove deprecated settings
+tmq 'del(.legacy_feature)' -i config.toml
+tmq 'del(.old_database_url)' -i config.toml
+
+# Remove test users
+tmq 'del(.test_users)' -i config.toml
+</code></pre>
+<h2 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
+<h3 id="non-existent-paths">Non-existent Paths<a class="headerlink" href="#non-existent-paths" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Setting non-existent parent creates the structure
+tmq '.new.deep.key = &quot;value&quot;' -i config.toml
+# Creates: [new.deep]
+#          key = &quot;value&quot;
+</code></pre>
+<h3 id="type-conflicts">Type Conflicts<a class="headerlink" href="#type-conflicts" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Overwriting different types is allowed
+tmq '.value = &quot;string&quot;' -i config.toml  # was a number
+tmq '.value = 42' -i config.toml        # was a string
+</code></pre>
+<h3 id="invalid-operations">Invalid Operations<a class="headerlink" href="#invalid-operations" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Invalid key names
+tmq '.invalid key = &quot;value&quot;' -i config.toml
+# Error: invalid set expression
+
+# Missing quotes for strings
+tmq '.name = John' -i config.toml
+# Error: invalid set expression
+</code></pre>
+<h2 id="backup-strategy">Backup Strategy<a class="headerlink" href="#backup-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="manual-backup">Manual Backup<a class="headerlink" href="#manual-backup" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Always backup before modification
+cp config.toml config.toml.backup
+
+# Make changes
+tmq '.version = &quot;2.0.0&quot;' -i config.toml
+
+# Verify
+tmq '.version' config.toml
+</code></pre>
+<h3 id="scripted-backup">Scripted Backup<a class="headerlink" href="#scripted-backup" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+CONFIG_FILE=&quot;config.toml&quot;
+BACKUP_FILE=&quot;${CONFIG_FILE}.backup.$(date +%Y%m%d_%H%M%S)&quot;
+
+cp &quot;$CONFIG_FILE&quot; &quot;$BACKUP_FILE&quot;
+echo &quot;Backup created: $BACKUP_FILE&quot;
+
+# Make changes
+tmq '.version = &quot;2.0.0&quot;' -i &quot;$CONFIG_FILE&quot;
+
+# Verify
+if tmq '.version' &quot;$CONFIG_FILE&quot; &gt;/dev/null; then
+    echo &quot;Update successful&quot;
+else
+    echo &quot;Update failed, restoring backup&quot;
+    cp &quot;$BACKUP_FILE&quot; &quot;$CONFIG_FILE&quot;
+fi
+</code></pre>
+<h2 id="performance-considerations">Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>OS</strong>: Linux, macOS, Windows</li>
-<li><strong>Architecture</strong>: AMD64, ARM64</li>
-<li><strong>Memory</strong>: Minimal (works with &lt; 10MB RAM)</li>
-<li><strong>Storage</strong>: ~5MB for the binary</li>
-<li><strong>No external dependencies</strong> - completely self-contained</li>
+<li>In-place modifications are efficient - only changed parts are rewritten</li>
+<li>Large files may take longer due to full file rewrite</li>
+<li>Consider using dry-run for large or critical files</li>
 </ul>
-<h2 id="updating">Updating<a class="headerlink" href="#updating" title="Permanent link">&para;</a></h2>
-<p>To update to the latest version:</p>
-<ol>
-<li>Download the new binary from <a href="https://github.com/azolfagharj/tmq/releases">releases</a></li>
-<li>Replace the old binary</li>
-<li>Make sure it's executable (<code>chmod +x tmq</code>)</li>
-</ol>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="permission-denied">Permission Denied<a class="headerlink" href="#permission-denied" title="Permanent link">&para;</a></h3>
-<p>If you get "permission denied" when running tmq:</p>
-<pre><code class="language-bash">chmod +x /path/to/tmq
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Validate after modifications
+tmq '.' config.toml &gt; /dev/null || echo &quot;Invalid TOML after modification&quot;
 </code></pre>
-<h3 id="command-not-found">Command Not Found<a class="headerlink" href="#command-not-found" title="Permanent link">&para;</a></h3>
-<p>If <code>tmq</code> command is not found:
-- Make sure it's in your PATH: <code>echo $PATH</code>
-- Or use the full path: <code>/usr/local/bin/tmq</code></p>
-<h3 id="download-issues">Download Issues<a class="headerlink" href="#download-issues" title="Permanent link">&para;</a></h3>
-<p>If wget fails, try using curl:</p>
-<pre><code class="language-bash">curl -L -o tmq https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-amd64
+<h3 id="atomic-operations">Atomic Operations<a class="headerlink" href="#atomic-operations" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Use temporary files for critical updates
+TEMP_FILE=$(mktemp)
+cp config.toml &quot;$TEMP_FILE&quot;
+
+tmq '.critical_setting = &quot;new_value&quot;' -i &quot;$TEMP_FILE&quot;
+
+# Validate
+if tmq '.' &quot;$TEMP_FILE&quot; &gt;/dev/null; then
+    mv &quot;$TEMP_FILE&quot; config.toml
+    echo &quot;Update successful&quot;
+else
+    rm &quot;$TEMP_FILE&quot;
+    echo &quot;Update failed - invalid TOML&quot;
+fi
+</code></pre>
+<h3 id="version-control">Version Control<a class="headerlink" href="#version-control" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Commit before and after modifications
+git add config.toml
+git commit -m &quot;Update configuration via tmq&quot;
+
+# Make changes
+tmq '.version = &quot;2.0.0&quot;' -i config.toml
+
+git add config.toml
+git commit -m &quot;Bump version to 2.0.0&quot;
+</code></pre>
+<h3 id="script-integration">Script Integration<a class="headerlink" href="#script-integration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+set -e
+
+# Function to safely update config
+update_config() {
+    local key=&quot;$1&quot;
+    local value=&quot;$2&quot;
+    local file=&quot;$3&quot;
+
+    echo &quot;Updating $key = $value in $file&quot;
+
+    # Dry run first
+    if tmq &quot;$key = $value&quot; --dry-run &quot;$file&quot; &gt;/dev/null; then
+        tmq &quot;$key = $value&quot; -i &quot;$file&quot;
+        echo &quot;✓ Updated successfully&quot;
+    else
+        echo &quot;✗ Update failed&quot;
+        return 1
+    fi
+}
+
+# Update multiple settings
+update_config '.version' '&quot;2.0.0&quot;' config.toml
+update_config '.debug' 'false' config.toml
+update_config '.database.port' '5432' config.toml
 </code></pre>
 
 
@@ -1346,7 +1608,7 @@ tmq --help
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
+  برگشت به بالا
 </button>
         
       </main>
@@ -1355,33 +1617,33 @@ tmq --help
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+          <a href="../Query-Operations/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: عملیات کوئری">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Previous
+                قبلی
               </span>
               <div class="md-ellipsis">
-                Home
+                عملیات کوئری
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Getting-Started/" class="md-footer__link md-footer__link--next" aria-label="Next: Quick Start">
+          <a href="../Validation-and-Comparison/" class="md-footer__link md-footer__link--next" aria-label="بعدی: اعتبارسنجی و مقایسه">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Next
+                بعدی
               </span>
               <div class="md-ellipsis">
-                Quick Start
+                اعتبارسنجی و مقایسه
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1456,7 +1718,7 @@ tmq --help
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

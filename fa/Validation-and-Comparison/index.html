@@ -1,24 +1,24 @@
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="fa" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A complete standalone TOML CLI tool. Like jq for JSON, yq for YAML — but for TOML.">
+        <meta name="description" content="ابزار خط‌فرمان مستقل برای TOML. مثل jq برای JSON، yq برای YAML — ولی برای TOML.">
       
       
         <meta name="author" content="azolfagharj">
       
       
-        <link rel="canonical" href="https://tomlq.ir/Installation/">
+        <link rel="canonical" href="https://tomlq.ir/fa/Validation-and-Comparison/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../Modification-Operations/">
       
       
-        <link rel="next" href="../Getting-Started/">
+        <link rel="next" href="../Bulk-Operations/">
       
       
         
@@ -33,7 +33,7 @@
     
     
       
-        <title>Installation - tmq - TOML Query Tool</title>
+        <title>اعتبارسنجی و مقایسه - tmq - ابزار کوئری TOML</title>
       
     
     
@@ -75,7 +75,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -84,8 +84,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
-          Skip to content
+        <a href="#validation-comparison" class="md-skip">
+          پرش به محتویات
         </a>
       
     </div>
@@ -99,8 +99,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="tmq - TOML Query Tool" class="md-header__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="سرتیتر">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-header__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,13 +114,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            tmq - TOML Query Tool
+            tmq - ابزار کوئری TOML
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installation
+              اعتبارسنجی و مقایسه
             
           </span>
         </div>
@@ -160,7 +160,7 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
+    <button class="md-header__button md-icon" aria-label="انتخاب زبان">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
@@ -194,21 +194,21 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="جستجو" placeholder="جستجو" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="جستجو">
         
-          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="هم‌رسانی" aria-label="هم‌رسانی" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
             
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
           </a>
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="بازنشانی" aria-label="بازنشانی" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -221,7 +221,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            راه‌اندازی جستجو
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -233,7 +233,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -248,7 +248,7 @@
   
     
       
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="زبانه‌ها" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -264,10 +264,32 @@
   
     
   
-  Home
+  خانه
 
       </a>
     </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Installation/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  شروع کار
+
+        </a>
+      </li>
+    
   
 
       
@@ -281,35 +303,13 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
-          
-  
-  
-    
-  
-  Getting Started
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
         <a href="../Query-Operations/" class="md-tabs__link">
           
   
   
     
   
-  User Guide
+  راهنمای کاربر
 
         </a>
       </li>
@@ -331,7 +331,7 @@
   
     
   
-  Reference
+  مرجع
 
         </a>
       </li>
@@ -351,7 +351,7 @@
   
     
   
-  Troubleshooting
+  عیب‌یابی
 
       </a>
     </li>
@@ -386,19 +386,19 @@
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="هدایت" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="tmq - TOML Query Tool" class="md-nav__button md-logo" aria-label="tmq - TOML Query Tool" data-md-component="logo">
+    <a href=".." title="tmq - ابزار کوئری TOML" class="md-nav__button md-logo" aria-label="tmq - ابزار کوئری TOML" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    tmq - TOML Query Tool
+    tmq - ابزار کوئری TOML
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/azolfagharj/tmq" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/azolfagharj/tmq" title="رفتن به مخزن" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -425,7 +425,7 @@
   <span class="md-ellipsis">
     
   
-    Home
+    خانه
   
 
     
@@ -442,10 +442,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -457,29 +455,26 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    Getting Started
+    شروع کار
   
 
     
@@ -490,12 +485,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Getting Started
+    شروع کار
   
 
           </label>
@@ -505,44 +500,17 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Installation
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Installation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Installation
+    نصب
   
 
     
@@ -551,259 +519,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#download-binary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Download Binary
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Download Binary">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#available-binaries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Available Binaries
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick Setup
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Quick Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#linux-amd64" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Linux (AMD64)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#linux-arm64" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Linux (ARM64)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos-apple-silicon" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        macOS (Apple Silicon)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#macos-intel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        macOS (Intel)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#windows-amd64" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Windows (AMD64)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#manual-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Manual Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-from-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build from Source
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Build from Source">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#build-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Build Steps
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verify-installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verify Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#system-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        System Requirements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#updating" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updating
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Troubleshooting">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#permission-denied" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Permission Denied
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#command-not-found" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Command Not Found
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#download-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Download Issues
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -823,7 +538,7 @@
   <span class="md-ellipsis">
     
   
-    Quick Start
+    شروع سریع
   
 
     
@@ -848,8 +563,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -865,26 +582,29 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    User Guide
+    راهنمای کاربر
   
 
     
@@ -895,12 +615,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
-    User Guide
+    راهنمای کاربر
   
 
           </label>
@@ -920,7 +640,7 @@
   <span class="md-ellipsis">
     
   
-    Query Operations
+    عملیات کوئری
   
 
     
@@ -948,7 +668,7 @@
   <span class="md-ellipsis">
     
   
-    Modification Operations
+    عملیات تغییر
   
 
     
@@ -966,17 +686,44 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../Validation-and-Comparison/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    اعتبارسنجی و مقایسه
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Validation & Comparison
+    اعتبارسنجی و مقایسه
   
 
     
@@ -985,6 +732,376 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="فهرست موضوعات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      فهرست موضوعات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-syntax-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Syntax Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-in-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation in Scripts
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparison">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-file-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic File Comparison
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detailed-comparison-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Comparison Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-in-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison in CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-with-error-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation with Error Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-with-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison with Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-commit-hook" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-commit Hook
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-drift-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Drift Detection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-pipeline-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI Pipeline Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Messages
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output Formats
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Output Formats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparison-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison Output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-in-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation in Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-control-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version Control Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-configuration-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring Configuration Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exit-codes-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exit Codes Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1004,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    Bulk Operations
+    عملیات گروهی
   
 
     
@@ -1061,7 +1178,7 @@
   <span class="md-ellipsis">
     
   
-    Reference
+    مرجع
   
 
     
@@ -1077,7 +1194,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Reference
+    مرجع
   
 
           </label>
@@ -1097,7 +1214,7 @@
   <span class="md-ellipsis">
     
   
-    Command Reference
+    مرجع دستورات
   
 
     
@@ -1125,7 +1242,7 @@
   <span class="md-ellipsis">
     
   
-    Examples
+    مثال‌ها
   
 
     
@@ -1160,7 +1277,7 @@
   <span class="md-ellipsis">
     
   
-    Troubleshooting
+    عیب‌یابی
   
 
     
@@ -1193,134 +1310,295 @@
   
 
 
-<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
-<p>tmq is distributed as pre-compiled binaries for multiple platforms. No external dependencies required.</p>
-<h2 id="download-binary">Download Binary<a class="headerlink" href="#download-binary" title="Permanent link">&para;</a></h2>
-<p>Download the latest release from <a href="https://github.com/azolfagharj/tmq/releases">GitHub Releases</a>.</p>
-<h3 id="available-binaries">Available Binaries<a class="headerlink" href="#available-binaries" title="Permanent link">&para;</a></h3>
+<h1 id="validation-comparison">Validation &amp; Comparison<a class="headerlink" href="#validation-comparison" title="Permanent link">&para;</a></h1>
+<p>tmq provides tools to validate TOML files and compare differences between them.</p>
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<h3 id="basic-syntax-validation">Basic Syntax Validation<a class="headerlink" href="#basic-syntax-validation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Check if TOML file is valid
+tmq --validate config.toml
+
+# Returns exit code 0 if valid, 1 if invalid
+echo $?  # Check exit code
+</code></pre>
+<h3 id="batch-validation">Batch Validation<a class="headerlink" href="#batch-validation" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Validate multiple files
+tmq --validate config/*.toml
+
+# Use with find
+find . -name &quot;*.toml&quot; -exec tmq --validate {} \;
+</code></pre>
+<h3 id="validation-in-scripts">Validation in Scripts<a class="headerlink" href="#validation-in-scripts" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+validate_toml() {
+    local file=&quot;$1&quot;
+    if tmq --validate &quot;$file&quot; &gt;/dev/null 2&gt;&amp;1; then
+        echo &quot;✓ $file is valid&quot;
+        return 0
+    else
+        echo &quot;✗ $file is invalid&quot;
+        return 1
+    fi
+}
+
+# Validate all TOML files in directory
+for file in *.toml; do
+    validate_toml &quot;$file&quot; || exit 1
+done
+</code></pre>
+<h2 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h2>
+<h3 id="basic-file-comparison">Basic File Comparison<a class="headerlink" href="#basic-file-comparison" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Compare two TOML files
+tmq --compare config1.toml config2.toml
+
+# Exit codes:
+# 0 = files are identical
+# 1 = files are different
+</code></pre>
+<h3 id="detailed-comparison-output">Detailed Comparison Output<a class="headerlink" href="#detailed-comparison-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># See detailed differences
+tmq --compare old-config.toml new-config.toml
+</code></pre>
+<h3 id="comparison-in-cicd">Comparison in CI/CD<a class="headerlink" href="#comparison-in-cicd" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Fail build if configuration changed unexpectedly
+if ! tmq --compare expected.toml actual.toml &gt;/dev/null; then
+    echo &quot;Configuration mismatch!&quot;
+    tmq --compare expected.toml actual.toml
+    exit 1
+fi
+</code></pre>
+<h2 id="advanced-usage">Advanced Usage<a class="headerlink" href="#advanced-usage" title="Permanent link">&para;</a></h2>
+<h3 id="validation-with-error-details">Validation with Error Details<a class="headerlink" href="#validation-with-error-details" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># tmq shows detailed error messages
+tmq --validate invalid.toml
+# Error: parse error: expected newline at line 5, column 10
+# DETAILS: Check your TOML syntax
+# ACTION: Fix the syntax error and try again
+</code></pre>
+<h3 id="comparison-with-output">Comparison with Output<a class="headerlink" href="#comparison-with-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Redirect comparison output to file
+tmq --compare file1.toml file2.toml &gt; differences.txt
+
+# Use in scripts
+if tmq --compare &quot;$EXPECTED&quot; &quot;$ACTUAL&quot; &gt; diff.log; then
+    echo &quot;Files match&quot;
+else
+    echo &quot;Differences found:&quot;
+    cat diff.log
+fi
+</code></pre>
+<h2 id="integration-examples">Integration Examples<a class="headerlink" href="#integration-examples" title="Permanent link">&para;</a></h2>
+<h3 id="pre-commit-hook">Pre-commit Hook<a class="headerlink" href="#pre-commit-hook" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# .git/hooks/pre-commit
+
+# Validate all TOML files
+echo &quot;Validating TOML files...&quot;
+if ! find . -name &quot;*.toml&quot; -exec tmq --validate {} \;; then
+    echo &quot;TOML validation failed&quot;
+    exit 1
+fi
+
+echo &quot;All TOML files are valid&quot;
+</code></pre>
+<h3 id="configuration-drift-detection">Configuration Drift Detection<a class="headerlink" href="#configuration-drift-detection" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Check if production config matches expected config
+
+PROD_CONFIG=&quot;prod-config.toml&quot;
+EXPECTED_CONFIG=&quot;expected-config.toml&quot;
+
+if tmq --compare &quot;$EXPECTED_CONFIG&quot; &quot;$PROD_CONFIG&quot; &gt;/dev/null; then
+    echo &quot;✓ Production config matches expected configuration&quot;
+    exit 0
+else
+    echo &quot;✗ Configuration drift detected!&quot;
+    echo &quot;Differences:&quot;
+    tmq --compare &quot;$EXPECTED_CONFIG&quot; &quot;$PROD_CONFIG&quot;
+    exit 1
+fi
+</code></pre>
+<h3 id="ci-pipeline-integration">CI Pipeline Integration<a class="headerlink" href="#ci-pipeline-integration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-yaml"># .github/workflows/validate.yml
+name: Validate Configuration
+
+on:
+  pull_request:
+    paths:
+      - 'config/*.toml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: checkout@v4
+
+      - name: Setup tmq
+        run: |
+          wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-amd64
+          chmod +x tmq-linux-amd64
+          sudo mv tmq-linux-amd64 /usr/local/bin/tmq
+
+      - name: Validate TOML files
+        run: |
+          for file in config/*.toml; do
+            echo &quot;Validating $file...&quot;
+            tmq --validate &quot;$file&quot;
+          done
+
+      - name: Check configuration consistency
+        run: |
+          tmq --compare config/base.toml config/production.toml
+</code></pre>
+<h2 id="error-messages">Error Messages<a class="headerlink" href="#error-messages" title="Permanent link">&para;</a></h2>
+<h3 id="validation-errors">Validation Errors<a class="headerlink" href="#validation-errors" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Syntax errors
+tmq --validate malformed.toml
+# ERROR: TOML parsing failed
+# DETAILS: Expected newline at line 5, column 10
+# ACTION: Check your TOML syntax and fix any formatting issues
+
+# File not found
+tmq --validate nonexistent.toml
+# ERROR: File operation error
+# DETAILS: Cannot read file 'nonexistent.toml'
+# ACTION: Ensure the file exists and is readable
+</code></pre>
+<h3 id="comparison-errors">Comparison Errors<a class="headerlink" href="#comparison-errors" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># File not found
+tmq --compare missing1.toml missing2.toml
+# ERROR: File operation error
+# DETAILS: Cannot read file 'missing1.toml'
+# ACTION: Ensure both files exist and are readable
+
+# Parse error in one file
+tmq --compare valid.toml invalid.toml
+# ERROR: TOML parsing failed
+# DETAILS: Invalid TOML in 'invalid.toml'
+# ACTION: Fix the TOML syntax in invalid.toml
+</code></pre>
+<h2 id="output-formats">Output Formats<a class="headerlink" href="#output-formats" title="Permanent link">&para;</a></h2>
+<h3 id="validation-output">Validation Output<a class="headerlink" href="#validation-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Successful validation (no output, exit code 0)
+tmq --validate valid.toml
+
+# Failed validation (error message, exit code 1)
+tmq --validate invalid.toml
+</code></pre>
+<h3 id="comparison-output">Comparison Output<a class="headerlink" href="#comparison-output" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Identical files (no output, exit code 0)
+tmq --compare same1.toml same1.toml
+
+# Different files (shows differences, exit code 1)
+tmq --compare old.toml new.toml
+# Files are different:
+# - old.toml: version = &quot;1.0.0&quot;
+# + new.toml: version = &quot;2.0.0&quot;
+</code></pre>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="validation-in-development">Validation in Development<a class="headerlink" href="#validation-in-development" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Add to your build process
+make validate-config:
+    @for file in config/*.toml; do \
+        echo &quot;Validating $$file...&quot;; \
+        tmq --validate &quot;$$file&quot; || exit 1; \
+    done
+    @echo &quot;All configurations valid&quot;
+</code></pre>
+<h3 id="configuration-testing">Configuration Testing<a class="headerlink" href="#configuration-testing" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Test configuration changes
+#!/bin/bash
+
+CONFIG_FILE=&quot;app-config.toml&quot;
+BACKUP_FILE=&quot;${CONFIG_FILE}.backup&quot;
+
+# Backup current config
+cp &quot;$CONFIG_FILE&quot; &quot;$BACKUP_FILE&quot;
+
+# Make test changes
+tmq '.debug = true' -i &quot;$CONFIG_FILE&quot;
+tmq '.test_mode = true' -i &quot;$CONFIG_FILE&quot;
+
+# Validate changes
+if tmq --validate &quot;$CONFIG_FILE&quot; &gt;/dev/null; then
+    echo &quot;✓ Configuration changes are valid&quot;
+    # Test your application here
+    # ./run-tests.sh
+else
+    echo &quot;✗ Invalid configuration after changes&quot;
+fi
+
+# Restore backup
+mv &quot;$BACKUP_FILE&quot; &quot;$CONFIG_FILE&quot;
+</code></pre>
+<h3 id="version-control-integration">Version Control Integration<a class="headerlink" href="#version-control-integration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash"># Check for configuration changes in commits
+git diff --name-only HEAD~1 | grep '\.toml$' | while read -r file; do
+    echo &quot;Checking $file...&quot;
+    if ! tmq --validate &quot;$file&quot; &gt;/dev/null; then
+        echo &quot;Invalid TOML in $file&quot;
+        exit 1
+    fi
+done
+</code></pre>
+<h3 id="monitoring-configuration-changes">Monitoring Configuration Changes<a class="headerlink" href="#monitoring-configuration-changes" title="Permanent link">&para;</a></h3>
+<pre><code class="language-bash">#!/bin/bash
+# Monitor configuration for unauthorized changes
+
+BASELINE=&quot;config-baseline.toml&quot;
+CURRENT=&quot;config.toml&quot;
+
+if [ ! -f &quot;$BASELINE&quot; ]; then
+    echo &quot;Creating baseline configuration...&quot;
+    cp &quot;$CURRENT&quot; &quot;$BASELINE&quot;
+    exit 0
+fi
+
+if ! tmq --compare &quot;$BASELINE&quot; &quot;$CURRENT&quot; &gt;/dev/null; then
+    echo &quot;WARNING: Configuration has changed!&quot;
+    echo &quot;Differences:&quot;
+    tmq --compare &quot;$BASELINE&quot; &quot;$CURRENT&quot;
+
+    read -p &quot;Accept changes and update baseline? (y/N): &quot; -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        cp &quot;$CURRENT&quot; &quot;$BASELINE&quot;
+        echo &quot;Baseline updated&quot;
+    fi
+fi
+</code></pre>
+<h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Validation is fast - typically &lt; 100ms for most files</li>
+<li>Comparison speed depends on file size and differences</li>
+<li>Memory usage is minimal for both operations</li>
+</ul>
+<h2 id="exit-codes-summary">Exit Codes Summary<a class="headerlink" href="#exit-codes-summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Platform</th>
-<th>Architecture</th>
-<th>Filename</th>
+<th>Operation</th>
+<th>Success</th>
+<th>Error</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Linux</td>
-<td>AMD64</td>
-<td><code>tmq-linux-amd64</code></td>
+<td>Validation</td>
+<td>0</td>
+<td>1 (parse error)</td>
 </tr>
 <tr>
-<td>Linux</td>
-<td>ARM64</td>
-<td><code>tmq-linux-arm64</code></td>
+<td>Comparison</td>
+<td>0 (identical)</td>
+<td>1 (different)</td>
 </tr>
 <tr>
-<td>macOS</td>
-<td>Intel</td>
-<td><code>tmq-darwin-amd64</code></td>
-</tr>
-<tr>
-<td>macOS</td>
-<td>Apple Silicon</td>
-<td><code>tmq-darwin-arm64</code></td>
-</tr>
-<tr>
-<td>Windows</td>
-<td>AMD64</td>
-<td><code>tmq-windows-amd64.exe</code></td>
+<td>File errors</td>
+<td>-</td>
+<td>4 (file not found/readable)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="quick-setup">Quick Setup<a class="headerlink" href="#quick-setup" title="Permanent link">&para;</a></h2>
-<h3 id="linux-amd64">Linux (AMD64)<a class="headerlink" href="#linux-amd64" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-amd64
-chmod +x tmq-linux-amd64
-sudo mv tmq-linux-amd64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="linux-arm64">Linux (ARM64)<a class="headerlink" href="#linux-arm64" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-arm64
-chmod +x tmq-linux-arm64
-sudo mv tmq-linux-arm64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="macos-apple-silicon">macOS (Apple Silicon)<a class="headerlink" href="#macos-apple-silicon" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-darwin-arm64
-chmod +x tmq-darwin-arm64
-sudo mv tmq-darwin-arm64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="macos-intel">macOS (Intel)<a class="headerlink" href="#macos-intel" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">wget https://github.com/azolfagharj/tmq/releases/latest/download/tmq-darwin-amd64
-chmod +x tmq-darwin-amd64
-sudo mv tmq-darwin-amd64 /usr/local/bin/tmq
-</code></pre>
-<h3 id="windows-amd64">Windows (AMD64)<a class="headerlink" href="#windows-amd64" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Download: https://github.com/azolfagharj/tmq/releases/latest/download/tmq-windows-amd64.exe</li>
-<li>Rename to <code>tmq.exe</code></li>
-<li>Add to your PATH</li>
-</ol>
-<h2 id="manual-installation">Manual Installation<a class="headerlink" href="#manual-installation" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Download</strong> the appropriate binary for your system</li>
-<li><strong>Make executable</strong> (Linux/macOS):
-   <code>bash
-   chmod +x tmq-*</code></li>
-<li><strong>Rename</strong> to <code>tmq</code> (or <code>tmq.exe</code> on Windows):
-   <code>bash
-   mv tmq-linux-amd64 tmq</code></li>
-<li><strong>Move to PATH</strong> (optional but recommended):
-   <code>bash
-   sudo mv tmq /usr/local/bin/</code></li>
-</ol>
-<h2 id="build-from-source">Build from Source<a class="headerlink" href="#build-from-source" title="Permanent link">&para;</a></h2>
-<p>If you prefer to build from source:</p>
-<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Go 1.23 or later</li>
-</ul>
-<h3 id="build-steps">Build Steps<a class="headerlink" href="#build-steps" title="Permanent link">&para;</a></h3>
-<pre><code class="language-bash">git clone https://github.com/azolfagharj/tmq.git
-cd tmq
-go build -o bin/tmq ./cmd/tmq
-</code></pre>
-<h2 id="verify-installation">Verify Installation<a class="headerlink" href="#verify-installation" title="Permanent link">&para;</a></h2>
-<p>After installation, verify tmq is working:</p>
-<pre><code class="language-bash">tmq --version
-# Should show: tmq version 1.0.1
-
-tmq --help
-# Should show help text
-</code></pre>
-<h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>OS</strong>: Linux, macOS, Windows</li>
-<li><strong>Architecture</strong>: AMD64, ARM64</li>
-<li><strong>Memory</strong>: Minimal (works with &lt; 10MB RAM)</li>
-<li><strong>Storage</strong>: ~5MB for the binary</li>
-<li><strong>No external dependencies</strong> - completely self-contained</li>
-</ul>
-<h2 id="updating">Updating<a class="headerlink" href="#updating" title="Permanent link">&para;</a></h2>
-<p>To update to the latest version:</p>
-<ol>
-<li>Download the new binary from <a href="https://github.com/azolfagharj/tmq/releases">releases</a></li>
-<li>Replace the old binary</li>
-<li>Make sure it's executable (<code>chmod +x tmq</code>)</li>
-</ol>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="permission-denied">Permission Denied<a class="headerlink" href="#permission-denied" title="Permanent link">&para;</a></h3>
-<p>If you get "permission denied" when running tmq:</p>
-<pre><code class="language-bash">chmod +x /path/to/tmq
-</code></pre>
-<h3 id="command-not-found">Command Not Found<a class="headerlink" href="#command-not-found" title="Permanent link">&para;</a></h3>
-<p>If <code>tmq</code> command is not found:
-- Make sure it's in your PATH: <code>echo $PATH</code>
-- Or use the full path: <code>/usr/local/bin/tmq</code></p>
-<h3 id="download-issues">Download Issues<a class="headerlink" href="#download-issues" title="Permanent link">&para;</a></h3>
-<p>If wget fails, try using curl:</p>
-<pre><code class="language-bash">curl -L -o tmq https://github.com/azolfagharj/tmq/releases/latest/download/tmq-linux-amd64
-</code></pre>
 
 
 
@@ -1346,7 +1624,7 @@ tmq --help
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
+  برگشت به بالا
 </button>
         
       </main>
@@ -1355,33 +1633,33 @@ tmq --help
   
     
       
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      <nav class="md-footer__inner md-grid" aria-label="پاورقی" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+          <a href="../Modification-Operations/" class="md-footer__link md-footer__link--prev" aria-label="قبلی: عملیات تغییر">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Previous
+                قبلی
               </span>
               <div class="md-ellipsis">
-                Home
+                عملیات تغییر
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Getting-Started/" class="md-footer__link md-footer__link--next" aria-label="Next: Quick Start">
+          <a href="../Bulk-Operations/" class="md-footer__link md-footer__link--next" aria-label="بعدی: عملیات گروهی">
             <div class="md-footer__title">
               <span class="md-footer__direction">
-                Next
+                بعدی
               </span>
               <div class="md-ellipsis">
-                Quick Start
+                عملیات گروهی
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1456,7 +1734,7 @@ tmq --help
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.code.select", "content.footnote.tooltips", "content.tooltips", "header.autohide", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u06a9\u067e\u06cc \u0634\u062f", "clipboard.copy": "\u06a9\u067e\u06cc \u06a9\u0631\u062f\u0646", "search.result.more.one": "1 \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.more.other": "# \u0645\u0648\u0631\u062f \u062f\u06cc\u06af\u0631 \u062f\u0631 \u0627\u06cc\u0646 \u0635\u0641\u062d\u0647", "search.result.none": "\u0633\u0646\u062f\u06cc \u06cc\u0627\u0641\u062a \u0646\u0634\u062f", "search.result.one": "1 \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.other": "# \u0633\u0646\u062f \u06cc\u0627\u0641\u062a \u0634\u062f", "search.result.placeholder": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u062c\u0633\u062a\u062c\u0648 \u062a\u0627\u06cc\u067e \u06a9\u0646\u06cc\u062f", "search.result.term.missing": "\u0645\u0648\u062c\u0648\u062f \u0646\u06cc\u0633\u062a", "select.version": "\u0627\u0646\u062a\u062e\u0627\u0628 \u0648\u06cc\u0631\u0627\u06cc\u0634"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
