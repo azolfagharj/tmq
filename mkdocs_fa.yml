@@ -11,19 +11,21 @@ theme:
   name: material
   language: fa
   direction: rtl
+  font:
+    text: Vazirmatn
   palette:
     - scheme: default
       primary: deep purple
       accent: deep purple
       toggle:
         icon: material/brightness-7
-        name: Switch to dark mode
+        name: تغییر به حالت تاریک
     - scheme: slate
       primary: deep purple
       accent: deep purple
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: تغییر به حالت روشن
   features:
     - content.tabs.link
     - content.code.annotate
