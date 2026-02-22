@@ -63,14 +63,17 @@ markdown_extensions:
 
 nav:
   - Home: README.md
-  - Installation: Installation.md
-  - Getting Started: Getting-Started.md
-  - Query Operations: Query-Operations.md
-  - Modification Operations: Modification-Operations.md
-  - Validation & Comparison: Validation-and-Comparison.md
-  - Bulk Operations: Bulk-Operations.md
-  - Command Reference: Command-Reference.md
-  - Examples: Examples.md
+  - Getting Started:
+    - Installation: Installation.md
+    - Quick Start: Getting-Started.md
+  - User Guide:
+    - Query Operations: Query-Operations.md
+    - Modification Operations: Modification-Operations.md
+    - Validation & Comparison: Validation-and-Comparison.md
+    - Bulk Operations: Bulk-Operations.md
+  - Reference:
+    - Command Reference: Command-Reference.md
+    - Examples: Examples.md
   - Troubleshooting: Troubleshooting.md
 
 extra:
